@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', 'HomeController@login');
+Route::get('/register', 'HomeController@registro');
+
+Route::get('/dashboard', 'HomeController@dashboard');
+Route::get('/profiles', 'HomeController@profiles');
+Route::get('/reprint', 'HomeController@reprint');
+Route::get('/rouerboard', 'HomeController@rouerboard');
+Route::get('/user-profile', 'HomeController@userprofile');
+Route::get('/design', 'HomeController@design');
