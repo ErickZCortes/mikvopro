@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+public function viewlogin(){
+    return view('mikvo.login');
+}
+
     /**
      * Display a listing of the resource.
      *
