@@ -16,9 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/login', 'UserController@viewlogin')->name('/login');
+Route::get('/register', 'UserController@register')->name('/register');
 
 Route::post('/login', 'UserController@login')->name('/login');
-Route::post('/register', 'UserController@registro');
+Route::post('/register', 'UserController@registro')->name('/register');
 Route::get('/user/{id}', 'UserController@getuserbyid');
 Route::put('/user/{id}', 'UserController@updateuser');
 
