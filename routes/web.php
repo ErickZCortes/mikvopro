@@ -15,12 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', 'HomeController@login');
-Route::get('/register', 'HomeController@registro');
+Route::post('/login', 'UserController@login');
+Route::post('/register', 'UserController@registro');
+Route::get('/user/{id}', 'UserController@getuserbyid');
+Route::put('/user/{id}', 'UserController@updateuser');
 
-Route::get('/dashboard', 'HomeController@dashboard');
-Route::get('/profiles', 'HomeController@profiles');
-Route::get('/reprint', 'HomeController@reprint');
-Route::get('/rouerboard', 'HomeController@rouerboard');
-Route::get('/user-profile', 'HomeController@userprofile');
-Route::get('/design', 'HomeController@design');
+Route::get('/routerboard', 'RouterController@getrouters');
+Route::get('/routerboard/{id}', 'RouterController@getroutersbyid');
+Route::post('/routerboard', 'RouterController@addrouter');
+Route::put('/routerboard', 'RouterController@updaterouter');
+Route::delete('/routerboard', 'RouterController@deleterouter');
+
+Route::get('/profiles', 'ProfilesController@getprofiles');
+Route::get('/profile/{id}', 'ProfilesController@getprofilebyid');
+Route::post('/profiles', 'ProfilesController@addprofile');
+Route::put('/profiles', 'ProfilesController@updateprofile');
+Route::delete('/profiles', 'ProfilesController@deleteprofile');
+
+Route::get('/vouchers', 'VouchersController@getvouchers');
+Route::get('/voucher/{id}', 'VouchersController@getvoucherbyid');
+Route::post('/vouchers', 'VouchersController@addvoucher');
+Route::delete('/vouchers', 'VouchersController@deletevoucher');
+
+Route::get('/detail-vouchers', 'DetailvController@getdetail');
+Route::post('/detail-vouchers', 'DetailvController@adddetail');
+Route::delete('/detail-voucher', 'DetailvController@deletedetail');
