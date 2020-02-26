@@ -4,97 +4,310 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Mikvo</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/cf0dea4152.js" crossorigin="anonymous" SameSite="None" Secure></script>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway|Roboto|Rubik&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Tahoma';
+            font-weight: 700;
+        }
 
-            .full-height {
-                height: 100vh;
-            }
+        .btn-primary-outline {
+            background-color: transparent;
+            border-color: #EEE9E0;
+            color: #EEE9E0;
+            border-radius: 0%;
+            border-width: 0.7mm;
+            font-size: 0.4cm;
+        }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
+        header.masthead {
+            position: relative;
+            background-color: #50B0AE;
+            background: url("https://ak5.picdn.net/shutterstock/videos/3530885/thumb/1.jpg") no-repeat center center;
+            background-size: cover;
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+        
+        header.masthead .overlay {
+            position: absolute;
+            background-color: #212529;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
+        
+        header.masthead h1 {
+            font-size: 2rem;
+        }
+  
+        @media (min-width: 768px) {
+            header.masthead {
+            padding-top: 12rem;
+            padding-bottom: 12rem;
             }
+            header.masthead h1 {
+            font-size: 3rem;
+            }
+        }
+        
+        .showcase .showcase-text {
+            padding: 3rem;
+        }
+        
+        .showcase .showcase-img {
+            min-height: 30rem;
+            background-size: cover;
+        }
+        
+        @media (min-width: 768px) {
+            .showcase .showcase-text {
+            padding: 7rem;
+            }
+        }
+  
+        .features-icons {
+            padding-top: 7rem;
+            padding-bottom: 7rem;
+        }
+        
+        .features-icons .features-icons-item {
+            max-width: 20rem;
+        }
+        
+        .features-icons .features-icons-item .features-icons-icon {
+            height: 7rem;
+        }
+        
+        .features-icons .features-icons-item .features-icons-icon i {
+            font-size: 4.5rem;
+        }
+  
+        .features-icons .features-icons-item:hover .features-icons-icon i {
+            font-size: 5rem;
+        }
+        
+        .testimonials {
+            padding-top: 7rem;
+            padding-bottom: 7rem;
+        }
+        
+        .testimonials .testimonial-item {
+            max-width: 18rem;
+        }
+        
+        .testimonials .testimonial-item img {
+            max-width: 12rem;
+            box-shadow: 0px 5px 5px 0px #adb5bd;
+        }
+        
+        .call-to-action {
+            position: relative;
+            background-color: #343a40;
+            background: url("https://ak5.picdn.net/shutterstock/videos/3530885/thumb/1.jpg") no-repeat center center;
+            background-size: cover;
+            padding-top: 7rem;
+            padding-bottom: 7rem;
+        }
 
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
+        .call-to-action .overlay {
+            position: absolute;
+            background-color: #212529;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <div class="container">
+              <a class="navbar-brand" href="{{ url('/home') }}">Mikvo</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio
+                      <span class="sr-only">(current)</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Servicios</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Precios</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-outline-info" role="button">Login</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-        </div>
+          </nav>
+          
+          <!-- Masthead -->
+          <header class="masthead text-white text-center">
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-9 mx-auto">
+                  <h1 class="mb-5">Servicio de internet por fichas al alcance de tus manos</h1>
+                </div>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                  <form>
+                    <div class="form-row">
+                      <div class="col-12">
+                        <a class="btn btn-primary-outline">COMENZAR</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </header>
+          
+          <!-- Icons Grid -->
+          <section class="features-icons bg-light text-center">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                      <i class="icon-screen-desktop m-auto text-primary"></i>
+                    </div>
+                    <h3>Fully Responsive</h3>
+                    <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                      <i class="icon-layers m-auto text-primary"></i>
+                    </div>
+                    <h3>Bootstrap 4 Ready</h3>
+                    <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                      <i class="icon-check m-auto text-primary"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Image Showcases -->
+          <section class="showcase">
+            <div class="container-fluid p-0">
+              <div class="row no-gutters">
+          
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                  <h2>Fully Responsive Design</h2>
+                  <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
+                <div class="col-lg-6 my-auto showcase-text">
+                  <h2>Updated For Bootstrap 4</h2>
+                  <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+                </div>
+              </div>
+              <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                  <h2>Easy to Use &amp; Customize</h2>
+                  <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Testimonials -->
+          <section class="testimonials text-center bg-light">
+            <div class="container">
+              <h2 class="mb-5">What people are saying...</h2>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
+                    <h5>Margaret E.</h5>
+                    <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
+                    <h5>Fred S.</h5>
+                    <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
+                    <h5>Sarah W.</h5>
+                    <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Call to Action -->
+          <section class="call-to-action text-white text-center">
+            <div class="overlay"></div>
+            <div class="container">
+              <div class="row">
+                <div class="col-xl-9 mx-auto">
+                  <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+                </div>
+                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                  <form>
+                    <div class="form-row">
+                      <div class="col-12 col-md-9 mb-2 mb-md-0">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+                      </div>
+                      <div class="col-12 col-md-3">
+                        <button type="submit" class="btn btn-block btn-lg btn-primary" [routerLink]="['/login']">Sign up!</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
     </body>
 </html>
