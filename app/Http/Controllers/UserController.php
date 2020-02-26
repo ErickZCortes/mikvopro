@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-public function viewlogin(){
-    return view('mikvo.login');
-}
-public function register(){
-    return view('mikvo.register');
-}
+    public function viewlogin(){
+        return view('mikvo.login');
+    }
+
+    public function register(){
+        return view('mikvo.register');
+    }
+
+    public function dashboard()
+    {
+        return view('mikvo.dashboard.layouts.main');
+    }
 
     /**
      * Display a listing of the resource.

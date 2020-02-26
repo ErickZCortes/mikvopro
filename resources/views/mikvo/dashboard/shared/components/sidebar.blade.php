@@ -1,3 +1,7 @@
+<header>
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/sidebar.css')}}">
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+</header>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->

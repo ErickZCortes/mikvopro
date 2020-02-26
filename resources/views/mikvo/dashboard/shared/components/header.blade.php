@@ -1,3 +1,7 @@
+<header>
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/header.css')}}">
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+</header>
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->

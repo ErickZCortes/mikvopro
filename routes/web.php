@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/login', 'UserController@viewlogin')->name('/login');
 Route::get('/register', 'UserController@register')->name('/register');
 
+Route::get('/dashboard', 'UserController@dashboard');
+
+
+
 Route::post('/login', 'UserController@login')->name('/login');
 Route::post('/register', 'UserController@registro')->name('/register');
 Route::get('/user/{id}', 'UserController@getuserbyid');

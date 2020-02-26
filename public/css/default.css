@@ -1,0 +1,48 @@
+#wrapper{
+    display: flex;
+}
+
+#wrapper #content-wrapper{
+    background-color: #f8f9fc;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#sidebar{
+    background-color: #0C154A;
+    background-image: linear-gradient(180deg, #4CB1F7 10%, #0339A6 100%);
+    background-size: cover;
+}
+
+.flex-column{
+    flex-direction: column!important;
+}
+
+.d-flex{ 
+    display: flex!important;
+}
+
+*, ::after, ::before{
+   box-sizing: border-box;
+}
+
+#wrapper #content-wrapper #content{
+    flex: 1 0 auto;
+}
+
+div{
+    display: block;
+}
+
+.container, .container-fluid{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.container-fluid{
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    margin-left: auto;      
+    margin-right: auto;
+}

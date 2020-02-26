@@ -12,7 +12,6 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway|Roboto|Rubik&display=swap" rel="stylesheet">
         <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
-
         <!-- Styles -->
         <style>
           body{
