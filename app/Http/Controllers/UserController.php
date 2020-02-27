@@ -3,22 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class UserController extends Controller
 {
 
-    public function viewlogin(){
+    public function login(){
+        if($this->isSession()){
+            return redirect(('/dashboard'));
+        }
         return view('mikvo.login');
     }
 
-    public function register(){
-        return view('mikvo.register');
+    public function loginSession(Request $request){
+        $password_user = $request->input('password_user');
+        $usuario = User::where('email_user',$request->input('email_user'))->first();
+        if(isset($usuario)){
+            //if(Hash::check($password_user,$usuario->passowrd_user)){
+                session()->put('UserSession',$usuario);
+                //dd($usuario);
+                return redirect('/dashboard');
+            //}
+            
+            
+        }
+        return redirect('/login')->with('status', 'Email o password incorrecto!');
     }
 
-    public function dashboard()
-    {
-        return view('mikvo.dashboard.layouts.main');
+    public function logout(){
+        session()->forget('UserSession');
+        return redirect('/welcome');
     }
+
+    public function issSession(){
+        return (session()->has('UserSession'));
+    }
+
+
+
+    /*public function login(){
+        $credentials = $this->validate(request(),[
+            'email_user'=> 'email|required|string',
+            'password_user'=>'required|string'
+        ]);
+
+
+        if(Auth::attempt($credentials)){
+            return 'see brooo';
+        }
+        return 'ahorita no joven';
+    }*/
 
     /**
      * Display a listing of the resource.

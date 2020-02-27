@@ -19,36 +19,36 @@
       <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="form-group">
-          <label for="email_user">Correo electrónico</label>
+          <label for="email">Correo electrónico</label>
           <input 
-            id="email_user" 
+            id="email" 
             type="email" 
-            class="form-control @error('email_user') is-invalid @enderror" 
-            name="email_user" 
-            value="{{ old('email_user') }}" 
+            class="form-control @error('email') is-invalid @enderror" 
+            name="email" 
+            value="{{ old('email') }}" 
             required 
             autocomplete="email" 
             autofocus
-            name="email_user"  
+            name="email"  
             placeholder="ingresa tu email">
-            @error('email_user')
+            @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
 
-        <div class="form-group {{ $errors->has('password_user')?'has-error' : ''}}">
-          <label for="password_user">Contraseña</label>
+        <div class="form-group {{ $errors->has('password')?'has-error' : ''}}">
+          <label for="password">Contraseña</label>
           <input
             placeholder="ingresa tu password"
-            id="password_user" 
+            id="password" 
             type="password" 
-            class="form-control @error('password_user') is-invalid @enderror" 
-            name="password_user" 
+            class="form-control @error('password') is-invalid @enderror" 
+            name="password" 
             required 
             autocomplete="current-password">
-            @error('password_user')
+            @error('password')
                 <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                 </span>

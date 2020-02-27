@@ -15,35 +15,47 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', 'UserController@viewlogin')->name('/login');
-Route::get('/register', 'UserController@register')->name('/register');
+//views 
+Route::get('/login', 'ViewsController@viewlogin')->name('/login');
+Route::get('/register', 'ViewsController@viewregister')->name('/register');
+Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
+Route::get('/dashboard/user', 'ViewsController@viewuser')->name('//dashboard/user');
+Route::get('/dashboard/profiles', 'ViewsController@viewprofiles')->name('/dashboard/profiles');
+Route::get('/dashboard/routerboard', 'ViewsController@viewrouterboard')->name('/dashboard/routerboard');
+Route::get('/dashboard/vouchers', 'ViewsController@viewvouchers')->name('/dashboard/vouchers');
 
-Route::get('/dashboard', 'UserController@dashboard');
 
 
+//login and register
+Route::post('/login', 'UserController@loginSession')->name('login');
+Route::post('/register', 'UserController@registro');
 
-Route::post('/login', 'UserController@login')->name('/login');
-Route::post('/register', 'UserController@registro')->name('/register');
+//user functions
 Route::get('/user/{id}', 'UserController@getuserbyid');
 Route::put('/user/{id}', 'UserController@updateuser');
 
+//router functions
 Route::get('/routerboard', 'RouterController@getrouters');
 Route::get('/routerboard/{id}', 'RouterController@getroutersbyid');
 Route::post('/routerboard', 'RouterController@addrouter');
 Route::put('/routerboard', 'RouterController@updaterouter');
 Route::delete('/routerboard', 'RouterController@deleterouter');
 
+//profiles functions
 Route::get('/profiles', 'ProfilesController@getprofiles');
 Route::get('/profile/{id}', 'ProfilesController@getprofilebyid');
 Route::post('/profiles', 'ProfilesController@addprofile');
 Route::put('/profiles', 'ProfilesController@updateprofile');
 Route::delete('/profiles', 'ProfilesController@deleteprofile');
 
+//vouchers functions
 Route::get('/vouchers', 'VouchersController@getvouchers');
 Route::get('/voucher/{id}', 'VouchersController@getvoucherbyid');
 Route::post('/vouchers', 'VouchersController@addvoucher');
 Route::delete('/vouchers', 'VouchersController@deletevoucher');
 
+//detailvouchers functions
 Route::get('/detail-vouchers', 'DetailvController@getdetail');
 Route::post('/detail-vouchers', 'DetailvController@adddetail');
 Route::delete('/detail-voucher', 'DetailvController@deletedetail');
+
