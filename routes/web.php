@@ -28,6 +28,7 @@ Route::get('/dashboard/vouchers', 'ViewsController@viewvouchers')->name('/dashbo
 
 //login and register
 Route::post('/login', 'UserController@loginSession')->name('login');
+Route::post('/logout', 'UserController@logout')->name('logout');
 Route::post('/register', 'UserController@registro');
 
 //user functions
