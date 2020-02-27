@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/login', 'ViewsController@viewlogin')->name('/login');
 Route::get('/register', 'ViewsController@viewregister')->name('/register');
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
-Route::get('/dashboard/user', 'ViewsController@viewuser')->name('//dashboard/user');
+Route::get('/dashboard/user', 'ViewsController@viewuser')->name('/dashboard/user');
 Route::get('/dashboard/profiles', 'ViewsController@viewprofiles')->name('/dashboard/profiles');
 Route::get('/dashboard/routerboard', 'ViewsController@viewrouterboard')->name('/dashboard/routerboard');
 Route::get('/dashboard/vouchers', 'ViewsController@viewvouchers')->name('/dashboard/vouchers');

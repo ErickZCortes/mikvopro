@@ -1,0 +1,108 @@
+#title{
+    text-align: center;
+}
+#btnform{
+    text-align: center;
+    margin: auto;
+}
+.container, .container-fluid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.container-fluid {
+    width: 100%;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+div {
+    display: block;
+}
+
+.text-gray-800 {
+    color: #5a5c69!important;
+}
+.mb-2, .my-2 {
+    margin-bottom: .5rem!important;
+}
+.h3, h3 {
+    font-size: 1.75rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+.h1, h1 {
+    font-size: 2.5rem;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+}
+.card-header:first-child {
+    border-radius: calc(.35rem - 1px) calc(.35rem - 1px) 0 0;
+}
+.pb-3, .py-3 {
+    padding-bottom: 1rem!important;
+}
+.pt-3, .py-3 {
+    padding-top: 1rem!important;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+div.table-responsive>div.dataTables_wrapper>div.row {
+    margin: 0;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -.75rem;
+    margin-left: -.75rem;
+}
+.btn.btn-info.btn-sm{
+    margin-right: 3px;
+}
+

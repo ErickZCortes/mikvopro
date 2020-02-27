@@ -1,3 +1,7 @@
+<header>
+  <link rel="stylesheet"type="text/css" href="{{URL::asset('css/reprintvoucher.css')}}">
+  <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+</header>
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Reprint</h1>
 <!-- DataTales Example -->

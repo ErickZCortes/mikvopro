@@ -1,3 +1,7 @@
+<header>
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/profiles.css')}}">
+    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+  </header>
 <h1 class="h3 mb-2 text-gray-800">Perfiles</h1>
 <div class="container">
     <div class="row">
