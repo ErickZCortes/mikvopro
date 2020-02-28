@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Router;
 
 class RouterController extends Controller
 {
@@ -13,7 +14,9 @@ class RouterController extends Controller
      */
     public function index()
     {
-        //
+        $routers = Router::all();
+        return view('mikvo.dashboard.modules.routerboard', compact('routers')); 
+
     }
 
     /**

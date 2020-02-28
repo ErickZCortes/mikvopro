@@ -32,7 +32,7 @@ Route::post('/logout', 'UserController@logout')->name('logout');
 Route::post('/register', 'UserController@register')->name('register');
 
 //user functions
-Route::get('/user/{id}', 'UserController@getuserbyid');
+//Route::get('/user/{id}', 'UserController@getuserbyid');
 Route::put('/user/{id}', 'UserController@updateuser');
 
 //router functions

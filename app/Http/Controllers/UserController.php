@@ -20,8 +20,8 @@ class UserController extends Controller
         $password_user = $request->input('password_user');
         $usuario = User::where('email_user',$request->input('email_user'))->first();
         if(isset($usuario)){
-            dd($usuario);
-            if(Hash::check($password_user,$usuario->passowrd_user)){
+            //dd($usuario);
+            if(Hash::check($password_user,$usuario->password_user)){
                 session()->put('UserSession',$usuario);
                 return redirect('/dashboard');
             }
@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function logout(){
         session()->forget('UserSession');
-        return redirect('/welcome');
+        return redirect('/login');
     }
 
     public function issSession(){

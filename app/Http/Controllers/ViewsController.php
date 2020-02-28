@@ -16,7 +16,10 @@ class ViewsController extends Controller
 
     public function viewdashboard()
     {
-        return view('mikvo.dashboard.layouts.main');
+        if(session()->has('UserSession')){
+            return view('mikvo.dashboard.layouts.main');
+        }
+        return view('mikvo.login');
     }
 
     public function viewuser()
@@ -38,4 +41,6 @@ class ViewsController extends Controller
     {
         return view('mikvo.dashboard.layouts.main');
     }
+
+
 }

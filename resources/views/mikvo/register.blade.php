@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito|Raleway|Roboto|Rubik&display=swap" rel="stylesheet">
   <link rel="stylesheet"type="text/css" href="{{URL::asset('css/register.css')}}">
   <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+  <script type="text/javascript" src="{{URL::asset('js/telephone.js')}}"></script>
 </head>
 <body>
   <div class="reg-form card shadow mb-4">
@@ -48,7 +49,7 @@
               <div class="col">
                 <label for="telephone_user">Teléfono</label>
                 <input 
-                class="form-control form-control-md" 
+                class="form-control form-control-md rounded-0 w-100" 
                 type="tel" 
                 id="telephone_user" 
                 required
