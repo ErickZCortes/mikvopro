@@ -16,6 +16,6 @@
 
     @endsection
     
-    @section('main')
+    @section('content')
         @include('mikvo.dashboard.shared.widgets.card')
     @endsection

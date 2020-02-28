@@ -20,7 +20,7 @@
             <div id="content">
                 @yield('header')
                 <div class="container-fluid">
-                    @yield('main')
+                    @yield('content')
                 </div>
             </div>
             @yield('footer')

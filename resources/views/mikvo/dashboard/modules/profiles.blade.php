@@ -1,7 +1,26 @@
-<header>
-    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/profiles.css')}}">
-    <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
-  </header>
+@extends('mikvo.dashboard.layouts.default')
+    @section('header')
+        @include('mikvo.dashboard.shared.components.header')
+        
+    @endsection
+    
+    @section('sidebar')
+        @include('mikvo.dashboard.shared.components.sidebar')
+    @endsection
+    
+    @section('footer')
+        @include('mikvo.dashboard.shared.components.footer')
+    @endsection
+    
+    @section('css')
+        <header>
+            <link rel="stylesheet"type="text/css" href="{{URL::asset('css/profiles.css')}}">
+            <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+        </header>
+    @endsection
+    
+    @section('content')
+      
 <h1 class="h3 mb-2 text-gray-800">Perfiles</h1>
 <div class="container">
     <div class="row">
@@ -182,3 +201,4 @@
         </div>
     </div>
 </div>
+@endsection
