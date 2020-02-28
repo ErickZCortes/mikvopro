@@ -49,10 +49,10 @@
                 <label for="telephone_user">Teléfono</label>
                 <input 
                 class="form-control form-control-md" 
-                type="text" 
+                type="tel" 
                 id="telephone_user" 
                 required
-                placeholder="Ingresa tu Teléfono"
+                placeholder="(555)-555-5555"
                 name="telephone_user"
                  />
               </div>
