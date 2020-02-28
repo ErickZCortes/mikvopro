@@ -18,31 +18,67 @@
       </div>
       <div class="justify-content-center">
         <div>
-          <form>
+          <form method="POST" action="{{ route('register') }}">
+          @csrf
             <div class="form-row form-group">
               <div class="col">
-                <label for="name">Nombre completo</label>
-                <input class="form-control form-control-md" type="text" id="name" required />
+                <label for="fullname_user">Nombre completo</label>
+                <input 
+                  class="form-control form-control-md" 
+                  type="text" 
+                  id="fullname_user" 
+                  required
+                  placeholder="Ingresa tu Nombre completo"
+                  name="fullname_user"
+                   />
               </div>
               <div class="col">
-                <label for="company">Compañia</label>
-                <input class="form-control form-control-md" type="text" id="company" required />
+                <label for="user_name">Usuario</label>
+                <input 
+                  class="form-control form-control-md" 
+                  type="text" 
+                  id="user_name" 
+                  required
+                  placeholder="Ingresa tu Usuario"
+                  name="user_name"
+                  />
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col">
-                <label for="username">Nombre de usuario</label>
-                <input class="form-control form-control-md" type="text" id="username" required />
+                <label for="telephone_user">Teléfono</label>
+                <input 
+                class="form-control form-control-md" 
+                type="text" 
+                id="telephone_user" 
+                required
+                placeholder="Ingresa tu Teléfono"
+                name="telephone_user"
+                 />
               </div>
               <div class="col">
-                <label for="email">Correo electrónico</label>
-                <input class="form-control form-control-md" type="email" id="email" required />
+                <label for="email_user">Correo electrónico</label>
+                <input 
+                class="form-control form-control-md" 
+                type="email" 
+                id="email_user" 
+                required 
+                placeholder="Ingresa tu Correo electrónico"
+                name="email_user"
+                />
               </div>
             </div>
             <div class="form-row form-group">
               <div class="col">
-                <label for="password">Contraseña</label>
-                <input class="form-control form-control-md" type="password" id="password" required />
+                <label for="password_user">Contraseña</label>
+                <input 
+                class="form-control form-control-md" 
+                type="password" 
+                id="password_user" 
+                required
+                placeholder="Ingresa tu Contraseña"
+                name="password_user"                
+                 />
                 <small>La contraseña debe tener al menos 7 caracteres</small>
               </div>
             </div>

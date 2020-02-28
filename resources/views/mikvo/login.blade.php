@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +29,7 @@
             autocomplete="email" 
             autofocus
             name="email_user"  
-            placeholder="ingresa tu email">
+            placeholder="Ingresa tu email">
             @error('email_user')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -41,7 +40,7 @@
         <div class="form-group {{ $errors->has('password_user')?'has-error' : ''}}">
           <label for="password_user">Contraseña</label>
           <input
-            placeholder="ingresa tu password"
+            placeholder="Ingresa tu password"
             id="password_user" 
             type="password" 
             class="form-control @error('password_user') is-invalid @enderror" 

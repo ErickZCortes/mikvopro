@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 class UserController extends Controller
 {
 
+//////////////////////////////////////////////Login//////////////////////////////////////////////////////
     public function login(){
         if($this->isSession()){
             return redirect(('/dashboard'));
@@ -18,11 +20,11 @@ class UserController extends Controller
         $password_user = $request->input('password_user');
         $usuario = User::where('email_user',$request->input('email_user'))->first();
         if(isset($usuario)){
-            //if(Hash::check($password_user,$usuario->passowrd_user)){
+            if(Hash::check($password_user,$usuario->passowrd_user)){
                 session()->put('UserSession',$usuario);
-                //dd($usuario);
+                dd($usuario);
                 return redirect('/dashboard');
-            //}
+            }
             
             
         }
@@ -37,21 +39,21 @@ class UserController extends Controller
     public function issSession(){
         return (session()->has('UserSession'));
     }
+    
+////////////////////////////////////////////////Register/////////////////////////////////////////////////////////////////
 
+    public function register(Request $request){
+        $user = new User;
+        $user->fullname_user = $request->input('fullname_user');
+        $user->user_name = $request->input('user_name');
+        $user->telephone_user = $request->input('telephone_user');
+        $user->email_user = $request->input('email_user');
+        $user->password_user = $request->input('password_user');
 
+        $user->save();
 
-    /*public function login(){
-        $credentials = $this->validate(request(),[
-            'email_user'=> 'email|required|string',
-            'password_user'=>'required|string'
-        ]);
-
-
-        if(Auth::attempt($credentials)){
-            return 'see brooo';
-        }
-        return 'ahorita no joven';
-    }*/
+        return redirect('/login');
+    }
 
     /**
      * Display a listing of the resource.
