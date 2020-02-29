@@ -59,8 +59,6 @@ class ProfilesController extends Controller
             $profile->expiredho_profiles = $request->input('expiredho_profiles');
             $profile->cuttime_profile = $request->input('cuttime_profile');    
         }
-        
-       
         // Inserto todos los datos en mi tabla 'jugos' 
         $profile->save();
         
