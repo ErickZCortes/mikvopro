@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRouterboardsTable extends Migration
+class CreateRoutersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRouterboardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('routerboards', function (Blueprint $table) {
+        Schema::create('routers', function (Blueprint $table) {
             $table->bigIncrements('id');
             
             $table->bigInteger("iduser_router")->unsigned();
@@ -23,7 +23,7 @@ class CreateRouterboardsTable extends Migration
             $table->string("router_description",200);
             $table->string("ip_router",15);
             $table->string("user_router",30);
-            $table->string("password",40);
+            $table->string("password_router",40);
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateRouterboardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routerboards');
+        Schema::dropIfExists('routers');
     }
 }
