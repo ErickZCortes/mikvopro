@@ -24,48 +24,72 @@
     <div class="card shadow mb-4">
       <div class="card-body">
         <h5 id="title">Add Routers</h5>
-        <form #routerform="ngForm" >
+        <form method="POST" action="{{ route('/dashboard/routerboard') }}">
+           @csrf
           <div class="row">
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="id">Model:</label>
-                <input type="number" class="form-control" id="id" [(ngModel)]="routerboard.iduser_router"
-                  placeholder="Enter the router's model" name="id">
+                <label for="model_router">Model:</label>
+                <input 
+                  id="model_router"
+                  type="text" 
+                  class="form-control" 
+                  name="model_router"
+                  required
+                  placeholder="Ingresa el modelo" 
+                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="model">Model:</label>
-                <input type="text" class="form-control" id="model" [(ngModel)]="routerboard.model_router"
-                  placeholder="Enter the router's model" name="model">
+                <label for="router_description">Description:</label>
+                <input 
+                  id="router_description"
+                  type="text" 
+                  class="form-control" 
+                  name="router_description"
+                  required
+                  placeholder="Ingresa la descripción"
+                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" class="form-control" id="description" [(ngModel)]="routerboard.router_description"
-                  placeholder="Enter the router's description" name="description">
+                <label for="ip_router">IP:</label>
+                <input 
+                  id="ip_router"
+                  type="text" 
+                  class="form-control" 
+                  name="ip_router"
+                  required
+                  placeholder="Ingresa la IP"
+                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="ip">IP:</label>
-                <input type="text" class="form-control" id="ip" [(ngModel)]="routerboard.ip_router"
-                  placeholder="Enter the router's IP" name="ip">
+                <label for="user_router">User:</label>
+                <input 
+                  id="user_router"
+                  type="text" 
+                  class="form-control" 
+                  name="user_router"
+                  required
+                  placeholder="Ingresa el usuario"
+                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="user">User:</label>
-                <input type="text" class="form-control" id="user" [(ngModel)]="routerboard.user_router"
-                  placeholder="Enter the router's user" name="user">
-              </div>
-            </div>
-            <div class="col-sm-10 col-md-4 col-lg-4">
-              <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" [(ngModel)]="routerboard.password_router"
-                  placeholder="Enter the router's password" name="password">
+                <label for="password_router">Password:</label>
+                <input 
+                  id="password_router"
+                  type="text" 
+                  class="form-control" 
+                  name="password_router"
+                  required
+                  placeholder="Ingresa la contraseña"
+                  >
               </div>
             </div>
             <div id="btnform" class="col-sm-10 col-md-4 col-lg-4">
@@ -121,7 +145,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let router of routerboardRepoService.routerboard" role="row" class="odd">
+                    <tr role="row" class="odd">
                       <td class="sorting_1">hi</td>
                     
                       <td id="btntable">

@@ -28,7 +28,6 @@
             required 
             autocomplete="email" 
             autofocus
-            name="email_user"  
             placeholder="Ingresa tu email">
             @error('email_user')
                 <span class="invalid-feedback" role="alert">

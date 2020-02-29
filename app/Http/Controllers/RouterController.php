@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Router;
+use App\User;
 
 class RouterController extends Controller
 {
@@ -12,6 +13,9 @@ class RouterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function index()
     {
         $routers = Router::all();
@@ -19,6 +23,10 @@ class RouterController extends Controller
 
     }
 
+    public function viewrouterboard()
+    {
+        return view('mikvo.dashboard.modules.routerboard');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -36,23 +44,30 @@ class RouterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addrouter(Request $request)
     {
         $router = new Router; 
- 
+        
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            //$dato = User::find($uidSesion);
+
+            $router->iduser_router = $uidSesion;
+            $router->model_router = $request->input('model_router');
+            $router->router_description = $request->input('router_description');
+            $router->ip_router = $request->input('ip_router');
+            $router->user_router = $request->input('user_router');
+            $router->password_router = $request->input('password_router');    
+        }
         // Recibo todos los datos del formulario de la vista 'crear.blade.php'
-        $router->model_router = $request->input('model_router');
-        $router->router_description = $request->input('router_description');
-        $router->ip_router = $request->input('ip_router');
-        $router->user_router = $request->input('user_router');
-        $router->password_router = $request->input('password_router');
+        
         
        
         // Inserto todos los datos en mi tabla 'jugos' 
         $router->save();
         
         // Hago una redirección a la vista principal con un mensaje 
-        return redirect('mikvo/dashboard/modules/routerboard')->with('message','Guardado Satisfactoriamente !');
+        return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
 
     }
 

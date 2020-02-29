@@ -21,7 +21,7 @@ Route::get('/register', 'ViewsController@viewregister')->name('/register');
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
 Route::get('/dashboard/user', 'ViewsController@viewuser')->name('/dashboard/user');
 Route::get('/dashboard/profiles', 'ViewsController@viewprofiles')->name('/dashboard/profiles');
-Route::get('/dashboard/routerboard', 'ViewsController@viewrouterboard')->name('/dashboard/routerboard');
+
 Route::get('/dashboard/vouchers/create', 'ViewsController@viewvouchers')->name('/dashboard/vouchers/create');
 Route::get('/dashboard/vouchers/reprint', 'ViewsController@viewreprintvouchers')->name('/dashboard/vouchers/reprint');
 Route::get('/dashboard/vouchers/design', 'ViewsController@viewdesignvoucher')->name('/dashboard/vouchers/design');
@@ -37,9 +37,10 @@ Route::post('/register', 'UserController@register')->name('register');
 Route::put('/user/{id}', 'UserController@updateuser');
 
 //router functions
-Route::get('/routerboard', 'RouterController@getrouters');
+//Route::get('/routerboard', 'RouterController@getrouters');
+Route::get('/dashboard/routerboard', 'RouterController@viewrouterboard')->name('/dashboard/routerboard');
 Route::get('/routerboard/{id}', 'RouterController@getroutersbyid');
-Route::post('/routerboard', 'RouterController@addrouter');
+Route::post('/dashboard/routerboard', 'RouterController@addrouter')->name('/dashboard/routerboard');
 Route::put('/routerboard', 'RouterController@updaterouter');
 Route::delete('/routerboard', 'RouterController@deleterouter');
 
