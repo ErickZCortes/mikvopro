@@ -35,25 +35,31 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function addProfile(Request $request)
     {
         $profile = new Profile; 
- 
-        // Recibo todos los datos del formulario de la vista 'crear.blade.php'
-        $profile->iduser_profile = $request->input('iduser_profile');
-        $profile->name_profile = $request->input('name_profile');
-        $profile->addpool_profile = $request->input('addpool_profile');
-        $profile->vsubida_profile = $request->input('vsubida_profile');
-        $profile->sbyte_profile = $request->input('sbyte_profile');
-        $profile->vdescarga_profile = $request->input('vdescarga_profile');
-        $profile->dbyte_profile = $request->input('dbyte_profile');
-        $profile->cost_profile = $request->input('cost_profile');
-        $profile->typet_profile = $request->input('typet_profile');
-        $profile->limitda_profiles = $request->input('limitda_profiles');
-        $profile->limitho_profiles = $request->input('limitho_profiles');
-        $profile->expireda_profiles = $request->input('expireda_profiles');
-        $profile->expiredho_profiles = $request->input('expiredho_profiles');
-        $profile->cuttime_profile = $request->input('cuttime_profile');
+        
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            //$dato = User::find($uidSesion);
+
+            // Recibo todos los datos del formulario de la vista 'crear.blade.php'
+            $profile->iduser_profile = $uidSesion;
+            $profile->name_profile = $request->input('name_profile');
+            $profile->addpool_profile = $request->input('addpool_profile');
+            $profile->vsubida_profile = $request->input('vsubida_profile');
+            $profile->sbyte_profile = $request->input('sbyte_profile');
+            $profile->vdescarga_profile = $request->input('vdescarga_profile');
+            $profile->dbyte_profile = $request->input('dbyte_profile');
+            $profile->cost_profile = $request->input('cost_profile');
+            $profile->typet_profile = $request->input('typet_profile');
+            $profile->limitda_profiles = $request->input('limitda_profiles');
+            $profile->limitho_profiles = $request->input('limitho_profiles');
+            $profile->expireda_profiles = $request->input('expireda_profiles');
+            $profile->expiredho_profiles = $request->input('expiredho_profiles');
+            $profile->cuttime_profile = $request->input('cuttime_profile');    
+        }
+        
        
         // Inserto todos los datos en mi tabla 'jugos' 
         $profile->save();
