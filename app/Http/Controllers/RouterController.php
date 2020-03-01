@@ -13,16 +13,6 @@ class RouterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    
-
-    public function index()
-    {
-        $routers = Router::all();
-        return view('mikvo.dashboard.modules.index', compact('routers')); 
-
-    }
-
     public function viewrouterboard()
     {
         return view('mikvo.dashboard.modules.routerboard');
@@ -59,15 +49,21 @@ class RouterController extends Controller
             $router->user_router = $request->input('user_router');
             $router->password_router = $request->input('password_router');    
         }
-        // Recibo todos los datos del formulario de la vista 'crear.blade.php'
+        // Recibo todos los datos del formulario de la vista 'createrouter.blade.php'
         
-        
-       
-        // Inserto todos los datos en mi tabla 'jugos' 
+        // Inserto todos los datos en mi tabla 'routers' 
         $router->save();
         
         // Hago una redirección a la vista principal con un mensaje 
         return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
+
+    }
+
+    // Leer Registros (Read) 
+    public function index()
+    {
+        $routers = Router::all();
+        return view('mikvo.dashboard.modules.routerboard', compact('routers')); 
 
     }
 
@@ -91,7 +87,7 @@ class RouterController extends Controller
     public function edit($id)
     {
         $router = Router::find($id);
-        return view('mikvo/dashboard/modules/routerboard.edit',['routers'=>$router]);
+        return view('mikvo/dashboard/modules/routerboard.updaterouter',['routers'=>$router]);
     }
 
     /**
@@ -112,7 +108,7 @@ class RouterController extends Controller
 
         $router->save();
 
-        return view('mikvo/dashboard/modules/routerboard');
+        return view('/dashboard/routerboard')  ;
     }
 
     /**
@@ -126,6 +122,6 @@ class RouterController extends Controller
         $router = Router::find($id);
 
         Router::destroy($id);
-        return Redirect::to('mikvo/dashboard/modules/routerboard');
+        return Redirect::to('/dashboard/routerboard');
     }
 }

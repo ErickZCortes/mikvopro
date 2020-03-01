@@ -38,11 +38,13 @@ Route::put('/user/{id}', 'UserController@updateuser');
 
 //router functions
 //Route::get('/routerboard', 'RouterController@getrouters');
-Route::get('/dashboard/routerboard', 'RouterController@viewrouterboard')->name('/dashboard/routerboard');
-Route::get('/routerboard/{id}', 'RouterController@getroutersbyid');
-Route::post('/dashboard/routerboard', 'RouterController@addrouter')->name('/dashboard/routerboard');
-Route::put('/routerboard', 'RouterController@updaterouter');
-Route::delete('/routerboard', 'RouterController@deleterouter');
+Route::get('/dashboard/routerboard/create', 'RouterController@create')->name('/dashboard/routerboard/create');
+//CRUD
+Route::put('/dashboard/routerboard/add','RouterController@addrouter')->name('/dashboard/routerboard/add');
+Route::get('/dashboard/routerboard', 'RouterController@index')->name('/dashboard/routerboard');
+Route::get('/dashboard/routerboard/edit', 'RouterController@edit')->name('/dashboard/routerboard/edit');
+Route::put('/dashboard/routerboard/update/{id}','RouterController@update')->name('/dashboard/routerboard/update');
+Route::delete('/dashboard/routerboard/delete/{id}', 'RouterController@destroy');
 
 //profiles functions
 Route::get('/profiles', 'ProfilesController@getprofiles');
