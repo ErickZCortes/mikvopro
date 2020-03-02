@@ -22,7 +22,7 @@
     @section('content')
     <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
     
-    <a href="{{ route('dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
+    <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -66,20 +66,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($router as $routerboard)
+                    @foreach ($routers as $router)
                     <tr role="row" class="odd">
-                      <td class="sorting_1">{{$routerboard->model_router}}</td>
-                      <td class="sorting_1">{{$routerboard->router_description}}</td>
-                      <td class="sorting_1">{{$routerboard->ip_router}}</td>
-                      <td class="sorting_1">{{$routerboard->user_router}}</td>
+                      <td class="sorting_1">{{$router->model_router}}</td>
+                      <td class="sorting_1">{{$router->router_description}}</td>
+                      <td class="sorting_1">{{$router->ip_router}}</td>
+                      <td class="sorting_1">{{$router->user_router}}</td>
     
        
                       
                       <td id="btntable">
-                        <form action="{{route('dashboard/routerboard/delete',$dashboard->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
+                        <form action="{{route('/dashboard/routerboard/delete',$router->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                           <input type="hidden" name="_method" value="PUT">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <a href="{{ route('dashboard/routerboard/update',$dashboard->id) }}" class="btn btn-info btn-sm">Editar</a>
+                          <a href="{{ route('/dashboard/routerboard/edit',$router->id) }}" class="btn btn-info btn-sm">Editar</a>
                           <button class="btn btn-danger btn-sm" type="submit">
                             <i class="fa fa-trash-o"> Eliminar</i>
                           </button>

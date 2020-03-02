@@ -15,7 +15,7 @@ class ProfilesController extends Controller
     public function index()
     {
         $profiles = Profile::all();
-        return view('mikvo.dashboard.modules.profiles', compact('profiles'));
+        return view('mikvo.dashboard.modules.profiles.profiles', compact('profiles'));
     }
 
     /**

@@ -7,40 +7,23 @@ use App\Router;
 use App\User;
 
 class RouterController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function viewrouterboard()
+{    
+    public function index()
     {
-        return view('mikvo.dashboard.modules.routerboard');
+        $routers = Router::all();
+        return view('mikvo.dashboard.modules.routerboard.routerboard', compact('routers')); 
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $routers = Router::all();
-        return view('mikvo.dashboard.modules.create', compact('routers'));
+        return view('mikvo.dashboard.modules.routerboard.createrouter', compact('routers'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addrouter(Request $request)
+    public function store(Request $request)
     {
         $router = new Router; 
         
         if (session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
-            //$dato = User::find($uidSesion);
 
             $router->iduser_router = $uidSesion;
             $router->model_router = $request->input('model_router');
@@ -49,54 +32,22 @@ class RouterController extends Controller
             $router->user_router = $request->input('user_router');
             $router->password_router = $request->input('password_router');    
         }
-        // Recibo todos los datos del formulario de la vista 'createrouter.blade.php'
-        
-        // Inserto todos los datos en mi tabla 'routers' 
-        $router->save();
-        
-        // Hago una redirección a la vista principal con un mensaje 
+          $router->save();
+
         return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
-
     }
 
-    // Leer Registros (Read) 
-    public function index()
-    {
-        $routers = Router::all();
-        return view('mikvo.dashboard.modules.routerboard', compact('routers')); 
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
-        $router = Router::find($id);
-        return view('mikvo/dashboard/modules/routerboard.updaterouter',['routers'=>$router]);
+        $routers = Router::find($id);
+        return view('mikvo.dashboard.modules.routerboard.updaterouter',['routers'=>$routers]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $router = Router::find($id);
@@ -108,20 +59,14 @@ class RouterController extends Controller
 
         $router->save();
 
-        return view('/dashboard/routerboard')  ;
+        return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $router = Router::find($id);
 
         Router::destroy($id);
-        return Redirect::to('/dashboard/routerboard');
+        return redirect('/dashboard/routerboard');
     }
 }

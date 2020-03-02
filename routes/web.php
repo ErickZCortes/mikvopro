@@ -15,39 +15,50 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
+
+
+
+
+
 //views 
-Route::get('/login', 'ViewsController@viewlogin')->name('/login');
-Route::get('/register', 'ViewsController@viewregister')->name('/register');
+
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
 Route::get('/dashboard/user', 'ViewsController@viewuser')->name('/dashboard/user');
-Route::get('/dashboard/profiles', 'ViewsController@viewprofiles')->name('/dashboard/profiles');
 
 Route::get('/dashboard/vouchers/create', 'ViewsController@viewvouchers')->name('/dashboard/vouchers/create');
 Route::get('/dashboard/vouchers/reprint', 'ViewsController@viewreprintvouchers')->name('/dashboard/vouchers/reprint');
 Route::get('/dashboard/vouchers/design', 'ViewsController@viewdesignvoucher')->name('/dashboard/vouchers/design');
 
 
-//login and register
+//-----------------------------------------LOGIN-------------------------------------------//
+Route::get('/login', 'UserController@index')->name('/login');
 Route::post('/login', 'UserController@loginSession')->name('login');
 Route::post('/logout', 'UserController@logout')->name('logout');
+//-----------------------------------------REGISTER-------------------------------------------//
 Route::post('/register', 'UserController@register')->name('register');
+//-----------------------------------------USER-------------------------------------------//
 
-//user functions
-//Route::get('/user/{id}', 'UserController@getuserbyid');
-Route::put('/user/{id}', 'UserController@updateuser');
-
-//router functions
-//Route::get('/routerboard', 'RouterController@getrouters');
-Route::get('/dashboard/routerboard/create', 'RouterController@create')->name('/dashboard/routerboard/create');
-//CRUD
-Route::put('/dashboard/routerboard/add','RouterController@addrouter')->name('/dashboard/routerboard/add');
+//-----------------------------------------ROUTER-------------------------------------------//
 Route::get('/dashboard/routerboard', 'RouterController@index')->name('/dashboard/routerboard');
-Route::get('/dashboard/routerboard/edit', 'RouterController@edit')->name('/dashboard/routerboard/edit');
+Route::get('/dashboard/routerboard/create', 'RouterController@create')->name('/dashboard/routerboard/create');
+Route::put('/dashboard/routerboard/store','RouterController@store')->name('/dashboard/routerboard/store');
+Route::get('/dashboard/routerboard/edit/{id}', 'RouterController@edit')->name('/dashboard/routerboard/edit');
 Route::put('/dashboard/routerboard/update/{id}','RouterController@update')->name('/dashboard/routerboard/update');
-Route::delete('/dashboard/routerboard/delete/{id}', 'RouterController@destroy');
+Route::put('/dashboard/routerboard/delete/{id}', 'RouterController@destroy')->name('/dashboard/routerboard/delete');
 
-//profiles functions
-Route::get('/profiles', 'ProfilesController@getprofiles');
+//-----------------------------------------PROFILES-------------------------------------------//
+Route::get('/profiles', 'ProfilesController@index')->name('/dashboard/profiles');
+
+
+//-----------------------------------------VOUCHERS-------------------------------------------//
+
+
+
+
 Route::get('/profile/{id}', 'ProfilesController@getprofilebyid');
 Route::post('/profiles', 'ProfilesController@addprofile');
 Route::put('/profiles', 'ProfilesController@updateprofile');
