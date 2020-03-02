@@ -14,16 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-
-
-
-
-
-
-
-
 //views 
 
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
@@ -51,11 +41,15 @@ Route::put('/dashboard/routerboard/update/{id}','RouterController@update')->name
 Route::put('/dashboard/routerboard/delete/{id}', 'RouterController@destroy')->name('/dashboard/routerboard/delete');
 
 //-----------------------------------------PROFILES-------------------------------------------//
-Route::get('/profiles', 'ProfilesController@index')->name('/dashboard/profiles');
-
+Route::get('/dashboard/profiles', 'ProfilesController@index')->name('/dashboard/profiles');
+Route::get('/dashboard/profiles/create', 'ProfilesController@create')->name('/dashboard/profiles/create');
+Route::put('/dashboard/profiles/store','ProfilesController@store')->name('/dashboard/profiles/store');
+Route::get('/dashboard/profiles/edit/{id}', 'ProfilesController@edit')->name('/dashboard/profiles/edit');
+Route::put('/dashboard/profiles/update/{id}','ProfilesController@update')->name('/dashboard/profiles/update');
+Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->name('/dashboard/profiles/delete');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
-
+Route::get('/vouchers', 'VouchersController@getvouchers');
 
 
 
@@ -65,7 +59,7 @@ Route::put('/profiles', 'ProfilesController@updateprofile');
 Route::delete('/profiles', 'ProfilesController@deleteprofile');
 
 //vouchers functions
-Route::get('/vouchers', 'VouchersController@getvouchers');
+
 Route::get('/voucher/{id}', 'VouchersController@getvoucherbyid');
 Route::post('/vouchers', 'VouchersController@addvoucher');
 Route::delete('/vouchers', 'VouchersController@deletevoucher');
@@ -74,4 +68,5 @@ Route::delete('/vouchers', 'VouchersController@deletevoucher');
 Route::get('/detail-vouchers', 'DetailvController@getdetail');
 Route::post('/detail-vouchers', 'DetailvController@adddetail');
 Route::delete('/detail-voucher', 'DetailvController@deletedetail');
+
 
