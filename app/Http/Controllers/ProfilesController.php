@@ -26,7 +26,7 @@ class ProfilesController extends Controller
     public function create()
     {
         $profiles = Profile::all();
-        return view('mikvo.dashboard.modules.profiles', compact('profiles'));
+        return view('mikvo.dashboard.modules.profiles.createprofile', compact('profiles'));
     }
 
     /**
@@ -35,7 +35,7 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function addProfile(Request $request)
+    public function store(Request $request)
     {
         $profile = new Profile; 
         
@@ -59,11 +59,11 @@ class ProfilesController extends Controller
             $profile->expiredho_profiles = $request->input('expiredho_profiles');
             $profile->cuttime_profile = $request->input('cuttime_profile');    
         }
-        // Inserto todos los datos en mi tabla 'jugos' 
+        // Inserto todos los datos en mi tabla 'profiles' 
         $profile->save();
         
         // Hago una redirección a la vista principal con un mensaje 
-        return redirect('mikvo/dashboard/modules/routerboard')->with('message','Guardado Satisfactoriamente !');
+        return redirect('/dashboard/profiles')->with('message','Guardado Satisfactoriamente !');
     }
 
     /**
@@ -85,7 +85,8 @@ class ProfilesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profiles = Profile::find($id);
+        return view('mikvo.dashboard.modules.profiles.updateprofile',['profiles'=>$profiles]);
     }
 
     /**
@@ -97,7 +98,24 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::find($id);
+            $profile->name_profile = $request->input('name_profile');
+            $profile->addpool_profile = $request->input('addpool_profile');
+            $profile->vsubida_profile = $request->input('vsubida_profile');
+            $profile->sbyte_profile = $request->input('sbyte_profile');
+            $profile->vdescarga_profile = $request->input('vdescarga_profile');
+            $profile->dbyte_profile = $request->input('dbyte_profile');
+            $profile->cost_profile = $request->input('cost_profile');
+            $profile->typet_profile = $request->input('typet_profile');
+            $profile->limitda_profiles = $request->input('limitda_profiles');
+            $profile->limitho_profiles = $request->input('limitho_profiles');
+            $profile->expireda_profiles = $request->input('expireda_profiles');
+            $profile->expiredho_profiles = $request->input('expiredho_profiles');
+            $profile->cuttime_profile = $request->input('cuttime_profile');   
+
+        $profile->save();
+
+        return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
     }
 
     /**
@@ -108,6 +126,9 @@ class ProfilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profile = Profile::find($id);
+
+        Profile::destroy($id);
+        return redirect('/dashboard/profiles');
     }
 }

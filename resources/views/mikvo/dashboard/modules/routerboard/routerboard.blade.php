@@ -20,31 +20,30 @@
     @endsection
     
     @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
+    <h1 class="h3 mb-2 text-gray-800">Routerboard</h1>
     
-    <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Routerboar</h6>
-      </div>
       <div class="card-body">
         <div class="table-responsive table-hover">
           <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sm-12 col-md-4">
                 <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length"
-                      aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                      aria-controls="dataTable" class="custom-select custom-select-md form-control form-control-md">
                       <option value="10">10</option>
                       <option value="25">25</option>
                       <option value="50">50</option>
                       <option value="100">100</option>
                     </select> entries</label></div>
               </div>
-              <div class="col-sm-12 col-md-6">
+              <div class="col-sm-12 col-md-4">
                 <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                      class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
+                      class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label></div>
+              </div>
+              <div class="col-sm-12 col-md-4">
+                <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
+
               </div>
             </div>
             <div class="row">
