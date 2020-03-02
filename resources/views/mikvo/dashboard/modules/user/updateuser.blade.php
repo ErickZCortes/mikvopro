@@ -84,22 +84,21 @@
                                     </small>
                                 </div>
                                 <div class="form-group col-md-12">
-                                <label for="img_user" class="negrita">Selecciona una imagen:</label>                         
+                                <label for="img_user" class="negrita">Selecciona una imagen:</label> 
+                                <hr>
+                                @if ( !empty ( $user->img_user) )
+
+                    <span>Imagen Actual: </span>
+                    <br>
+                    <img src="../../../../uploads/{{$user->img_user}}" width="200" class="img-fluid">
+
+                  @else
+
+                    Aún no se ha cargado una imagen para este producto
+
+                  @endif                         
                                 <div>
-                                <input name="img_user" type="file" id="img_user">
-                                <br>
-                                <br>
-                                              @if ( !empty ( $user->img_user) )
-                
-                                  <span>Imagen Actual: </span>
-                                  <br>
-                                  <img src="../../../uploads/{{ $user->img_user }}" width="200" class="img-fluid">
-                
-                                @else
-                
-                                  Aún no se ha cargado una imagen para este producto
-                
-                                @endif      
+                                <input name="img_user" type="file" id="img_user">   
                                 </div>
                             <div class="center">
                                 <button type="submit" class="btn btn-primary">Actualizar cuenta</button>

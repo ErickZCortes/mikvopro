@@ -8,14 +8,10 @@ use App\User;
 
 class VouchersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
+        $vouchers = Voucher::all();
+        return view('mikvo.dashboard.modules.createvouchers', compact('vouchers'));
     }
 
     /**

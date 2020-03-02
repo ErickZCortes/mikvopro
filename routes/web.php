@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -54,16 +43,8 @@ Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->nam
 Route::get('/dashboard/vouchers', 'VouchersController@index')->name('/dashboard/vouchers');
 Route::get('/dashboard/vouchers/create', 'VouchersController@create')->name('/dashboard/vouchers/create');
 Route::put('/dashboard/vouchers/store','VouchersController@store')->name('/dashboard/vouchers/store');
-
-//vouchers functions
-
-Route::get('/voucher/{id}', 'VouchersController@getvoucherbyid');
-Route::post('/vouchers', 'VouchersController@addvoucher');
-Route::delete('/vouchers', 'VouchersController@deletevoucher');
-
-//detailvouchers functions
-Route::get('/detail-vouchers', 'DetailvController@getdetail');
-Route::post('/detail-vouchers', 'DetailvController@adddetail');
-Route::delete('/detail-voucher', 'DetailvController@deletedetail');
+Route::get('/dashboard/vouchers/edit/{id}', 'VouchersController@edit')->name('/dashboard/vouchers/edit');
+Route::put('/dashboard/vouchers/update/{id}','VouchersController@update')->name('/dashboard/vouchers/update');
+Route::put('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->name('/dashboard/vouchers/delete');
 
 

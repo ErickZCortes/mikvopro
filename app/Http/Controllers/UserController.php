@@ -80,7 +80,7 @@ class UserController extends Controller
             $user->telephone_user = $request->input('telephone_user');
             //$user->password_user = $request->input('password_user');
             $user->img_user = $request->input('img_user');
-            //session()->push('UserSession.fullname_user', 'developers');
+            //session()->push('UserSession.fullname_user', $user->fullname_user);
             //session()->push('UserSession.user_name', 'developers');
             //session()->push('UserSession.telephone_user', 'developers');
             //session()->push('UserSession.password_user', 'developers');

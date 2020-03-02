@@ -42,7 +42,7 @@
             <span>Routerboard</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('/dashboard/vouchers/create')}}">
+        <a class="nav-link" href="{{route('/dashboard/vouchers')}}">
             <i class="fas fa-ticket-alt"></i>
             <span>Create vouchers</span></a>
     </li>

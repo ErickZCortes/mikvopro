@@ -32,9 +32,17 @@
 <div class="container">
             <div class="text-center card shadow mb-4 mx-auto">
                 <div class="card-body">
-                    <img class="rounded-circle"
-                        src="https://cursania.com/imagenes/usuario/foto/foto-usuario-cursania.png" alt="" width="200"
+                @if (( $user->img_user) == "null")
+                <img class="rounded-circle"
+                        src="../../../../uploads/user-default.png" alt="" width="200"
+                        height="200"> 
+              @else
+              <img class="rounded-circle"
+                        src="../../../../uploads/{{$user->img_user}}" alt="" width="200"
                         height="200">
+                 
+              @endif     
+                <hr>
                     <h4 class="mb-0">{{$user->user_name}}</h4>
                     <span class="text-muted d-block mb-2">User Name</span>
                     <hr>
