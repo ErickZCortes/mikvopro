@@ -70,7 +70,7 @@
           </button>
           <a href="/reset-password" id="pass">¿Olvidó la contraseña?</a>
         </div>
-        <span class="text-small">¿Aún no tienes una cuenta? <a href="{{url('/register')}}"> Crear cuenta</a></span>
+        <span class="text-small">¿Aún no tienes una cuenta? <a href="{{route('/register')}}"> Crear cuenta</a></span>
       </form>
     </div>
 </div>

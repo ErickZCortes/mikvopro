@@ -19,7 +19,7 @@
       </div>
       <div class="justify-content-center">
         <div>
-          <form method="POST" action="{{ route('register') }}">
+          <form method="POST" action="{{ route('/register/create') }}">
           @csrf
             <div class="form-row form-group">
               <div class="col">

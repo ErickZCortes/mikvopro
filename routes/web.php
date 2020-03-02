@@ -17,7 +17,8 @@ Route::get('/login', 'UserController@index')->name('/login');
 Route::post('/login', 'UserController@loginSession')->name('login');
 Route::post('/logout', 'UserController@logout')->name('logout');
 //-----------------------------------------REGISTER-------------------------------------------//
-Route::post('/register', 'UserController@register')->name('register');
+Route::get('/register', 'UserController@indexregister')->name('/register');
+Route::post('/register/create', 'UserController@register')->name('/register/create');
 //-----------------------------------------USER-------------------------------------------//
 Route::get('/dashboard/user', 'UserController@indexuser')->name('/dashboard/user');
 Route::get('/dashboard/user/edit/{id}','UserController@edit')->name('/dashboard/user/edit');

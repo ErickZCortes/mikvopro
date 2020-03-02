@@ -39,7 +39,9 @@ class UserController extends Controller
     }
 
 //----------------------------------------------------REGISTER--------------------------------------------------
-
+    public function indexregister(){
+        return view('mikvo.register');
+    }
     public function register(Request $request){
         $user = new User;
         $user->fullname_user = $request->input('fullname_user');
