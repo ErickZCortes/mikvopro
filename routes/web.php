@@ -17,7 +17,6 @@ Route::get('/', function () {
 //views 
 
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
-Route::get('/dashboard/user', 'ViewsController@viewuser')->name('/dashboard/user');
 
 Route::get('/dashboard/vouchers/create', 'ViewsController@viewvouchers')->name('/dashboard/vouchers/create');
 Route::get('/dashboard/vouchers/reprint', 'ViewsController@viewreprintvouchers')->name('/dashboard/vouchers/reprint');
@@ -31,6 +30,9 @@ Route::post('/logout', 'UserController@logout')->name('logout');
 //-----------------------------------------REGISTER-------------------------------------------//
 Route::post('/register', 'UserController@register')->name('register');
 //-----------------------------------------USER-------------------------------------------//
+Route::get('/dashboard/user', 'UserController@indexuser')->name('/dashboard/user');
+Route::get('/dashboard/user/edit/{id}','UserController@edit')->name('/dashboard/user/edit');
+Route::put('/dashboard/user/update/{id}','UserController@update')->name('/dashboard/user/update');
 
 //-----------------------------------------ROUTER-------------------------------------------//
 Route::get('/dashboard/routerboard', 'RouterController@index')->name('/dashboard/routerboard');
@@ -49,14 +51,9 @@ Route::put('/dashboard/profiles/update/{id}','ProfilesController@update')->name(
 Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->name('/dashboard/profiles/delete');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
-Route::get('/vouchers', 'VouchersController@getvouchers');
-
-
-
-Route::get('/profile/{id}', 'ProfilesController@getprofilebyid');
-Route::post('/profiles', 'ProfilesController@addprofile');
-Route::put('/profiles', 'ProfilesController@updateprofile');
-Route::delete('/profiles', 'ProfilesController@deleteprofile');
+Route::get('/dashboard/vouchers', 'VouchersController@index')->name('/dashboard/vouchers');
+Route::get('/dashboard/vouchers/create', 'VouchersController@create')->name('/dashboard/vouchers/create');
+Route::put('/dashboard/vouchers/store','VouchersController@store')->name('/dashboard/vouchers/store');
 
 //vouchers functions
 
