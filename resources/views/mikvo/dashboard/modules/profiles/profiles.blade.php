@@ -64,6 +64,8 @@
                       aria-label="Actions: activate to sort column ascending" style="width: 51px;">Costo</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                       aria-label="Actions: activate to sort column ascending" style="width: 51px;">Tipo tiempo</th>
+                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                      aria-label="Actions: activate to sort column ascending" style="width: 51px;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -79,8 +81,8 @@
                       <form action="{{route('/dashboard/profiles/delete',$profile->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('/dashboard/profiles/edit',$profile->id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <button class="btn btn-danger btn-xs" type="submit">
+                        <a href="{{ route('/dashboard/profiles/edit',$profile->id) }}" class="btn btn-info btn-sm"> <i class="far fa-edit"> Editar</i></a>
+                        <button class="btn btn-danger btn-sm" type="submit">
                           <i class="fa fa-trash-o"> Eliminar</i>
                         </button>
                       </form>

@@ -20,7 +20,7 @@
     @endsection
     
     @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
+    <h1 class="h3 mb-2 text-gray-800">Profiles</h1>
     <div class="card shadow mb-4">
    <div class="card-body">
    <h5 id="title">Update Profiles</h5>

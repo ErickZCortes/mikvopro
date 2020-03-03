@@ -28,10 +28,10 @@ class CreateProfilesTable extends Migration
             $table->integer("cost_profile")->length(5)->nullable();
             $table->string("typet_profile",25);
             $table->integer("limitda_profiles")->length(10);
-            $table->time("limitho_profiles",6);
+            $table->time("limitho_profiles");
             $table->integer("expireda_profiles")->length(10);
-            $table->time("expiredho_profiles",6);
-            $table->time("cuttime_profile",6);
+            $table->time("expiredho_profiles");
+            $table->time("cuttime_profile");
             $table->timestamps();
         });
     }

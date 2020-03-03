@@ -9,6 +9,13 @@ div {
 .text-gray-800 {
     color: #5a5c69!important;
 }
+CSS
+.non-selectable {
+   -moz-user-select: none; 
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none; 
+}
 .mb-2, .my-2 {
     margin-bottom: .5rem!important;
 }
