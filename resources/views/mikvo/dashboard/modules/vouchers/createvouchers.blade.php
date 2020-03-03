@@ -28,47 +28,69 @@
           <div class="row">
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="dns">DNS name:</label>
-                <input type="text" class="form-control" id="dns" placeholder="Enter DNS name" name="dns"
+                <label for="dnsname_voucher">DNS name:</label>
+                <input 
+                id="dnsname_voucher"
+                type="text" 
+                class="form-control" 
+                name="dnsname_voucher"
+                placeholder="Ingresa el DNS"
                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="numusers">Number of users:</label>
-                <input type="number" class="form-control" id="numusers" placeholder="Enter Number of users" name="numusers"
+                <label for="nusers_voucher">Number of users:</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="nusers_voucher"
+                  required 
+                  min="1"
+                  placeholder="Número de usuarios" 
+                  name="nusers_voucher"
                   >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="server">Server:</label>
-                <input type="text" class="form-control" id="server" placeholder="Enter Serve's name " name="server"
+                <label for="server_voucher">Server:</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="server_voucher" 
+                  placeholder="Ingresa un servidor" 
+                  name="server_voucher"
                  >
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="prefix">Prefix:</label>
-                <input type="text" class="form-control" id="prefix" placeholder="Enter Prefix" name="prefix"
+                <label for="prefix_voucher">Prefix:</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="prefix_voucher" 
+                  placeholder="Ingresa el prefijo" 
+                  name="prefix_voucher"
                 >
               </div>
             </div>
+            
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="profile">Profile vouchers:</label>
+                @foreach ($profiles as $profile)
                 <select class="form-control" id="profile" name="profile" >
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
+                  <option selected> Elige una opción</option>
+                  <option>{{$profile->name_profile}}</option>
                 </select>
+                @endforeach
               </div>
             </div>
             <div id="btnform" class="col-sm-10 col-md-4 col-lg-4">
               <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check-square"></i> Generar</button>
             </div>
-    
           </div>
         </form>
       </div>

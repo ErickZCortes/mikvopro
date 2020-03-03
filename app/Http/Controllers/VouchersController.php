@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Voucher;
 use App\User;
+use App\Profile;
 use DB;
 class VouchersController extends Controller
 {
     public function index()
     {
         $vouchers = Voucher::all();
-        //$voucher = DB::table('users')->where('name', 'John')->first()
         return view('mikvo.dashboard.modules.vouchers.indexvoucher', compact('vouchers'));
     }
 
@@ -19,16 +19,15 @@ class VouchersController extends Controller
     {
         $voucher = new Voucher;
         if (session()->has('UserSession')){
-            
-            $vouchers = DB::table('vouchers')->where('created_at')->Orderby('id', 'desc')->limit(1)->get();
-            dd($vouchers);
             $uidSesion = session()->get('UserSession')->id;
             $voucher->iduser_voucher = $uidSesion;
-            $voucher->idprofile_voucher = $request->input('idprofile_voucher'); 
+            $profiledefault = DB::table('profiles')->select('id')->orderBy('id', 'desc')->limit(1)->first();
+            $voucher->idprofile_voucher = $profiledefault->id; 
         }
-
         $voucher->save();
-        return view('mikvo.dashboard.modules.vouchers.createvouchers');
+
+        $profiles = Profile::all();
+        return view('mikvo.dashboard.modules.vouchers.createvouchers', compact('profiles'));
     }
 
     public function addVoucher(Request $request)
@@ -37,11 +36,7 @@ class VouchersController extends Controller
         
         if (session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
-            //$dato = User::find($uidSesion);
-
-            // Recibo todos los datos del formulario de la vista 'crear.blade.php'
-            $voucher->iduser_voucher = $uidSesion;
-            
+            $voucher->iduser_voucher = $uidSesion; 
             $voucher->idprofile_voucher = $request->input('idprofile_voucher'); 
         }
 
@@ -79,7 +74,10 @@ class VouchersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        ////$vouchers = DB::table('vouchers')->select('id')->orderBy('id', 'desc')->limit(1)->first();
+            //SELECT id from vouchers where created_at order by id desc limit 1
+           // dd($vouchers);
+
     }
 
     /**

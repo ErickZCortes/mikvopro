@@ -20,12 +20,12 @@ class CreateVouchersTable extends Migration
             $table->foreign("iduser_voucher")->references("id")->on("users");
             
             $table->string("dnsname_voucher",25)->default('null');            
-            $table->integer("nusers_voucher")->length(30)->nullable()->default('null');
+            $table->integer("nusers_voucher")->length(30)->nullable()->default('0');
             $table->string("server_voucher",25)->default('null');
             $table->string("prefix_voucher",30)->nullable()->default('null');
-            $table->bigInteger("idprofile_voucher")->unsigned()->nullable()->default('null');
+            $table->bigInteger("idprofile_voucher")->unsigned()->nullable();
             $table->foreign("idprofile_voucher")->references("id")->on("profiles");
-            $table->string("nprofile_voucher",30)->nullable();
+            $table->string("nprofile_voucher",30)->nullable()->default('null');
             $table->timestamps();
         });
     }
