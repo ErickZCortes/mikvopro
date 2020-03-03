@@ -26,21 +26,37 @@
         USER
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('/dashboard/user')}}">
-            <i class="fas fa-user-circle"></i>
-            <span>User Profile</span></a>
+        <a class="nav-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fas fa-user"></i>
+            <span>User</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Options Profile</h6>
+              <a class="collapse-item" href="{{route('/dashboard/user')}}">Profile</a>
+              <a class="collapse-item" href="">Edit Profile</a>
+              <a class="collapse-item" href="buttons.html">Change password</a>
+              
+            </div>
+          </div>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">
-        VOUCHERS
+        ROUTERBOARD
     </div>
     <li class="nav-item">
         <a class="nav-link" href="{{route('/dashboard/routerboard')}}">
-            <i class="fas fa-record-vinyl"></i>
+            <i class="far fa-hdd"></i>
             <span>Routerboard</span></a>
     </li>
+  
+    
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        VOUCHERS
+    </div>
     <li class="nav-item">
         <a class="nav-link" href="{{route('/dashboard/vouchers')}}">
             <i class="fas fa-ticket-alt"></i>
@@ -48,7 +64,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('/dashboard/profiles')}}">
-            <i class="far fa-id-card"></i>
+            <i class="far fa-address-card"></i>
             <span>Profiles</span></a>
     </li>
     <li class="nav-item">
