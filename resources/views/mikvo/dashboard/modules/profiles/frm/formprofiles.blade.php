@@ -69,8 +69,9 @@
            <label for="typet_profile">Tipo de tiempo:</label>
            <select class="form-control" name="typet_profile" id="typet_profile">
             <option selected>Seleciona un tipo de tiempo</option>
-            <option value="{{$profiles->typet_profile}}">Corrido</option>
-            <option value="{{$profiles->typet_profile}}">Pausado</option>
+           <option value="Corrido" @if ($profiles->typet_profile=="Corrido" ) selected @endif
+            >Corrido</option>
+            <option value="Pausado" @if ($profiles->typet_profile=="Pausado" ) selected @endif>Pausado</option>
           </select>
         </div>
      </div>
@@ -91,9 +92,9 @@
             <label class="non-selectable" for="sbyte_profile" style="color: transparent;">Tipo de velocidad:</label>
             <select class="form-control" name="sbyte_profile" id="sbyte_profile">
                 <option selected> Elige una opción</option>
-                <option value="{{ $profiles->sbyte_profile }}">KB</option>
-                <option value="{{ $profiles->sbyte_profile }}">MB</option>
-                <option value="{{ $profiles->sbyte_profile }}">GB</option>
+                <option value="KB" @if ($profiles->sbyte_profile=="KB" ) selected @endif>KB</option>
+                <option value="MB" @if ($profiles->sbyte_profile=="MB" ) selected @endif>MB</option>
+                <option value="GB" @if ($profiles->sbyte_profile=="GB" ) selected @endif>GB</option>
             </select>
         </div>
     </div>
@@ -115,9 +116,9 @@
             <label class="non-selectable" for="dbyte_profile" style="color: transparent;">Velocidad de subida:</label>
             <select class="form-control" name="dbyte_profile" id="dbyte_profile">
                 <option selected> Elige una opción</option>
-                <option value="{{ $profiles->dbyte_profile }}">KB</option>
-                <option value="{{ $profiles->dbyte_profile }}">MB</option>
-                <option value="{{ $profiles->dbyte_profile }}">GB</option>
+                <option value="KB"@if ($profiles->dbyte_profile=="KB" ) selected @endif>KB</option>
+                <option value="MB"@if ($profiles->dbyte_profile=="MB" ) selected @endif>MB</option>
+                <option value="GB" @if ($profiles->dbyte_profile=="GB" ) selected @endif>GB</option>
             </select>
         </div>
     </div>
