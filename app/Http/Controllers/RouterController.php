@@ -33,7 +33,7 @@ class RouterController extends Controller
             $router->password_router = $request->input('password_router');    
         }
           $router->save();
-
+        
         return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
     }
 

@@ -56,7 +56,7 @@
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle" >
             </a>
             <!-- Dropdown - User Information -->
             

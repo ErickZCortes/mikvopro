@@ -43,7 +43,6 @@
               </div>
               <div class="col-sm-12 col-md-4">
                 <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
-
               </div>
             </div>
             <div class="row">

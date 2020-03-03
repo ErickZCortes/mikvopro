@@ -5,31 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Voucher;
 use App\User;
-
+use DB;
 class VouchersController extends Controller
 {
     public function index()
     {
         $vouchers = Voucher::all();
-        return view('mikvo.dashboard.modules.createvouchers', compact('vouchers'));
+        //$voucher = DB::table('users')->where('name', 'John')->first()
+        return view('mikvo.dashboard.modules.vouchers.indexvoucher', compact('vouchers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $voucher = new Voucher;
+        if (session()->has('UserSession')){
+            
+            $vouchers = DB::table('vouchers')->where('created_at')->Orderby('id', 'desc')->limit(1)->get();
+            dd($vouchers);
+            $uidSesion = session()->get('UserSession')->id;
+            $voucher->iduser_voucher = $uidSesion;
+            $voucher->idprofile_voucher = $request->input('idprofile_voucher'); 
+        }
+
+        $voucher->save();
+        return view('mikvo.dashboard.modules.vouchers.createvouchers');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function addVoucher(Request $request)
     {
         $voucher = new Voucher; 
@@ -40,12 +41,8 @@ class VouchersController extends Controller
 
             // Recibo todos los datos del formulario de la vista 'crear.blade.php'
             $voucher->iduser_voucher = $uidSesion;
-            $voucher->dnsname_voucher = $request->input('dnsname_voucher');
-            $voucher->nusers_voucher = $request->input('nusers_voucher');
-            $voucher->server_voucher = $request->input('server_voucher');
-            $voucher->prefix_voucher = $request->input('prefix_voucher');
-            $voucher->idprofile_voucher = $request->input('idprofile_voucher');
-            $voucher->nprofile_voucher = $request->input('nprofile_voucher');   
+            
+            $voucher->idprofile_voucher = $request->input('idprofile_voucher'); 
         }
 
         $voucher->save();
