@@ -61,6 +61,7 @@
             required
             value="{{ $profiles->cost_profile }}"
             placeholder="Ingresa el costo"
+            min="1"
             >
         </div>
     </div>
@@ -86,6 +87,7 @@
            required
            value="{{ $profiles->vsubida_profile }}"
            placeholder="Ingresa la velocidad de subida"
+           min="1"
            >
        </div>
         <div class="col-md-6">
@@ -110,6 +112,7 @@
             required
             value="{{ $profiles->vdescarga_profile }}"
             placeholder="Ingresa la velocidad de descarga"
+            min="1"
             >
         </div>
         <div class="col-md-6">
@@ -134,6 +137,7 @@
             required
             value="{{ $profiles->limitda_profiles }}"
             placeholder="Ingresa el limite de tiempo"
+            min="1"
             >
        </div>
     <div class="col-md-6">
@@ -161,6 +165,7 @@
            required
            value="{{ $profiles->expireda_profiles }}"
            placeholder="Ingresa la velocidad de subida"
+           min="1"
            >
        </div>
        <div class="col-md-6">
@@ -229,6 +234,7 @@
               name="cost_profile"
               required
               placeholder="Ingresa el costo" 
+              min="1"
               >
         </div>
      </div>
@@ -253,6 +259,7 @@
             name="vsubida_profile"
             required
             placeholder="Ingresa la velocidad de subida"
+            min="1"
             >
         </div>
         <div class="col-md-6">
@@ -276,6 +283,7 @@
             name="vdescarga_profile"
             required
             placeholder="Ingresa la velocidad de descarga"
+            min="1"
             >
         </div>
         <div class="col-md-6">
@@ -299,6 +307,7 @@
             name="limitda_profiles"
             required
             placeholder="Ingresa el limite de tiempo"
+            min="1"
             >
         </div>
         <div class="col-md-6">
@@ -322,6 +331,7 @@
             name="expireda_profiles"
             required
             placeholder="Ingresa la velocidad de subida"
+            min="1"
             >
         </div>
         <div class="col-md-6">

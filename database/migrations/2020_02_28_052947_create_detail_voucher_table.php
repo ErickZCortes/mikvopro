@@ -19,10 +19,10 @@ class CreateDetailVoucherTable extends Migration
             $table->bigInteger("idvoucher_detailv")->unsigned();
             $table->foreign("idvoucher_detailv")->references("id")->on("vouchers");
 
-            $table->string("server_detailv",30)->default('null');
-            $table->string("user_detailv",20)->default('null');
+            $table->string("server_detailv",30);
+            $table->string("user_detailv",20);
             $table->string("password_detailv",25);
-            $table->string("limittime_detailv",25)->default('null');
+            $table->string("limittime_detailv",25);
             $table->string("limitbin_detailv",25)->default('null');
             $table->string("limitout_detailv",25)->default('null');
             $table->timestamps();

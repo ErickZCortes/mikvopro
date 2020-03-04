@@ -87,12 +87,13 @@
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="nprofile_voucher">Profile vouchers:</label>
-                @foreach ($profiles as $profile)
+                
                 <select class="form-control" id="nprofile_voucher" name="nprofile_voucher" >
                   <option selected> Elige una opción</option>
+                  @foreach ($profiles as $profile)
                   <option>{{$profile->name_profile}}</option>
+                  @endforeach
                 </select>
-                @endforeach
               </div>
             </div>
 
