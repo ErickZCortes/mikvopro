@@ -1,3 +1,4 @@
+
 @extends('mikvo.dashboard.layouts.default')
     @section('header')
         @include('mikvo.dashboard.shared.components.header')
@@ -16,16 +17,22 @@
       <header>
         <link rel="stylesheet"type="text/css" href="{{URL::asset('css/createvoucher.css')}}">
         <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+        
       </header>
     @endsection
     
     @section('content')
+
+<body>
     <h1 class="h3 mb-2 text-gray-800">Vouchers</h1>
     <div class="card shadow mb-4">
       <div class="card-body">
         <h5 id="title">Create New Vouchers</h5>
-        <form action="">
-          <div class="row">
+        <form method="POST" action="{{ route('/dashboard/vouchers/store') }}">
+        @csrf  
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+        <div class="row">
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="dnsname_voucher">DNS name:</label>
@@ -79,22 +86,24 @@
             
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
-                <label for="profile">Profile vouchers:</label>
+                <label for="nprofile_voucher">Profile vouchers:</label>
                 @foreach ($profiles as $profile)
-                <select class="form-control" id="profile" name="profile" >
+                <select class="form-control" id="nprofile_voucher" name="nprofile_voucher" >
                   <option selected> Elige una opción</option>
                   <option>{{$profile->name_profile}}</option>
                 </select>
                 @endforeach
               </div>
             </div>
+
             <div id="btnform" class="col-sm-10 col-md-4 col-lg-4">
               <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check-square"></i> Generar</button>
+              <a href="{{ route('/dashboard/vouchers') }}"  class="btn btn-warning" >Cancelar</a>
             </div>
           </div>
         </form>
       </div>
     
     </div>
-    
+    <body>
   @endsection
