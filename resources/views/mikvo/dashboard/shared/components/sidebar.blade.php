@@ -26,7 +26,7 @@
         USER
     </div>
     <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             <i class="fas fa-user"></i>
             <span>User</span>
         </a>
@@ -34,8 +34,8 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">Options Profile</h6>
               <a class="collapse-item" href="{{route('/dashboard/user')}}">Profile</a>
-              <a class="collapse-item" href="">Edit Profile</a>
-              <a class="collapse-item" href="buttons.html">Change password</a>
+              <a class="collapse-item" href="#">Edit Profile</a>
+              <a class="collapse-item" href="#">Change password</a>
               
             </div>
           </div>
@@ -72,6 +72,11 @@
             <i class="far fa-file-alt"></i>
             <span>Reprint vouchers</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-pencil-ruler"></i>
+            <span>Design vouchers</span></a>
+    </li>
     <!-- Nav Item - Pages Collapse Menu -->
     
     <!-- Divider -->
@@ -79,7 +84,7 @@
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0" ><i class="fas fa-pencil-ruler"></i></button>
     </div>
 
 </ul>
