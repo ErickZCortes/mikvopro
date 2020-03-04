@@ -2,14 +2,72 @@
   <link rel="stylesheet"type="text/css" href="{{URL::asset('css/main.css')}}">
   <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
 </header>
-  
-  
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-  <p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme. The charts below have been customized - for further customization options, please visit the <a target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js documentation</a>.</p>
-
+<h1 class="h3 mb-2 text-gray-800 text-capitalize ">Bienvenido {{$user->user_name}}</h1>
   <!-- Content Row -->
   <div class="row">
+    <div class="col-xl-4 col-md-6 mb-4">
+      <div class="card border-left-info shadow" id="cards">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs text-primary text-capitalize mb-1">Datos del router</div>
+              <small class="text-gray-800">192.168.1.54</small>
+              <small class="text-gray-800">642364UVGVOWQNJ</small>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-server fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow" id="cards">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h5 text-xs text-primary text-capitalize mb-1">Total usuarios</div>
+              <div class="h4 mb-0 text-gray-800">8000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-users fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow" id="cards">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h5 text-xs text-primary text-capitalize mb-1">Usuarios activos</div>
+              <div class="h4 mb-0 text-gray-800">4000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-user-check fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-6 mb-4">
+      <div class="card border-left-info shadow" id="cards">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="h5 text-xs text-primary text-capitalize mb-1">Costos</div>
+              <div class="h4 mb-0 text-gray-800">$54000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="col-xl-8 col-lg-7">
 
@@ -20,10 +78,8 @@
         </div>
         <div class="card-body">
           <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
+            <canvas id="myChart"></canvas>
           </div>
-          <hr>
-          Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code> file.
         </div>
       </div>
 
@@ -34,10 +90,8 @@
         </div>
         <div class="card-body">
           <div class="chart-bar">
-            <canvas id="myBarChart"></canvas>
+            <canvas id="myChart1"></canvas>
           </div>
-          <hr>
-          Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
         </div>
       </div>
 
@@ -53,10 +107,8 @@
         <!-- Card Body -->
         <div class="card-body">
           <div class="chart-pie pt-4">
-            <canvas id="myPieChart"></canvas>
+            <canvas id="myChart2"></canvas>
           </div>
-          <hr>
-          Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
         </div>
       </div>
     </div>

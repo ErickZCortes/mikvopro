@@ -1,6 +1,7 @@
 <header>
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/sidebar.css')}}">
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+<link src="{{asset('public/js/sidebar.js')}}">
 </header>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -84,7 +85,7 @@
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" ><i class="fas fa-pencil-ruler"></i></button>
+        <button class="rounded-circle border-0" id="sidebarToggle"></i></button>
     </div>
 
 </ul>

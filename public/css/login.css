@@ -1,4 +1,6 @@
-
+body{
+  background: linear-gradient(to right, #000046, #1cb5e0);
+}
   h3.login-heading.mb-4{
     font-family: roboto;
     text-align: center;

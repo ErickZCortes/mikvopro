@@ -44,3 +44,27 @@ h1 {
     margin-inline-end: 0px;
     font-weight: bold;
 }
+#cards {
+    color: #dddfeb!important;
+}
+
+.border-left-primary {
+    border-left: .25rem solid #007bff!important;
+}
+.border-left-secondary {
+    border-left: .25rem solid #6c757d!important;
+}
+.border-left-success {
+    border-left: .25rem solid #28a745!important;
+}
+.border-left-danger {
+    border-left: .25rem solid #dc3545!important;
+}
+.border-left-warning {
+    border-left: .25rem solid #ffc107!important;
+}
+.border-left-info {
+    border-left: .25rem solid #17a2b8!important;
+}
+
+
