@@ -6,20 +6,10 @@
         -ms-user-select: none;
         user-select: none; 
         }
-        .without_ampm::-webkit-datetime-edit-ampm-field {
-   display: none;
- }
- input[type=time]::-webkit-clear-button {
-   -webkit-appearance: none;
-   -moz-appearance: none;
-   -o-appearance: none;
-   -ms-appearance:none;
-   appearance: none;
-   margin: -10px; 
- }
+        
     </style>    
     <script type="text/javascript">
-   document.getElementById("settime").value = "13:24:00";    
+   document.getElementById("inputtime").value = "13:24:00";    
   </script>
 </head>
     
@@ -146,11 +136,12 @@
     <div class="col-md-6">
         <label class="non-selectable" for="limitho_profiles" style="color: transparent;">Velocidad de subida:</label>
         <input 
-        id="limitho_profiles"
+        id="inputtime"
         type="time"
         class="form-control" 
         name="limitho_profiles"
         required
+        step="1"
         value="{{ $profiles->limitho_profiles }}"
         placeholder=""
         >
@@ -174,11 +165,12 @@
        <div class="col-md-6">
         <label class="non-selectable" for="expiredho_profiles" style="color: transparent;">Velocidad de subida:</label>
            <input 
-           id="expiredho_profiles"
+           id="inputtime"
            type="time" 
            class="form-control" 
            name="expiredho_profiles"
            required
+           step="1"
            value="{{ $profiles->expiredho_profiles }}"
            placeholder="Ingresa la velocidad de subida"
            >
@@ -188,11 +180,12 @@
        <div class="form-group">
            <label for="cuttime_profile">Desconectar en:</label>
            <input 
-           id="cuttime_profile"
+           id="inputtime"
            type="time" 
            class="form-control" 
            name="cuttime_profile"
            required
+           step="1"
            value="{{ $profiles->cuttime_profile }}"
            placeholder="Ingresa el tiempo de desconexión" 
            >
@@ -315,7 +308,13 @@
         </div>
         <div class="col-md-6">
             <label class="non-selectable" for="limitho_profiles" style="color: transparent;">Limite horas:</label>
-            <input class="form-control"  id="settime" type="time" step="1" />
+            <input 
+            id="inputtime"
+            type="time"
+            class="form-control" 
+            name="limitho_profiles"
+            step="1"
+            >
         </div>
     </div>
     <div class="row col-md-6">
@@ -334,11 +333,11 @@
         <div class="col-md-6">
             <label class="non-selectable" for="expiredho_profiles" style="color: transparent;">Velocidad de subida:</label>
             <input 
-            id="expiredho_profiles"
+            id="inputtime"
             type="time" 
             class="form-control" 
             name="expiredho_profiles"
-            
+            step="1"
             placeholder="Ingresa la velocidad de subida"
             >
         </div>
@@ -346,11 +345,12 @@
     <div class="col-md-2">
             <label for="cuttime_profile">Desconectar en:</label>
             <input 
-            id="cuttime_profile"
+            id="inputtime"
             type="time" 
             class="form-control" 
             name="cuttime_profile"
             required
+            step="1"
             placeholder="Ingresa la velocidad de subida"
             >
     </div>
