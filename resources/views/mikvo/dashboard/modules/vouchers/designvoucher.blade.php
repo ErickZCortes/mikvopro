@@ -51,46 +51,54 @@
                     </select>  
                 </div>
             </div>
-            
-            <div class="row col-md-3">
-                <div class="col-md-12">
-                    
-                    
-                    
-                        
-                        <div>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-user"></i>
-                                <span><strong>10 por hoja</strong></span>            
-                            </a>
+            <div class="col-md-12"><hr></div>
+            <div class="row col-md-12 text-center">
+                  <div class="col-md-4">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-file-text-o"></i> Por hoja
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">10 por hoja</a>
+                            <a class="dropdown-item" href="#">21 por hoja</a>
+                            <a class="dropdown-item" href="#">50 por hoja</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Automatico</a>
                         </div>
-                        <div>
-                            <a href="#" class="btn btn-info">
-                                <i class="fas fa-user"></i>
-                                <span><strong>21 por hoja QR</strong></span>        	
-                            </a>
+                      </div>
+                </div>  
+
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-qrcode"></i>                        
+                            Por QR
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">5 por hoja</a>
+                            <a class="dropdown-item" href="#">15 por hoja</a>
+                            <a class="dropdown-item" href="#">25 por hoja</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Automatico</a>
                         </div>
-                        <div class="span1">
-                            <button type="button" href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-user"></i>
-                                <span><strong>21 por hoja Logo</strong></span>       
-                            </button> 	
+                      </div>
+                </div>  
+
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-image"></i>
+                            Por logo
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">10 por hoja</a>
+                            <a class="dropdown-item" href="#">20 por hoja</a>
+                            <a class="dropdown-item" href="#">30 por hoja</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Automatico</a>
                         </div>
-                        <div class="span1">
-                            <button type="button" href="#" class="btn btn-primary btn-sm">
-                                <i class="fas fa-user"></i>
-                                <span><strong>36 por hoja QR</strong></span>
-                                <p>                             {!! QrCode::size(250)->generate('.com'); !!}
-                                </p>        	
-                            </button>
-                        </div>
-                          
-                      
-                              
-                          
-                    
-                    
-                </div>
+                      </div>
+                </div>      
             </div>
         </div>
       </div>
@@ -99,10 +107,11 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <h1 class="h3 mb-2 text-gray-800">Preview</h1>
+        <div class="dropdown-divider"></div>
+
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
             <div class="col-md-12">
-
             </div>
            </div>
         </div>

@@ -55,9 +55,9 @@
                   <button class="btn btn-info btn-sm">
                     <i class="fas fa-file-excel"></i> Excel
                   </button>
-                  <button class="btn btn-info btn-sm" href="{{route('voucher.pdf')}}">
+                  <a class="btn btn-info btn-sm" href="{{route('/dashboard/vouchers/design')}}">
                     <i class="fas fa-print"></i> Imprimir
-                  </button>
+                  </a>
                   
                 </div>
               </div>

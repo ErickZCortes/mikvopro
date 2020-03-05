@@ -73,11 +73,7 @@
             <i class="far fa-file-alt"></i>
             <span>Reprint vouchers</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('/dashboard/vouchers/design')}}">
-            <i class="fas fa-pencil-ruler"></i>
-            <span>Design vouchers</span></a>
-    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     
     <!-- Divider -->
