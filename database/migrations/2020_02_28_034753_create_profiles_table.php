@@ -29,8 +29,8 @@ class CreateProfilesTable extends Migration
             $table->string("typet_profile",25);
             $table->integer("limitda_profiles")->length(10);
             $table->time("limitho_profiles");
-            $table->integer("expireda_profiles")->length(10);
-            $table->time("expiredho_profiles");
+            $table->integer("expireda_profiles")->length(10)->default('0');
+            $table->time("expiredho_profiles")->default('00:00:00');
             $table->time("cuttime_profile");
             $table->timestamps();
         });

@@ -19,9 +19,9 @@ class CreateVouchersTable extends Migration
             $table->bigInteger("iduser_voucher")->unsigned();
             $table->foreign("iduser_voucher")->references("id")->on("users");
             
-            $table->string("dnsname_voucher",25);            
+            $table->string("dnsname_voucher",25)->nullable();            
             $table->integer("nusers_voucher")->length(30)->nullable();
-            $table->string("server_voucher",25)->default('null');
+            $table->string("server_voucher",25)->nullable();
             $table->string("prefix_voucher",30)->nullable();
             $table->bigInteger("idprofile_voucher")->unsigned()->nullable();
             $table->foreign("idprofile_voucher")->references("id")->on("profiles");
