@@ -8,6 +8,7 @@ use App\User;
 use App\Profile;
 use App\DetailVoucher;
 use DB;
+use Barryvdh\DomPDF\Facade as PDF;
 class VouchersController extends Controller
 {
     public function index()
@@ -202,5 +203,15 @@ class VouchersController extends Controller
         $voucher = Voucher::find($id);
         Voucher::destroy($id);
         return redirect('/dashboard/vouchers');
+    }
+    
+    public function design()
+    {
+        return view('mikvo.dashboard.modules.vouchers.designvoucher');
+    }
+    public function exportPdf($id){
+        $voucher = Voucher::get();
+        $pdf = PDF::loadView('pdf.vouchers',compact('vouchers'));
+        return $pdf->download('voucher-list.pdf');
     }
 }
