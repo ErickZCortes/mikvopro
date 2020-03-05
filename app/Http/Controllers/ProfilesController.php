@@ -55,8 +55,15 @@ class ProfilesController extends Controller
             $profile->typet_profile = $request->input('typet_profile');
             $profile->limitda_profiles = $request->input('limitda_profiles');
             $profile->limitho_profiles = $request->input('limitho_profiles');
-            $profile->expireda_profiles = $request->input('expireda_profiles');
-            $profile->expiredho_profiles = $request->input('expiredho_profiles');
+            if($request->input('typet_profile') == "Corrido"){
+                $profile->expireda_profiles = '0';
+                $profile->expiredho_profiles = '00:00:00';
+            }else if($request->input('typet_profile') == "Pausado"){
+                $profile->expireda_profiles = $request->input('expireda_profiles');
+                $profile->expiredho_profiles = $request->input('expiredho_profiles');
+            }
+            
+            
             $profile->cuttime_profile = $request->input('cuttime_profile');    
         }
         // Inserto todos los datos en mi tabla 'profiles' 

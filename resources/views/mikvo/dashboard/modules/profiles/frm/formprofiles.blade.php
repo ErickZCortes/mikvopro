@@ -16,6 +16,8 @@
         $(document).ready(function(){
 	        $('#typet_profile').change(function(){
                 if ($('#typet_profile').val() === "nada") {
+                    $("#expireda_profiles").prop('disabled', false);
+                    $("#expiredho_profiles").prop('disabled', false);
                 } else if($('#typet_profile').val()  === "Corrido"){
                     $("#expireda_profiles").prop('disabled', true);
                     $("#expiredho_profiles").prop('disabled', true);
@@ -253,7 +255,7 @@
      <div class="col-sm-10 col-md-3 col-lg-3">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
+           <select class="form-control" name="typet_profile" id="typet_profile" onchange="deshabilitar()">
             <option value ="nada" selected>Seleciona un tipo de tiempo</option>
             <option value="Corrido">Corrido</option>
             <option value="Pausado">Pausado</option>
