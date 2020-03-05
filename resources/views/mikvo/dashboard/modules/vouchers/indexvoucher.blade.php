@@ -69,17 +69,17 @@
                   <thead>
                     <tr role="row">
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Position: activate to sort column ascending" style="width: 246px;">Servidor</th>
+                        aria-label="Position: activate to sort column ascending" style="width: 160px;">Servidor</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                         aria-label="Office: activate to sort column ascending" style="width: 116px;">Usuario</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Age: activate to sort column ascending" style="width: 51px;">Contraseña</th>
+                        aria-label="Age: activate to sort column ascending" style="width: 116px;">Contraseña</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Start date: activate to sort column ascending" style="width: 107px;">Perfil</th>
+                        aria-label="Start date: activate to sort column ascending" style="width: 116px;">Perfil</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite tiempo - días</th>
+                        aria-label="Salary: activate to sort column ascending" style="width: 200px;">Límite tiempo - días</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite tiempo - horas</th>  
+                        aria-label="Salary: activate to sort column ascending" style="width: 100px;">Fecha</th>  
                     </tr>
                   </thead>
                   <tbody>
@@ -91,8 +91,8 @@
                       @foreach ($voucherget as $voucher)
                       <td>{{$voucher->nprofile_voucher}}</td>
                       @endforeach
-                      <td>{{$detail->limittda_detailv}}</td>
-                      <td>{{$detail->limitho_detailv}}</td>
+                      <td>Días: {{$detail->limittda_detailv}}  //  Horas: {{$detail->limitho_detailv}}</td>
+                      <td>{{$detail->created_at}}</td>
                     </tr>
                     @endforeach
                   </tbody>

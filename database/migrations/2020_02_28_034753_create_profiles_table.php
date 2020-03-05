@@ -25,7 +25,7 @@ class CreateProfilesTable extends Migration
             $table->string("sbyte_profile",5);
             $table->integer("vdescarga_profile")->length(5);
             $table->string("dbyte_profile",5);
-            $table->integer("cost_profile")->length(5)->nullable();
+            $table->string("cost_profile")->nullable();
             $table->string("typet_profile",25);
             $table->integer("limitda_profiles")->length(10);
             $table->time("limitho_profiles");

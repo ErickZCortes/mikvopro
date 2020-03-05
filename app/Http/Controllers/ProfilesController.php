@@ -43,6 +43,8 @@ class ProfilesController extends Controller
             $uidSesion = session()->get('UserSession')->id;
             //$dato = User::find($uidSesion);
 
+        
+            // USD 1,234.56
             // Recibo todos los datos del formulario de la vista 'crear.blade.php'
             $profile->iduser_profile = $uidSesion;
             $profile->name_profile = $request->input('name_profile');
@@ -51,7 +53,8 @@ class ProfilesController extends Controller
             $profile->sbyte_profile = $request->input('sbyte_profile');
             $profile->vdescarga_profile = $request->input('vdescarga_profile');
             $profile->dbyte_profile = $request->input('dbyte_profile');
-            $profile->cost_profile = $request->input('cost_profile');
+            $money = number_format($request->input('cost_profile'),2);
+            $profile->cost_profile = "$".$money = number_format($request->input('cost_profile'),2);
             $profile->typet_profile = $request->input('typet_profile');
             $profile->limitda_profiles = $request->input('limitda_profiles');
             $profile->limitho_profiles = $request->input('limitho_profiles');

@@ -8,9 +8,7 @@
         }
         
     </style>    
-    <script type="text/javascript">
-   document.getElementById("inputtime").value = "13:24:00";    
-  </script>
+    
   <script type="text/javascript">
     function deshabilitar(){      
         $(document).ready(function(){
@@ -66,7 +64,7 @@
             <label for="cost_profile">Costo:</label>
             <input 
             id="cost_profile"
-            type="number" 
+            type="text" 
             class="form-control" 
             name="cost_profile"
             required
@@ -79,7 +77,7 @@
     <div class="col-sm-10 col-md-3 col-lg-3">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile">
+           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
             <option value="nada" selected>Seleciona un tipo de tiempo</option>
            <option value="Corrido" @if ($profiles->typet_profile=="Corrido" ) selected @endif
             >Corrido</option>
@@ -243,7 +241,7 @@
            <label for="cost_profile">Costo:</label>
            <input 
               id="cost_profile"
-              type="number" 
+              type="text" 
               class="form-control" 
               name="cost_profile"
               required
@@ -255,7 +253,7 @@
      <div class="col-sm-10 col-md-3 col-lg-3">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile" onchange="deshabilitar()">
+           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
             <option value ="nada" selected>Seleciona un tipo de tiempo</option>
             <option value="Corrido">Corrido</option>
             <option value="Pausado">Pausado</option>

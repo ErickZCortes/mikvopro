@@ -53,19 +53,19 @@
                 <thead>
                   <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 161px;">Nombre</th>
+                      aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 180px;">Nombre</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Position: activate to sort column ascending" style="width: 246px;">Pool</th>
+                      aria-label="Position: activate to sort column ascending" style="width: 180px;">Pool</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Office: activate to sort column ascending" style="width: 116px;">Velocidad subida</th>
+                      aria-label="Office: activate to sort column ascending" style="width: 180px;">Velocidad subida</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Age: activate to sort column ascending" style="width: 51px;">Velocidad descarga</th>
+                      aria-label="Age: activate to sort column ascending" style="width: 180px;">Velocidad descarga</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 51px;">Costo</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Costo</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 51px;">Tipo tiempo</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Tipo tiempo</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 51px;">Acciones</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -73,8 +73,8 @@
                   <tr role="row" class="odd">
                     <td class="sorting_1">{{$profile->name_profile}}</td>
                     <td class="sorting_1">{{$profile->addpool_profile}}</td>
-                    <td class="sorting_1">{{$profile->vsubida_profile}}</td>
-                    <td class="sorting_1">{{$profile->vdescarga_profile}}</td>
+                    <td class="sorting_1">{{$profile->vsubida_profile}} {{$profile->sbyte_profile}}</td>
+                    <td class="sorting_1">{{$profile->vdescarga_profile}} {{$profile->dbyte_profile}}</td>
                     <td class="sorting_1">{{$profile->cost_profile}}</td>
                     <td class="sorting_1">{{$profile->typet_profile}}</td>                
                     <td id="btntable">
