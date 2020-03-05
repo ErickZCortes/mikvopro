@@ -213,11 +213,25 @@ class VouchersController extends Controller
     
     public function design()
     {
-        return view('mikvo.dashboard.modules.vouchers.designvoucher');
+        if (session()->has('UserSession')){
+            //$uidSesion = session()->get('UserSession')->id;
+        $voucher = DB::table('vouchers')->select('*')->orderBy('id', 'desc')->limit(1)->first();
+        $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
+        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
+        }
+        
     }
-    public function exportPdf($id){
-        $voucher = Voucher::get();
-        $pdf = PDF::loadView('pdf.vouchers',compact('vouchers'));
-        return $pdf->download('voucher-list.pdf');
+    public function exportPdf(){
+        if (session()->has('UserSession')){
+          //  $uidSesion = session()->get('UserSession')->id;
+        $voucher = DB::table('vouchers')->select('*')->orderBy('id', 'desc')->limit(1)->first();
+        $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
+        //dd($voucher->id);
+        $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
+        return $pdf->download('voucherlist.pdf');
+        }            
     }
 }
+
+
+

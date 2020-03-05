@@ -24,7 +24,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-body">
-      <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+      <div>
         <div class="row">
             <div class="row col-md-6">
                 <div class="col-md-3 title">Plantilla</div>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-12"><hr></div>
             <div class="row col-md-12 text-center">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-file-text-o"></i> Por hoja
@@ -68,7 +68,7 @@
                       </div>
                 </div>  
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-qrcode"></i>                        
@@ -84,7 +84,7 @@
                       </div>
                 </div>  
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="btn-group">
                         <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="far fa-file-image"></i>
@@ -98,7 +98,13 @@
                             <a class="dropdown-item" href="#">Automatico</a>
                         </div>
                       </div>
-                </div>      
+                </div>    
+                
+                <div class="col-md-3">
+                    <div class="">
+                    <a href="{{route('/dashboard/vouchers/pdf')}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
+                    </div>
+                </div>  
             </div>
         </div>
       </div>
@@ -109,9 +115,13 @@
         <h1 class="h3 mb-2 text-gray-800">Preview</h1>
         <div class="dropdown-divider"></div>
 
-        <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div>
           <div class="row">
             <div class="col-md-12">
+
+@include('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher')
+
+
             </div>
            </div>
         </div>

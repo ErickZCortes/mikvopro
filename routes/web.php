@@ -50,4 +50,4 @@ Route::get('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->nam
 Route::get('/dashboard/vouchers/generate', 'VouchersController@generate')->name('/dashboard/vouchers/generate');
 Route::get('/dashboard/vouchers/design', 'VouchersController@design')->name('/dashboard/vouchers/design');
 
-Route::get('/dashboard/voucher/voucher-list-pdf','VouchersController@exportPdf')->name('voucher.pdf');
+Route::get('/dashboard/vouchers/pdf','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
