@@ -18,6 +18,9 @@
    margin: -10px; 
  }
     </style>    
+    <script type="text/javascript">
+   document.getElementById("settime").value = "13:24:00";    
+  </script>
 </head>
     
 @if ( !empty ( $profiles->id) )
@@ -311,14 +314,8 @@
             >
         </div>
         <div class="col-md-6">
-            <label class="non-selectable" for="limitho_profiles" style="color: transparent;">Velocidad de subida:</label>
-            <input 
-            id="limitho_profiles"
-            type="time"
-            class="form-control" 
-            name="limitho_profiles"
-            
-            >
+            <label class="non-selectable" for="limitho_profiles" style="color: transparent;">Limite horas:</label>
+            <input class="form-control"  id="settime" type="time" step="1" />
         </div>
     </div>
     <div class="row col-md-6">

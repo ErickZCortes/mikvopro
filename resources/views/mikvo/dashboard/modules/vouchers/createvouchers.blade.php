@@ -1,4 +1,3 @@
-
 @extends('mikvo.dashboard.layouts.default')
     @section('header')
         @include('mikvo.dashboard.shared.components.header')
@@ -83,11 +82,9 @@
                 >
               </div>
             </div>
-            
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="nprofile_voucher">Profile vouchers:</label>
-                
                 <select class="form-control" id="nprofile_voucher" name="nprofile_voucher" >
                   <option selected> Elige una opción</option>
                   @foreach ($profiles as $profile)
@@ -96,7 +93,48 @@
                 </select>
               </div>
             </div>
-
+            <div class="col-sm-10 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="tipo_generar">Tipo de generación:</label>
+                <select class="form-control" id="tipo_generar" name="tipo_generar" >
+                  <option selected> Elige una opción</option>
+                  <option value="lowercase">Sólo letras minúsculas</option>
+                  <option value="uppercase">Sólo letras mayúsculas</option>
+                  <option value="numbers">Sólo números</option>
+                  <option value="letnumlow">Números y letras minúsculas</option>
+                  <option value="letnumupp">Números y letras mayúsculas</option>
+                  <option value="all">Todo</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-10 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="long_user">Longitud de usuario:</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="long_user" 
+                  name="long_user"
+                  required
+                  min="1"
+                  placeholder="Longitud de usuario"
+                >
+              </div>
+            </div>
+            <div class="col-sm-10 col-md-4 col-lg-4">
+              <div class="form-group">
+                <label for="long_pass">Longitud de contraseña:</label>
+                <input 
+                  type="number" 
+                  class="form-control" 
+                  id="long_pass" 
+                  name="long_pass"
+                  min="1"
+                  required
+                  placeholder="Longitud de contraseña"
+                >
+              </div>
+            </div>
             <div id="btnform" class="col-sm-10 col-md-4 col-lg-4">
               <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check-square"></i> Generar</button>
               <a href="{{ route('/dashboard/vouchers') }}"  class="btn btn-warning" >Cancelar</a>

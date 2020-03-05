@@ -41,9 +41,9 @@ Route::put('/dashboard/profiles/update/{id}','ProfilesController@update')->name(
 Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->name('/dashboard/profiles/delete');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
-Route::get('/dashboard/vouchers', 'VouchersController@index')->name('/dashboard/vouchers');
-Route::get('/dashboard/vouchers/create', 'VouchersController@create')->name('/dashboard/vouchers/create');
+Route::get('/dashboard/vouchers', 'VouchersController@create')->name('/dashboard/vouchers');
 Route::put('/dashboard/vouchers/store','VouchersController@store')->name('/dashboard/vouchers/store');
+Route::get('/dashboard/vouchers/created', 'VouchersController@index')->name('/dashboard/created');
 //Route::get('/dashboard/vouchers/edit/{id}', 'VouchersController@edit')->name('/dashboard/vouchers/edit');
 Route::put('/dashboard/vouchers/update/{id}','VouchersController@update')->name('/dashboard/vouchers/update');
 Route::get('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->name('/dashboard/vouchers/delete');

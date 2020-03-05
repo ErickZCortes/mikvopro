@@ -20,14 +20,10 @@
     @endsection
     
     @section('content')
-    <div class="col-sm-12 col-md-12">
-                <a href="{{ route('/dashboard/vouchers/create') }}" class="btn btn-success mt-4 ml-3">Agregar vouchers</a>
-
-              </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Vouchers' table</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Fichas creadas</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -72,64 +68,30 @@
                   aria-describedby="dataTable_info" style="width: 100%;">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 161px;">
-                        Name</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Position: activate to sort column ascending" style="width: 246px;">Position</th>
+                        aria-label="Position: activate to sort column ascending" style="width: 246px;">Servidor</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Office: activate to sort column ascending" style="width: 116px;">Office</th>
+                        aria-label="Office: activate to sort column ascending" style="width: 116px;">Usuario</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Age: activate to sort column ascending" style="width: 51px;">Age</th>
+                        aria-label="Age: activate to sort column ascending" style="width: 51px;">Contraseña</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Start date: activate to sort column ascending" style="width: 107px;">Start date</th>
+                        aria-label="Start date: activate to sort column ascending" style="width: 107px;">Perfil</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Salary</th>
+                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite de tiempo</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th rowspan="1" colspan="1">Name</th>
-                      <th rowspan="1" colspan="1">Position</th>
-                      <th rowspan="1" colspan="1">Office</th>
-                      <th rowspan="1" colspan="1">Age</th>
-                      <th rowspan="1" colspan="1">Start date</th>
-                      <th rowspan="1" colspan="1">Salary</th>
-                    </tr>
-                  </tfoot>
                   <tbody>
+                  @foreach ($detailsv as $detail)
                     <tr role="row" class="odd">
-                      <td class="sorting_1">Airi Satou</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>33</td>
-                      <td>2008/11/28</td>
-                      <td>$162,700</td>
+                      <td class=>{{$detail->server_detailv}}</td>
+                      <td>{{$detail->user_detailv}}</td>
+                      <td>{{$detail->password_detailv}}</td>
+                      @foreach ($voucherget as $voucher)
+                      <td>{{$voucher->nprofile_voucher}}</td>
+                      @endforeach
+                      <td>{{$detail->limittime_detailv}}</td>
                     </tr>
-                    <tr role="row" class="even">
-                      <td class="sorting_1">Angelica Ramos</td>
-                      <td>Chief Executive Officer (CEO)</td>
-                      <td>London</td>
-                      <td>47</td>
-                      <td>2009/10/09</td>
-                      <td>$1,200,000</td>
-                    </tr>
-                    <tr role="row" class="odd">
-                      <td class="sorting_1">Ashton Cox</td>
-                      <td>Junior Technical Author</td>
-                      <td>San Francisco</td>
-                      <td>66</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
-                    </tr>
-                    <tr role="row" class="even">
-                      <td class="sorting_1">Bradley Greer</td>
-                      <td>Software Engineer</td>
-                      <td>London</td>
-                      <td>41</td>
-                      <td>2012/10/13</td>
-                      <td>$132,000</td>
-                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
