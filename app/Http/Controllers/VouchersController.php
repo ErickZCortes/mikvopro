@@ -32,8 +32,8 @@ class VouchersController extends Controller
             $voucher->nusers_voucher = $request->input('nusers_voucher');
             $voucher->server_voucher = $request->input('server_voucher');
             $voucher->prefix_voucher = $request->input('prefix_voucher');
-            $idprofile = DB::table('profiles')->select('id')->where('name_profile',$request->input('nprofile_voucher'))->first();
-            $voucher->idprofile_voucher = $idprofile->id;
+            $profile = DB::table('profiles')->select('*')->where('name_profile',$request->input('nprofile_voucher'))->first();
+            $voucher->idprofile_voucher = $profile->id;
             $voucher->nprofile_voucher = $request->input('nprofile_voucher');
 
             if($voucher->save()){
@@ -58,7 +58,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }else if($generation == "lowercase"){
@@ -79,7 +80,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }else if($generation == "numbers"){
@@ -100,7 +102,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }else if($generation == "letnumlow"){
@@ -121,7 +124,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }else if($generation == "letnumupp"){
@@ -142,7 +146,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }else if($generation == "all"){
@@ -163,7 +168,8 @@ class VouchersController extends Controller
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
                         $detailv->password_detailv = $keypass;   
-                        $detailv->limittime_detailv =01;
+                        $detailv->limittda_detailv = $profile->limitda_profiles;
+                        $detailv->limitho_detailv = $profile->limitho_profiles;
                         $detailv->save();
                     }
                 }

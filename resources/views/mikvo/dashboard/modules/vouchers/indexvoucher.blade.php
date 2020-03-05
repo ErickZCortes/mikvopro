@@ -77,7 +77,9 @@
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                         aria-label="Start date: activate to sort column ascending" style="width: 107px;">Perfil</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite de tiempo</th>
+                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite tiempo - días</th>
+                      <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                        aria-label="Salary: activate to sort column ascending" style="width: 97px;">Límite tiempo - horas</th>  
                     </tr>
                   </thead>
                   <tbody>
@@ -89,7 +91,8 @@
                       @foreach ($voucherget as $voucher)
                       <td>{{$voucher->nprofile_voucher}}</td>
                       @endforeach
-                      <td>{{$detail->limittime_detailv}}</td>
+                      <td>{{$detail->limittda_detailv}}</td>
+                      <td>{{$detail->limitho_detailv}}</td>
                     </tr>
                     @endforeach
                   </tbody>
