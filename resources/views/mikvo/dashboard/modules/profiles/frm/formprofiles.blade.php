@@ -11,6 +11,22 @@
     <script type="text/javascript">
    document.getElementById("inputtime").value = "13:24:00";    
   </script>
+  <script type="text/javascript">
+    function deshabilitar(){      
+        $(document).ready(function(){
+	        $('#typet_profile').change(function(){
+                if ($('#typet_profile').val() === "nada") {
+                } else if($('#typet_profile').val()  === "Corrido"){
+                    $("#expireda_profiles").prop('disabled', true);
+                    $("#expiredho_profiles").prop('disabled', true);
+                }else if($('#typet_profile').val()  === "Pausado"){
+                    $("#expireda_profiles").prop('disabled', false);
+                    $("#expiredho_profiles").prop('disabled', false);
+                }      
+	        });
+        });
+    }
+  </script>
 </head>
     
 @if ( !empty ( $profiles->id) )
@@ -62,7 +78,7 @@
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
            <select class="form-control" name="typet_profile" id="typet_profile">
-            <option selected>Seleciona un tipo de tiempo</option>
+            <option value="nada" selected>Seleciona un tipo de tiempo</option>
            <option value="Corrido" @if ($profiles->typet_profile=="Corrido" ) selected @endif
             >Corrido</option>
             <option value="Pausado" @if ($profiles->typet_profile=="Pausado" ) selected @endif>Pausado</option>
@@ -86,7 +102,7 @@
         <div class="col-md-6">
             <label class="non-selectable" for="sbyte_profile" style="color: transparent;">Tipo de velocidad:</label>
             <select class="form-control" name="sbyte_profile" id="sbyte_profile">
-                <option selected> Elige una opción</option>
+                <option  selected> Elige una opción</option>
                 <option value="KB" @if ($profiles->sbyte_profile=="KB" ) selected @endif>KB</option>
                 <option value="MB" @if ($profiles->sbyte_profile=="MB" ) selected @endif>MB</option>
                 <option value="GB" @if ($profiles->sbyte_profile=="GB" ) selected @endif>GB</option>
@@ -237,8 +253,8 @@
      <div class="col-sm-10 col-md-3 col-lg-3">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile">
-            <option selected>Seleciona un tipo de tiempo</option>
+           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
+            <option value ="nada" selected>Seleciona un tipo de tiempo</option>
             <option value="Corrido">Corrido</option>
             <option value="Pausado">Pausado</option>
           </select>
@@ -333,7 +349,7 @@
         <div class="col-md-6">
             <label class="non-selectable" for="expiredho_profiles" style="color: transparent;">Velocidad de subida:</label>
             <input 
-            id="inputtime"
+            id="expiredho_profiles"
             type="time" 
             class="form-control" 
             name="expiredho_profiles"
