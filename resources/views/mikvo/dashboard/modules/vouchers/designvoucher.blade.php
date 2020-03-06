@@ -114,17 +114,13 @@
     <div class="card-body">
         <h1 class="h3 mb-2 text-gray-800">Preview</h1>
         <div class="dropdown-divider"></div>
-
-        <div>
+        
           <div class="row">
-            <div class="col-md-12">
-
-@include('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher')
-
-
-            </div>
+                <div class="col-md-12">
+                    @include('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher')
+                </div>
            </div>
-        </div>
+      
     </div>
   </div>
 @endsection
