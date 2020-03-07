@@ -18,7 +18,12 @@
 <header>
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/designvoucher.css')}}">
 </header>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style style type="text/css" media="all">
 
+    </style>
+</head>
 <h1 class="h3 mb-2 text-gray-800">Design</h1>
     
 <!-- DataTales Example -->
@@ -113,14 +118,11 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <h1 class="h3 mb-2 text-gray-800">Preview</h1>
-        <div class="dropdown-divider"></div>
-        
-          <div class="row">
-                <div class="col-md-12">
+          <div class="row" style="justify-content:center">
+                <div class="col-md-12" style="">
                     @include('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher')
                 </div>
            </div>
-      
     </div>
   </div>
 @endsection

@@ -13,13 +13,14 @@
     @endsection
     
     @section('css')
-      <header>
-        <link rel="stylesheet"type="text/css" href="{{URL::asset('css/createvoucher.css')}}">
-        <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
-      </header>
+      
     @endsection
     
     @section('content')
+    <header>
+        <link rel="stylesheet"type="text/css" href="{{URL::asset('css/createvoucher.css')}}">
+        <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
+      </header>
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
       <div class="card-header py-3">

@@ -1,32 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <style></style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"type="text/css" href="css/bootstrap.min.css">
+<style>
+@page { 
+  size: 595pt 842pt; 
+  margin: 0.3cm 0.3cm;
+  }
+  @media print
+{
+  .table { page-break-after:auto }
+  tr    { page-break-inside:avoid; page-break-after:auto }
+  td    { page-break-inside:avoid; page-break-after:auto }
+  thead { display:table-header-group }
+  tfoot { display:table-footer-group }
+}
+table.table{
+	width: 100%;
+  border: 1px solid pink;
+}
+.td{
+  width: 33.33%;
+border: 1px solid red;
+}
+</style>
 </head>
-<body>    
-  <div class="col-md-12">     
+<table class="table">
+<tbody>
+<tr>
+    <td class="td">
     <table class="table">
-      <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Email</th>
-          <th>qr</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($detailv as $detail)
-        <tr>
-          <td>{{$detail->user_detailv}}</td>
-          <td>{{$detail->password_detailv}}</td>
-          <td>{{$voucher->nprofile_voucher}}</td>
-          <td><img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($voucher->nprofile_voucher)) !!} "></td>
-        </tr>
-        @endforeach
-      </tbody>
+  <tr>
+    <th>first</th>
+    <th>Lastname</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+  </tr>
+</table>
+    </td>
+    <td class="td">
+    <table class="table">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+  </tr>
+</table>
+    </td> 
+    <td class="td">
+    <table class="table">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+  </tr>
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+  </tr>
+</table>  
+    </td>
+    </tr>
+    </tbody>
     </table>
-  </div>
-</body>
 </html>

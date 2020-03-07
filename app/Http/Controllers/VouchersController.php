@@ -227,6 +227,7 @@ class VouchersController extends Controller
         $voucher = DB::table('vouchers')->select('*')->orderBy('id', 'desc')->limit(1)->first();
         $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
         //dd($voucher->id);
+        
         $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
         return $pdf->download('voucherlist.pdf');
         }            
