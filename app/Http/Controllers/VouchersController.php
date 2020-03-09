@@ -69,7 +69,6 @@ class VouchersController extends Controller
                         $pattern = 'abcdefghijklmnopqrstuvwxyz';
                         $max = strlen($pattern)-1;
                         $detailv = new DetailVoucher;
-                        $detailv->idvoucher_detailv =$voucher->id;
                         $detailv->server_detailv = $voucher->server_voucher;
                         
                         for($h=0;$h < $longuser;$h++) $keyuser .= $pattern{
@@ -79,6 +78,7 @@ class VouchersController extends Controller
                             mt_rand(0,$max)
                         };
                         $detailv->user_detailv = $voucher->prefix_voucher.$keyuser;
+                        $detailv->idvoucher_detailv =$voucher->id;
                         $detailv->password_detailv = $keypass;   
                         $detailv->limittda_detailv = $profile->limitda_profiles;
                         $detailv->limitho_detailv = $profile->limitho_profiles;
@@ -229,7 +229,10 @@ class VouchersController extends Controller
         //dd($voucher->id);
         
         $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
-        return $pdf->download('voucherlist.pdf');
+       if($voucher->prefix_voucher == 'tete'){
+            $pdfname =$voucher->prefix_voucher.$voucher->id.".pdf";
+       }
+       return $pdf->download($pdfname);
         }            
     }
 }
