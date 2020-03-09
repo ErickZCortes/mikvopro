@@ -14,6 +14,8 @@
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.2",
+        "pear2/net_routeros": "^1.0@beta",
+        "pear2/net_transmitter": "^1.0@beta",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "twbs/bootstrap": "4.4.1"
     },
