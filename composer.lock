@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da597432659176c3b851920eb442d321",
+    "content-hash": "f26bdacc0401b4e9dfbd288756f82a5a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -447,6 +447,68 @@
                 "validator"
             ],
             "time": "2020-02-13T22:36:52+00:00"
+        },
+        {
+            "name": "evilfreelancer/routeros-api-php",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EvilFreelancer/routeros-api-php.git",
+                "reference": "c5989b01ad730a509734cde38e0cda832b726ed3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EvilFreelancer/routeros-api-php/zipball/c5989b01ad730a509734cde38e0cda832b726ed3",
+                "reference": "c5989b01ad730a509734cde38e0cda832b726ed3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-sockets": "*",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RouterOS\\Laravel\\ClientServiceProvider"
+                    ],
+                    "aliases": {
+                        "RouterOS": "RouterOS\\Laravel\\ClientFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RouterOS\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Rock",
+                    "email": "paul@drteam.rocks",
+                    "homepage": "http://drteam.rocks/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Modern Mikrotik RouterOS API PHP client for your applications (with Laravel support)",
+            "keywords": [
+                "PSR-4",
+                "facade",
+                "laravel",
+                "mikrotik",
+                "plugin",
+                "routeros",
+                "socket-client"
+            ],
+            "time": "2020-01-09T19:04:30+00:00"
         },
         {
             "name": "fideloper/proxy",

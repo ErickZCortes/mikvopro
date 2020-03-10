@@ -48,3 +48,6 @@ Route::get('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name(
 //-----------------------------------------VOUCHERS-------------------------------------------//
 Route::get('/dashboard/vouchers/reprint','VouchersController@indexreprint')->name('/dashboard/vouchers/reprint');
 Route::get('/dashboard/vouchers/reprintvoucher/{id}','VouchersController@reprintvoucher')->name('/dashboard/vouchers/reprintvoucher');
+
+
+Route::get('/prueba', 'MikrotikController@conection')->name('/prueba');

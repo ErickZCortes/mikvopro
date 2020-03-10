@@ -186,7 +186,7 @@
                   <form>
                     <div class="form-row">
                       <div class="col-12">
-                        <a class="btn btn-primary-outline" >COMENZAR</a>
+                        <a class="btn btn-primary-outline"  href="{{route('/prueba')}}">COMENZAR</a>
                       </div>
                     </div>
                   </form>
