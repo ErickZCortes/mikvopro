@@ -16,12 +16,7 @@ class ViewsController extends Controller
             $user = User::find($id);
             return view('mikvo.dashboard.layouts.main',['user'=>$user]);
         }
-        return view('mikvo.login');
-    }
-
-    public function viewdesignvoucher()
-    {
-        return view('mikvo.dashboard.modules.designvoucher');
+        return view('welcome');
     }
 
     public function viewreprintvouchers()

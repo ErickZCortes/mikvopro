@@ -34,10 +34,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         @if (( $user->img_user) == "null")
-                            <img class="rounded mx-auto d-block" src="../../../../uploads/user-default.png" alt="" width="250" height="220"> 
+                            <img class="rounded mx-auto d-block" src="{{URL::asset('uploads/user.png') }}" alt="" width="250" height="220"> 
                         @else
-                            <img class="rounded mx-auto d-block" src="../../../../uploads/{{$user->img_user}}" alt="" width="250" height="220">
-                        @endif   
+                            <img class="rounded mx-auto d-block" src="{{ asset('uploads/'.$user->img_user) }}" alt="" width="250" height="220">
+                        @endif     
                         <hr>
                         <h4 class="mb-0 text-uppercase" >{{$user->user_name}}</h4>
                     </div>

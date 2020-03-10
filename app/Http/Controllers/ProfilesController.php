@@ -4,48 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Profile;
+use App\User;
 
 class ProfilesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function index()
     {
-        $profiles = Profile::all();
-        return view('mikvo.dashboard.modules.profiles.profiles', compact('profiles'));
+        if(session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $profiles = Profile::where('iduser_profile', $uidSesion)->paginate(5);
+            return view('mikvo.dashboard.modules.profiles.profiles', ["profiles"=>$profiles, "user"=>$user]);               
+        }
+        return view('welcome');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $profiles = Profile::all();
-        return view('mikvo.dashboard.modules.profiles.createprofile', compact('profiles'));
+        if(session()->has('UserSession')){
+            $profiles = Profile::all();
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            return view('mikvo.dashboard.modules.profiles.createprofile', ["user"=>$user]);           
+        }
+        return view('welcome');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $profile = new Profile; 
-        
         if (session()->has('UserSession')){
-            $uidSesion = session()->get('UserSession')->id;
-            //$dato = User::find($uidSesion);
+            $profile = new Profile; 
 
-        
-            // USD 1,234.56
-            // Recibo todos los datos del formulario de la vista 'crear.blade.php'
+            $uidSesion = session()->get('UserSession')->id;
             $profile->iduser_profile = $uidSesion;
             $profile->name_profile = $request->input('name_profile');
             $profile->addpool_profile = $request->input('addpool_profile');
@@ -67,48 +58,29 @@ class ProfilesController extends Controller
             }
             
             
-            $profile->cuttime_profile = $request->input('cuttime_profile');    
+            $profile->cuttime_profile = $request->input('cuttime_profile');  
+
+            $profile->save();        
+        return redirect('/dashboard/profiles')->with('message','Guardado Satisfactoriamente !'); 
         }
-        // Inserto todos los datos en mi tabla 'profiles' 
-        $profile->save();
-        
-        // Hago una redirección a la vista principal con un mensaje 
-        return redirect('/dashboard/profiles')->with('message','Guardado Satisfactoriamente !');
+        return view('welcome');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $profiles = Profile::find($id);
-        return view('mikvo.dashboard.modules.profiles.updateprofile',['profiles'=>$profiles]);
+        if(session()->has('UserSession')){
+            $profiles = Profile::find($id);
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            return view('mikvo.dashboard.modules.profiles.updateprofile',['profiles'=>$profiles, "user"=>$user]);
+        }
+        return view('welcome');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $profile = Profile::find($id);
+        if(session()->has('UserSession')){
+            $profile = Profile::find($id);
             $profile->name_profile = $request->input('name_profile');
             $profile->addpool_profile = $request->input('addpool_profile');
             $profile->vsubida_profile = $request->input('vsubida_profile');
@@ -126,19 +98,18 @@ class ProfilesController extends Controller
         $profile->save();
 
         return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
+        }
+        return view('welcome');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $profile = Profile::find($id);
+        if(session()->has('UserSession')){
+            $profile = Profile::find($id);
 
-        Profile::destroy($id);
-        return redirect('/dashboard/profiles');
+            Profile::destroy($id);
+            return redirect('/dashboard/profiles');
+        }
+        return view('welcome');
     }
 }

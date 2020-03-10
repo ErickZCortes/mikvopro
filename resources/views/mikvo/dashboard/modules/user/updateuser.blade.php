@@ -100,13 +100,12 @@
                                 </div>
                                     <div class="col-md-6" style=" text-align: center;
                                     padding-top: 50PX;">
-                                        <label for="img_user" class="negrita">Selecciona una imagen:</label>
-                                        <span class="btn btn btn-dark btn-file">Seleccionar archivo<input type="file" name="img_user" type="file" id="img_user">
+                                        <input class="btn btn btn-dark btn-file upld-file">Seleccionar archivo<input type="file" name="img_user" type="file" id="img_user">
                                     </div>
                                 @if ( !empty ( $user->img_user) )
                                 <div class="col-md-6">
                                     <span>Imagen Actual:</span>
-                                        <img src="../../../../uploads/{{$user->img_user}}" width="200" class="img-fluid">
+                                        <img src="{{URL::asset('uploads/user.png') }}" width="200" class="img-fluid">
                                         <br>
                                         <div class="col-md-4 center">
                                     </span>

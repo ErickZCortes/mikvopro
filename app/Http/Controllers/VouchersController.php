@@ -13,19 +13,29 @@ class VouchersController extends Controller
 {
     public function index()
     {
-        return view('mikvo.dashboard.modules.vouchers.indexvoucher');
+        if(session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            return view('mikvo.dashboard.modules.vouchers.indexvoucher', ['user'=>$user]);
+        }
+        return view('welcome');
     }
 
     public function create()
     {
-        $profiles = Profile::all();
-        
-        return view('mikvo.dashboard.modules.vouchers.createvouchers', compact('profiles'));
+        if(session()->has('UserSession')){
+            $profiles = Profile::all();
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            return view('mikvo.dashboard.modules.vouchers.createvouchers', ['profiles'=>$profiles, "user"=>$user]);
+        }
+        return view('welcome');
     }
  
     public function store(Request $request){
-        $voucher = new Voucher;
         if (session()->has('UserSession')){
+            $voucher = new Voucher;
+
             $uidSesion = session()->get('UserSession')->id;
             $voucher->iduser_voucher = $uidSesion;
             $voucher->dnsname_voucher = $request->input('dnsname_voucher');
@@ -175,65 +185,66 @@ class VouchersController extends Controller
                 }
                 
             }
+            $detailsv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
+            $voucherget = DB::table('vouchers')->select('*')->where('id',$voucher->id)->get(); 
+            $user = User::find($uidSesion);
 
+            return view('mikvo.dashboard.modules.vouchers.indexvoucher',["detailsv"=>$detailsv,"voucherget"=>$voucherget, 'user'=>$user]);
         }
-        $detailsv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
-        $voucherget = DB::table('vouchers')->select('*')->where('id',$voucher->id)->get();
-        
-        ($voucherget);
-        //$voucherget = Voucher::find($voucher->id);
-        //,['detailsv'=>$detailsv],['voucherget'=>$voucherget]
-        
-        return view('mikvo.dashboard.modules.vouchers.indexvoucher',["detailsv"=>$detailsv,"voucherget"=>$voucherget]);
+        return view('welcome');
     }
     
    public function update(Request $request, $id)
     {
-        //$vouchers = DB::table('vouchers')->select('id')->orderBy('id', 'desc')->limit(1)->first();
-           $voucher = Voucher::find($id);
-        
            if (session()->has('UserSession')){
+            $voucher = Voucher::find($id);
+
             $voucher->dnsname_voucher = $request->input('dnsname_voucher');
             $voucher->nusers_voucher = $request->input('nusers_voucher');
             $voucher->server_voucher = $request->input('server_voucher');
             $voucher->prefix_voucher = $request->input('prefix_voucher');
             $voucher->nprofile_voucher = $request->input('nprofile_voucher'); 
-           }
-   
-           $voucher->save();
-           return redirect('/dashboard/vouchers')->with('message','Guardado Satisfactoriamente !');
+            
+            $voucher->save();
+            
+            return redirect('/dashboard/vouchers')->with('message','Guardado Satisfactoriamente !');   
+        }
+        return view('welcome');
     }
 
     public function destroy($id)
     {
-        $voucher = Voucher::find($id);
-        Voucher::destroy($id);
-        return redirect('/dashboard/vouchers');
+        if(session()->has('UserSession')){
+            $voucher = Voucher::find($id);
+            Voucher::destroy($id);
+
+            return redirect('/dashboard/vouchers');
+        }
+        return view('welcome');
     }
     
     public function design()
     {
         if (session()->has('UserSession')){
-            //$uidSesion = session()->get('UserSession')->id;
         $voucher = DB::table('vouchers')->select('*')->orderBy('id', 'desc')->limit(1)->first();
         $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
+        
         return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
         }
-        
+        return view('welcome');
     }
     public function exportPdf(){
         if (session()->has('UserSession')){
-          //  $uidSesion = session()->get('UserSession')->id;
         $voucher = DB::table('vouchers')->select('*')->orderBy('id', 'desc')->limit(1)->first();
         $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
-        //dd($voucher->id);
-        
+       
         $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
-       if($voucher->prefix_voucher == 'tete'){
-            $pdfname =$voucher->prefix_voucher.$voucher->id.".pdf";
-       }
-       return $pdf->download($pdfname);
-        }            
+            if($voucher->prefix_voucher == 'tete'){
+                $pdfname =$voucher->prefix_voucher.$voucher->id.".pdf";
+            }
+            return $pdf->download($pdfname);
+        }   
+        return view('welcome');         
     }
 }
 
