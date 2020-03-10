@@ -32,7 +32,8 @@
         <div class="text-center card shadow mb-4 mx-auto">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" >
+                    
                         @if (( $user->img_user) == "null")
                             <img class="rounded mx-auto d-block" src="{{URL::asset('uploads/user.png') }}" alt="" width="250" height="220"> 
                         @else

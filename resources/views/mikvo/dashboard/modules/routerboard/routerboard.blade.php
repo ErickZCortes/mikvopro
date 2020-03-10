@@ -83,7 +83,7 @@
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <a href="{{ route('/dashboard/routerboard/edit',$router->id) }}" class="btn btn-info btn-sm">Editar</a>
                           <button class="btn btn-danger btn-sm" type="submit">
-                            <i class="fa fa-trash-o"> Eliminar</i>
+                          <i class="fa fa-trash-o"></i>
                           </button>
                         </form>
                         <button class="btn btn-primary btn-sm" type="submit">

@@ -7,11 +7,6 @@ Route::get('/', function () {
 
 Route::get('/dashboard', 'ViewsController@viewdashboard')->name('/dashboard');
 
-Route::get('/dashboard/vouchers/create', 'ViewsController@viewvouchers')->name('/dashboard/vouchers/create');
-Route::get('/dashboard/vouchers/reprint', 'ViewsController@viewreprintvouchers')->name('/dashboard/vouchers/reprint');
-Route::get('/dashboard/vouchers/design', 'ViewsController@viewdesignvoucher')->name('/dashboard/vouchers/design');
-
-
 //-----------------------------------------LOGIN-------------------------------------------//
 Route::get('/login', 'UserController@index')->name('/login');
 Route::post('/login', 'UserController@loginSession')->name('login');
@@ -44,10 +39,12 @@ Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->nam
 Route::get('/dashboard/vouchers', 'VouchersController@create')->name('/dashboard/vouchers');
 Route::put('/dashboard/vouchers/store','VouchersController@store')->name('/dashboard/vouchers/store');
 Route::get('/dashboard/vouchers/created', 'VouchersController@index')->name('/dashboard/created');
-//Route::get('/dashboard/vouchers/edit/{id}', 'VouchersController@edit')->name('/dashboard/vouchers/edit');
 Route::put('/dashboard/vouchers/update/{id}','VouchersController@update')->name('/dashboard/vouchers/update');
-Route::get('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->name('/dashboard/vouchers/delete');
+Route::put('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->name('/dashboard/vouchers/delete');
 Route::get('/dashboard/vouchers/generate', 'VouchersController@generate')->name('/dashboard/vouchers/generate');
-Route::get('/dashboard/vouchers/design', 'VouchersController@design')->name('/dashboard/vouchers/design');
+Route::get('/dashboard/vouchers/design/{id}', 'VouchersController@design')->name('/dashboard/vouchers/design');
+Route::get('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
 
-Route::get('/dashboard/vouchers/pdf','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
+//-----------------------------------------VOUCHERS-------------------------------------------//
+Route::get('/dashboard/vouchers/reprint','VouchersController@indexreprint')->name('/dashboard/vouchers/reprint');
+Route::get('/dashboard/vouchers/reprintvoucher/{id}','VouchersController@reprintvoucher')->name('/dashboard/vouchers/reprintvoucher');

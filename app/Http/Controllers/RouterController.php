@@ -78,7 +78,6 @@ class RouterController extends Controller
     public function destroy($id)
     {
         if (session()->has('UserSession')){
-            $router = Router::find($id);
 
             Router::destroy($id);
             return redirect('/dashboard/routerboard');

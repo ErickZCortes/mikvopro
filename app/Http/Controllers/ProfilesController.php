@@ -23,7 +23,6 @@ class ProfilesController extends Controller
     public function create()
     {
         if(session()->has('UserSession')){
-            $profiles = Profile::all();
             $uidSesion = session()->get('UserSession')->id;
             $user = User::find($uidSesion);
             return view('mikvo.dashboard.modules.profiles.createprofile', ["user"=>$user]);           

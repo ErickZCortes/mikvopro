@@ -56,7 +56,8 @@
                   <button class="btn btn-info btn-sm">
                     <i class="fas fa-file-excel"></i> Excel
                   </button>
-                  <a class="btn btn-info btn-sm" href="{{route('/dashboard/vouchers/design')}}">
+                  
+                  <a class="btn btn-info btn-sm" href="{{route('/dashboard/vouchers/design',$voucherget->id )}}">
                     <i class="fas fa-print"></i> Imprimir
                   </a>
                   
@@ -89,9 +90,7 @@
                       <td class=>{{$detail->server_detailv}}</td>
                       <td>{{$detail->user_detailv}}</td>
                       <td>{{$detail->password_detailv}}</td>
-                      @foreach ($voucherget as $voucher)
-                      <td>{{$voucher->nprofile_voucher}}</td>
-                      @endforeach
+                      <td>{{$voucherget->nprofile_voucher}}</td>
                       <td>Días: {{$detail->limittda_detailv}}  //  Horas: {{$detail->limitho_detailv}}</td>
                       <td>{{$detail->created_at}}</td>
                     </tr>
@@ -105,4 +104,5 @@
         </div>
       </div>
     </div>
+
   @endsection

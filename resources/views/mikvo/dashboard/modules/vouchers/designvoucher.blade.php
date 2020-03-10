@@ -107,7 +107,7 @@
                 
                 <div class="col-md-3">
                     <div class="">
-                    <a href="{{route('/dashboard/vouchers/pdf')}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
+                    <a href="{{route('/dashboard/vouchers/pdf', $voucher->id )}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
                     </div>
                 </div>  
             </div>

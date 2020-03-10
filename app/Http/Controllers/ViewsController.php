@@ -7,8 +7,6 @@ use App\User;
 
 class ViewsController extends Controller
 {
-    
-
     public function viewdashboard()
     {
         if(session()->has('UserSession')){
@@ -18,10 +16,4 @@ class ViewsController extends Controller
         }
         return view('welcome');
     }
-
-    public function viewreprintvouchers()
-    {
-        return view('mikvo.dashboard.modules.reprintvoucher');
-    }
-
 }
