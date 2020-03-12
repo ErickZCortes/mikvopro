@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
@@ -114,5 +115,33 @@ class UserController extends Controller
             return redirect('/dashboard/user')->with('message','Guardado Satisfactoriamente !');
         }
         return view('welcome');
+    }
+
+
+    //--------------------------------------------------UPDATE PASSWORD---------------------------------------------------    
+
+    public function password($id)
+    {
+        if(session()->has('UserSession')){
+            $user = User::find($id);
+            return view('mikvo.dashboard.modules.user.changepassword',['user'=>$user]);
+        }
+        return view('welcome');
+    }
+
+    public function updatepassword(Request $request, $id){
+        $user = User::find($id);
+        $password_user = $request->input('password_user');
+        $password_new = $request->input('password_new');
+        $password_repeat = $request->input('password_repeat');
+        if(Hash::check($password_user,$user->password_user)){
+            if($password_new == $password_repeat){
+                $user->password_user = Hash::make($password_repeat);
+            }   
+            $user->save();
+            return redirect('/dashboard/user')->with('message','Contraseña actualizada Satisfactoriamente !');            
+        }else{
+            return redirect('/dashboard/user')->with('message','No se actualizo la contraseña!');
+        }
     }
 }

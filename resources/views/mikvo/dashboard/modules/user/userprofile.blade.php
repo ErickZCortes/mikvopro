@@ -27,43 +27,53 @@
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/userprofile.css')}}">
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
 </header>
-
+@if(Session::has('message'))
+<div class="alert alert-primary" role="alert">
+    {{ Session::get('message') }}
+</div>
+@endif
     <h1 class="h3 mb-2 text-gray-800">Perfil del usuario</h1>
         <div class="text-center card shadow mb-4 mx-auto">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6" >
-                    
-                        @if (( $user->img_user) == "null")
+                    <div class="col-lg-4">
+                            @if (( $user->img_user) == "null")
                             <img class="rounded mx-auto d-block" src="{{URL::asset('uploads/user.png') }}" alt="" width="250" height="220"> 
-                        @else
-                            <img class="rounded mx-auto d-block" src="{{ asset('uploads/'.$user->img_user) }}" alt="" width="250" height="220">
-                        @endif     
-                        <hr>
-                        <h4 class="mb-0 text-uppercase" >{{$user->user_name}}</h4>
+                                
+                            @else
+                                <img class="rounded mx-auto d-block" src="{{ asset('uploads/'.$user->img_user) }}" alt="" width="250" height="220">
+                            @endif 
+                            <hr>
+                            <h4 class="mb-0 text-uppercase" >{{$user->user_name}}</h4>   
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class=" col-md-12">
-                               <div class="col-md-3"><span class="text-muted lead d-block mb-2">Nombre:</span></div>
-                               <div class="col-md-9 text-capitalize"><h5>{{$user->fullname_user}}</h5></div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-3"><span class="text-muted lead d-block mb-2">Teléfono:</span></div>
-                                <div class="col-md-9"><h5>{{$user->telephone_user}}</h5></div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-3"><span class="text-muted lead d-block mb-2">Email:</span></div>
-                                <div class="col-md-9"><h5>{{$user->email_user}}</h5></div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="col-md-3"><span class="text-muted lead d-block mb-2">Registrado:</span></div>
-                                <div class="col-md-9"><h5>{{$user->created_at}}</h5></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <a href="{{ route('/dashboard/user/edit', $user->id) }}" class="btn btn-success mt-4 ml-3">Editar usuario</a>
+                    <div class="col-lg-8">
+                        <form>
+                            <br>
+                             <div class="form-row">   
+                                    
+                                            <div class="form-group col-md-6">
+                                                <label for="FirstName">Nombre completo:</label>
+                                                <h5 class="text-capitalize">{{$user->fullname_user}}</h5>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="UserName">Teléfono:</label>
+                                                <h5>{{$user->telephone_user}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="Email">Correo electrónico:</label>
+                                                <h5>{{$user->email_user}}</h5>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="Email">Registrado:</label>
+                                                <h5>{{$user->created_at}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <a href="{{ route('/dashboard/user/edit', $user->id) }}" class="btn btn-success mt-4 ml-3">Editar usuario</a>
+                                        </div>
+                                    </form>            
                     </div>
                 </div>
             </div>

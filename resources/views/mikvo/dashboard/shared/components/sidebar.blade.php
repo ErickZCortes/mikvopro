@@ -33,12 +33,11 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Options Profile</h6>
-              <a class="collapse-item" href="{{route('/dashboard/user')}}">Profile</a>
-              <a class="collapse-item" href="#">Edit Profile</a>
-              <a class="collapse-item" href="#">Change password</a>
-              
-            </div>
+                <h6 class="collapse-header">Options Profile</h6>
+                <a class="collapse-item" href="{{route('/dashboard/user')}}">Profile</a>
+                <a class="collapse-item" href="{{ route('/dashboard/user/edit', $user->id) }}">Edit Profile</a>
+                <a class="collapse-item" href="{{ route('/dashboard/user/change-password', $user->id) }}">Change password</a>
+              </div>  
           </div>
     </li>
     <!-- Divider -->

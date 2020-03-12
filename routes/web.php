@@ -18,6 +18,8 @@ Route::post('/register/create', 'UserController@register')->name('/register/crea
 Route::get('/dashboard/user', 'UserController@indexuser')->name('/dashboard/user');
 Route::get('/dashboard/user/edit/{id}','UserController@edit')->name('/dashboard/user/edit');
 Route::put('/dashboard/user/update/{id}','UserController@update')->name('/dashboard/user/update');
+Route::get('/dashboard/user/change-password/{id}','UserController@password')->name('/dashboard/user/change-password');
+Route::post('/dashboard/user/updatepassword/{id}', 'UserController@updatepassword')->name('/dashboard/user/updatepassword');
 
 //-----------------------------------------ROUTER-------------------------------------------//
 Route::get('/dashboard/routerboard', 'RouterController@index')->name('/dashboard/routerboard');
