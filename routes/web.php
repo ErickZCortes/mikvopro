@@ -23,6 +23,10 @@ Route::put('/dashboard/user/update/{id}','UserController@update')->name('/dashbo
 Route::get('/dashboard/routerboard', 'RouterController@index')->name('/dashboard/routerboard');
 Route::get('/dashboard/routerboard/create', 'RouterController@create')->name('/dashboard/routerboard/create');
 Route::put('/dashboard/routerboard/store','RouterController@store')->name('/dashboard/routerboard/store');
+
+Route::get('/dashboard/routerboard/router-info/{id}', 'RouterController@indexinfo')->name('/dashboard/routerboard/router-info');
+Route::put('/dashboard/routerboard/info-add/{id}','RouterController@addinfo')->name('/dashboard/routerboard/info-add');
+
 Route::get('/dashboard/routerboard/edit/{id}', 'RouterController@edit')->name('/dashboard/routerboard/edit');
 Route::put('/dashboard/routerboard/update/{id}','RouterController@update')->name('/dashboard/routerboard/update');
 Route::put('/dashboard/routerboard/delete/{id}', 'RouterController@destroy')->name('/dashboard/routerboard/delete');

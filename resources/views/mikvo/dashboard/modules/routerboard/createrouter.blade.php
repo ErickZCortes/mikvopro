@@ -21,7 +21,7 @@
     
     @section('content')
     <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 col-md-6">
    <div class="card-body">
    <h5 id="title">Add Routers</h5>
       
@@ -29,8 +29,8 @@
  
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-        @include('mikvo.dashboard.modules.routerboard.frm.formrouter')     
+        
+        @include('mikvo.dashboard.modules.routerboard.frm.formrouter') 
     </form>
     </div>
       </div>

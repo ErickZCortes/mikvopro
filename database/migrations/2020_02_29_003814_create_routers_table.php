@@ -19,11 +19,13 @@ class CreateRoutersTable extends Migration
             $table->bigInteger("iduser_router")->unsigned();
             $table->foreign("iduser_router")->references("id")->on("users");
             
-            $table->string("model_router",30);
-            $table->string("router_description",200);
-            $table->string("ip_router",15);
-            $table->string("user_router",30);
-            $table->string("password_router",40);
+            $table->string("name_router");
+            $table->string("model_router");
+            $table->string("serialn_router");
+            $table->string("ip_router");
+            $table->string("user_router");
+            $table->string("password_router")->default('null');
+            $table->string("port_router");
             $table->timestamps();
         });
     }

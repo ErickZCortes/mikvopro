@@ -2,34 +2,6 @@
       <div class="row">
          <div class="col-sm-10 col-md-4 col-lg-4">
          <div class="form-group">
-            <label for="model_router">Model:</label>
-            <input 
-               id="model_router"
-               type="text" 
-               class="form-control" 
-               name="model_router"
-               required
-               value="{{ $routers->model_router }}"
-               placeholder="Ingresa el modelo" 
-               >
-         </div>
-         </div>
-         <div class="col-sm-10 col-md-4 col-lg-4">
-         <div class="form-group">
-            <label for="router_description">Description:</label>
-            <input 
-               id="router_description"
-               type="text" 
-               class="form-control" 
-               name="router_description"
-               required
-               value="{{ $routers->router_description }}"
-               placeholder="Ingresa la descripción"
-               >
-         </div>
-         </div>
-         <div class="col-sm-10 col-md-4 col-lg-4">
-         <div class="form-group">
             <label for="ip_router">IP:</label>
             <input 
                id="ip_router"
@@ -64,41 +36,28 @@
                type="text" 
                class="form-control" 
                name="password_router"
-               required
                value="{{ $routers->password_router }}"
                placeholder="Ingresa la contraseña"
+               >
+         </div>
+         </div>
+         <div class="col-sm-10 col-md-4 col-lg-4">
+         <div class="form-group">
+            <label for="port_router">Puerto:</label>
+            <input 
+               id="port_router"
+               type="text" 
+               class="form-control" 
+               name="port_router"
+               required
+               value="{{ $routers->port_router }}"
+               placeholder="Ingresa un puerto"
                >
          </div>
          </div>
          </div>
 @else
 <div class="row">
-         <div class="col-sm-10 col-md-4 col-lg-4">
-            <div class="form-group">
-               <label for="model_router">Model:</label>
-               <input 
-                  id="model_router"
-                  type="text" 
-                  class="form-control" 
-                  name="model_router"
-                  required
-                  placeholder="Ingresa el modelo" 
-                  >
-            </div>
-         </div>
-         <div class="col-sm-10 col-md-4 col-lg-4">
-         <div class="form-group">
-            <label for="router_description">Description:</label>
-            <input 
-               id="router_description"
-               type="text" 
-               class="form-control" 
-               name="router_description"
-               required
-               placeholder="Ingresa la descripción"
-               >
-         </div>
-         </div>
          <div class="col-sm-10 col-md-4 col-lg-4">
          <div class="form-group">
             <label for="ip_router">IP:</label>
@@ -133,10 +92,22 @@
                   type="text" 
                   class="form-control" 
                   name="password_router"
-                  required
                   placeholder="Ingresa la contraseña"
                   >
             </div>
+         </div>
+         <div class="col-sm-10 col-md-4 col-lg-4">
+         <div class="form-group">
+            <label for="port_router">Puerto:</label>
+            <input 
+               id="port_router"
+               type="text" 
+               class="form-control" 
+               name="port_router"
+               required
+               placeholder="Ingresa un puerto"
+               >
+         </div>
          </div>
          </div>
 @endif

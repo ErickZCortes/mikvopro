@@ -56,27 +56,30 @@
                   <thead>
                     <tr role="row">
                       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 161px;">Modelo</th>
+                        aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 116px;">Nombre</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Position: activate to sort column ascending" style="width: 246px;">Descripción</th>
+                        aria-label="Position: activate to sort column ascending" style="width: 116px;">Modelo</th>
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                        aria-label="Position: activate to sort column ascending" style="width: 116px;">Número de serie</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                         aria-label="Office: activate to sort column ascending" style="width: 116px;">Dirección IP</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Age: activate to sort column ascending" style="width: 51px;">Usuario</th>
+                        aria-label="Age: activate to sort column ascending" style="width: 116px;">Usuario</th>
+                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                        aria-label="Age: activate to sort column ascending" style="width: 116px;">Puerto</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                        aria-label="Actions: activate to sort column ascending" style="width: 51px;">Acciones</th>
-                    </tr>
+                        aria-label="Actions: activate to sort column ascending" style="width: 116px;">Acciones</th>
+                      </tr>
                   </thead>
                   <tbody>
                     @foreach ($routers as $router)
                     <tr role="row" class="odd">
+                      <td class="sorting_1">{{$router->name_router}}</td>
                       <td class="sorting_1">{{$router->model_router}}</td>
-                      <td class="sorting_1">{{$router->router_description}}</td>
+                      <td class="sorting_1">{{$router->serialn_router}}</td>
                       <td class="sorting_1">{{$router->ip_router}}</td>
                       <td class="sorting_1">{{$router->user_router}}</td>
-    
-       
-                      
+                      <td class="sorting_1">{{$router->port_router}}</td>
                       <td id="btntable">
                         <form action="{{route('/dashboard/routerboard/delete',$router->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                           <input type="hidden" name="_method" value="PUT">

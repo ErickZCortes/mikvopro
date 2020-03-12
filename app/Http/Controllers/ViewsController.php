@@ -16,4 +16,13 @@ class ViewsController extends Controller
         }
         return view('welcome');
     }
+    public function viewdasheader()
+    {
+        if(session()->has('UserSession')){
+            $id = session()->get('UserSession')->id;
+            $user = User::find($id);
+            return view('mikvo.dashboard.shared.header',['user'=>$user]);
+        }
+        return view('welcome');
+    }
 }
