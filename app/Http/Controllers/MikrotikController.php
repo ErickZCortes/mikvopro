@@ -16,19 +16,34 @@ class MikrotikController extends Controller{
             'pass' => '',
             'port' => 8728,
         ]);
-        $config = new \RouterOS\Config([
-            'host' => '20.20.10.1',
-            'user' => 'admin',
-            'pass' => '',
-            'port' => 8728,
-        ]);
+
+        $getallqueue = (new Query('/queue/simple/print'));        
+        $out = $client->query($getallqueue)->read();
+        //print_r($out);
         
-        $client = new Client($config);
-        $query =(new Query('/system/routerboard/print'));
+        $getpool = (new Query('/ip/pool/print'));
+        $out = $client->query($getpool)->read();
+        print_r($out);
+
+
+
+
+
+
+
+        /*$query =(new Query('/ip/hotspot/user/profile/add'))
+        ->equal('name','profile')
+        ->equal('address-pool','none')
+        ->equal('rate-limit','256k/512k')
+        ->equal('shared-users','1')
+        ->equal('status-autorefresh','00:02:00')
+        ->equal('transparent-proxy','yes')
+        ->equal('on-login','00:02:00')
+        ->equal('parent-queue','00:02:00');
         $out = $client->query($query)->read();
        
         dd($out);
-        
+        */
         
         
         

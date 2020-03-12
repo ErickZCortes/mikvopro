@@ -8,7 +8,26 @@ use App\User;
 
 class ProfilesController extends Controller
 {
- 
+    public function connect($ip,$user,$pass,$port){
+        if($pass === null){
+            $client = new Client([
+                'host' => $ip,
+                'user' => $user,
+                'pass' => '',
+                'port' => (int)$port,
+            ]);
+            return $client;
+        }else{
+            $client = new Client([
+                'host' => $ip,
+                'user' => $user,
+                'pass' => $pass,
+                'port' => (int)$port,
+            ]);
+            return $client;
+        }
+    }
+    
     public function index()
     {
         if(session()->has('UserSession')){
