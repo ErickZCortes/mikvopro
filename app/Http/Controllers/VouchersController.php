@@ -242,10 +242,10 @@ class VouchersController extends Controller
         $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
        
         $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
-            if($voucher->prefix_voucher == 'tete'){
+           /* if($voucher->prefix_voucher == 'tete'){
                 $pdfname =$voucher->prefix_voucher.$voucher->id.".pdf";
-            }
-            return $pdf->download($pdfname);
+            }*/
+            return $pdf->stream();
         }   
         return view('welcome');         
     }
