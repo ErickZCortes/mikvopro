@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crear plantilla </title>
+    <script type="text/javascript">
+        function bgOnChange(sel) {
+            if(sel.value=="bgcolor"){
+                divI = document.getElementById("div1");
+                divI.style.display = "none";
+                divC = document.getElementById("div2");
+                divC.style.display = "";
+            }else if(sel.value=="bgimage"){
+                divC = document.getElementById("div2");
+                divC.style.display ="none";
+                divI = document.getElementById("div1");
+                divI.style.display = "";
+            }else if(sel.value=="none"){
+                divC = document.getElementById("div2");
+                divC.style.display = "none";
+                divI = document.getElementById("div1");
+                divI.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-10 col-md-4 col-lg-4">
+           <div class="form-group">
+               <label for="name_template">Nombre:</label>
+               <input 
+               id="name_template"
+               type="text" 
+               class="form-control" 
+               name="name_template"
+               required
+               placeholder="Ingresa el nombre para la plantilla">
+           </div>
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-4">        
+            <div class="form-group">
+                <label for="font_voucher">Fuente para voucher:</label>
+                <select class="form-control" name="font_voucher" id="font_voucher" >
+                    <option value="" selected>Seleciona un tipo de fuente</option>
+                    <option value="">fuente 1</option>
+                    <option value="">fuente 2</option>
+                    <option value="">fuente 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-10 col-md-4 col-lg-4">
+            <div class="form-group">
+                <label for="logo_template">Logo:</label>
+                <input type="file" id="logo_template" name="logo_template" accept="image/*">
+            </div>
+         </div>
+        <div class="col-sm-10 col-md-4 col-lg-4">
+            <div class="form-group">
+               <label for="bg_voucher">Fondo para voucher:</label>
+               <select class="form-control" name="bg_voucher" id="bg_voucher" onchange="bgOnChange(this)">
+                <option selected value="none">Ninguno</option>
+                <option value="bgcolor">Color</option>
+                <option value="bgimage">Imagen</option>
+              </select>
+            </div>
+            <div class="col-sm-10 col-md-12 col-lg-12">
+                <div class="form-group" id="div2" style="display: none;">
+                    <label for="bgcolor_template">Color:</label>
+                    <input type="color" id="bgcolor_template" name="bgcolor_template" value="#ed6868">
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-12 col-lg-12">
+                <div class="form-group" id="div1" style="display: none;">
+                    <label for="font_template">Imagen de fondo:</label>
+                    <input type="file" id="font_template" name="font_template" accept="image/*">
+                </div>
+            </div>
+        </div>  
+        <div class="col-sm-10 col-md-4 col-lg-4" style="text-align: center; top: 28px; left: 23px;">
+            <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-download"></i> Guardar</button> 
+        </div>      
+    </div>
+</body>
+</html>

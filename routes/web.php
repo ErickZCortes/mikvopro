@@ -33,6 +33,8 @@ Route::get('/dashboard/routerboard/edit/{id}', 'RouterController@edit')->name('/
 Route::put('/dashboard/routerboard/update/{id}','RouterController@update')->name('/dashboard/routerboard/update');
 Route::put('/dashboard/routerboard/delete/{id}', 'RouterController@destroy')->name('/dashboard/routerboard/delete');
 
+Route::get('/dashboard/routerboard/conect/{id}', 'RouterController@conectrouter')->name('/dashboard/routerboard/conect');
+
 //-----------------------------------------PROFILES-------------------------------------------//
 Route::get('/dashboard/profiles', 'ProfilesController@index')->name('/dashboard/profiles');
 Route::get('/dashboard/profiles/create', 'ProfilesController@create')->name('/dashboard/profiles/create');

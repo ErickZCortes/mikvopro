@@ -88,10 +88,10 @@
                           <button class="btn btn-danger btn-sm" type="submit">
                           <i class="fa fa-trash-o"></i>
                           </button>
+                          <a  href="{{ route('/dashboard/routerboard/conect', $router->id) }}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plug"></i> Conectar
+                          </a>
                         </form>
-                        <button class="btn btn-primary btn-sm" type="submit">
-                          <i class="fas fa-plug"> Conectar</i>
-                        </button>
                       </td>
                     </tr>
                     @endforeach

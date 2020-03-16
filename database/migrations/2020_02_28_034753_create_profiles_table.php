@@ -19,19 +19,26 @@ class CreateProfilesTable extends Migration
             $table->bigInteger("iduser_profile")->unsigned()->nullable();
             $table->foreign("iduser_profile")->references("id")->on("users");
             
-            $table->string("name_profile",30)->nullable();
-            $table->string("addpool_profile",30);            
-            $table->integer("vsubida_profile")->length(5);
-            $table->string("sbyte_profile",5);
-            $table->integer("vdescarga_profile")->length(5);
-            $table->string("dbyte_profile",5);
-            $table->string("cost_profile")->nullable();
-            $table->string("typet_profile",25);
-            $table->integer("limitda_profiles")->length(10);
-            $table->time("limitho_profiles");
-            $table->integer("expireda_profiles")->length(10)->default('0');
-            $table->time("expiredho_profiles")->default('00:00:00');
+            $table->string("name_profile",30)->nullable()->unique();
+            $table->string("addpool_profile");            
+            $table->string("cost_profile");
+            $table->string("sprice_profile");
+            $table->string("sharedu_profile");
+            $table->string("vsubida_profile");
+            $table->string("sbyte_profile");
+            $table->string("vdescarga_profile");
+            $table->string("dbyte_profile");
+            $table->string("expmode_profile");
+            $table->string("validation_profile");
+            $table->string("gracep_profile");
+            $table->string("typet_profile");
+            $table->string("limitda_profiles");
+            $table->string("limitho_profiles");
+            $table->string("expireda_profiles");
+            $table->string("expiredho_profiles");
             $table->time("cuttime_profile");
+            $table->string("lockuser_profile");
+            $table->string("parentq_profiles");
             $table->timestamps();
         });
     }

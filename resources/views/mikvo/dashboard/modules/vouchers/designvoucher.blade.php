@@ -1,3 +1,4 @@
+designvoucher.blade.php
 @extends('mikvo.dashboard.layouts.default')
 @section('header')
     @include('mikvo.dashboard.shared.components.header')
@@ -30,10 +31,10 @@
 <div class="card shadow mb-4">
   <div class="card-body">
       <div>
-        <div class="row">
-            <div class="row col-md-6">
-                <div class="col-md-3 title">Plantilla</div>
-                <div class="col-md-9">
+        <div class="">
+            <div class="row col-md-12 col-lg-12">
+                <div class="col-md-4 title">Plantilla de vouchers:</div>
+                <div class="col-md-4">
                     <select class="form-control" >
                         <option> Elige una opción</option>
                         <option>Plantilla 1</option>
@@ -41,21 +42,18 @@
                         <option>Plantilla 3</option>
                         <option>Plantilla 4</option>
                     </select>  
+                    
+                   
+            
+                </div> 
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+
                 </div>
+               
+    
             </div>
             
-            <div class="row col-md-6">
-                <div class="col-md-4 title">Reportes</div>
-                <div class="col-md-8">
-                    <select class="form-control" >
-                        <option> Elige una opción</option>
-                        <option>Reportes 1</option>
-                        <option>Reportes 2</option>
-                        <option>Reportes 3</option>
-                        <option>Reportes 4</option>
-                    </select>  
-                </div>
-            </div>
             <div class="col-md-12"><hr></div>
             <div class="row col-md-12 text-center">
                   <div class="col-md-3">
@@ -107,7 +105,7 @@
                 
                 <div class="col-md-3">
                     <div class="">
-                    <a href="{{route('/dashboard/vouchers/pdf', $voucher->id )}}" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
+                    <a href="{{route('/dashboard/vouchers/pdf', $voucher->id )}}" class="btn btn-dark"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
                     </div>
                 </div>  
             </div>
@@ -117,10 +115,10 @@
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
-        <h1 class="h3 mb-2 text-gray-800">Preview</h1>
+        <h1 class="h3 mb-2 text-gray-800">Crear plantilla</h1>
           <div class="row" style="justify-content:center">
                 <div class="col-md-12" style="">
-                    @include('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher')
+                    @include('mikvo.dashboard.modules.vouchers.pdf.voucher')
                 </div>
            </div>
     </div>

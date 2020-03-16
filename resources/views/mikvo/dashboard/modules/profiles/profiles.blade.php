@@ -55,15 +55,15 @@
                     <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                       aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 180px;">Nombre</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Position: activate to sort column ascending" style="width: 180px;">Pool</th>
+                      aria-label="Position: activate to sort column ascending" style="width: 180px;">Address Pool</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Office: activate to sort column ascending" style="width: 180px;">Velocidad subida</th>
+                      aria-label="Office: activate to sort column ascending" style="width: 180px;">Límite de velocidad</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Age: activate to sort column ascending" style="width: 180px;">Velocidad descarga</th>
-                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Costo</th>
+                      aria-label="Age: activate to sort column ascending" style="width: 180px;">Precio</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                       aria-label="Actions: activate to sort column ascending" style="width: 180px;">Tipo tiempo</th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Límite de tiempo</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                       aria-label="Actions: activate to sort column ascending" style="width: 180px;">Acciones</th>
                   </tr>
@@ -73,10 +73,10 @@
                   <tr role="row" class="odd">
                     <td class="sorting_1">{{$profile->name_profile}}</td>
                     <td class="sorting_1">{{$profile->addpool_profile}}</td>
-                    <td class="sorting_1">{{$profile->vsubida_profile}} {{$profile->sbyte_profile}}</td>
-                    <td class="sorting_1">{{$profile->vdescarga_profile}} {{$profile->dbyte_profile}}</td>
-                    <td class="sorting_1">{{$profile->cost_profile}}</td>
-                    <td class="sorting_1">{{$profile->typet_profile}}</td>                
+                    <td class="sorting_1">{{$profile->vsubida_profile}}{{$profile->sbyte_profile}}/{{$profile->vdescarga_profile}}{{$profile->dbyte_profile}}</td>
+                    <td class="sorting_1">${{$profile->cost_profile}}.00</td>
+                    <td class="sorting_1">{{$profile->typet_profile}}</td>
+                    <td class="sorting_1">Días: {{$profile->limitda_profiles}} / Horas: {{$profile->limitho_profiles}}</td>                
                     <td id="btntable">
                       <form action="{{route('/dashboard/profiles/delete',$profile->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                         <input type="hidden" name="_method" value="PUT">

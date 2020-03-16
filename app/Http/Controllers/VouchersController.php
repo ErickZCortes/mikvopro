@@ -272,4 +272,23 @@ class VouchersController extends Controller
         }
         return view('welcome');
     }
+
+    //---------------------------------------CREATE TEMPLATE----------------------------------------------//
+    public function createmp(){
+        if(session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $template = new Template;
+
+            $template->name_template = $request->input('name_template');
+            $template->bgcolor_template = $request->input('bgcolor_template');
+            $template->bgimage_template = $request->input('bgimage_template');
+            $template->logo_template = $request->input('logo_template');
+            $template->font_template = $request->input('font_template'); 
+            
+            $template->save();
+            return view('mikvo.dashboard.modules.vouchers.designvoucher',["detailsv"=>$detailsv,"voucherget"=>$voucherget, 'user'=>$user]);
+
+        }
+        return view('welcome');
+    }
 }

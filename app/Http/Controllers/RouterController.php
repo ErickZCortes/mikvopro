@@ -32,11 +32,27 @@ class RouterController extends Controller
             return $client;
         }
     }
+
+    public function conectrouter($id)
+    {
+        if (session()->has('UserSession')){
+            $router = Router::find($id);
+        session()->put('routerConnected',$router);
+            if (session()->has('routerConnected')) {
+                return redirect('/dashboard/routerboard')->with('message','Conectado!');
+            }else {
+                return redirect('/dashboard/routerboard')->with('message','n!');
+            }
+        }
+        return view('welcome');
+    }
+
     public function index()
     {
         if (session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
             $routers = Router::where('iduser_router', $uidSesion)->paginate(5);
+            //dd($routers);
             $user = User::find($uidSesion);
 
             return view('mikvo.dashboard.modules.routerboard.routerboard',['routers'=>$routers, 'user' => $user ] ); 
@@ -52,7 +68,7 @@ class RouterController extends Controller
         }
         return view('welcome');
     }
-    public function store(Request $request)
+     public function store(Request $request)
     {
         if (session()->has('UserSession')){
             $router = new Router;
@@ -70,7 +86,10 @@ class RouterController extends Controller
                 $router->iduser_router = $uidSesion;
                 $router->ip_router = $ip;
                 $router->user_router = $user;
-                $router->password_router = "";
+                if ($pass == null ) {
+                    $pass = "";
+                }
+                $router->password_router = $pass;
                 $router->port_router = $port;    
                 $router->name_router = $out[0]['board-name'];
                 $router->model_router = $out[0]['model'];
