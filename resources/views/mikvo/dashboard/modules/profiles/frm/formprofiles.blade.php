@@ -202,6 +202,38 @@
       </select>
         </div>
      </div>
+     @if ($profiles->expmode_profile=="rem" || $profiles->expmode_profile=="ntf" || $profiles->expmode_profile=="remc" || $profiles->expmode_profile=="ntfc" ) 
+     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: ;">
+        <div class="form-group" >
+           <label for="validation_profile">Validación:</label>
+           <input 
+            id="validation_profile"
+            type="text" 
+            class="form-control" 
+            name="validation_profile"
+            required
+            value="{{ $profiles->validation_profile}}"
+            placeholder="Ejemplo: 1d, 5m"
+            min="1"
+            >
+        </div>
+     </div>
+     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: ;">
+        <div class="form-group" >
+           <label for="gracep_profile">Tiempo de espera:</label>
+           <input 
+            id="gracep_profile"
+            type="text" 
+            class="form-control" 
+            name="gracep_profile"
+            required
+            value="{{ $profiles->gracep_profile}}"
+            placeholder="Ejemplo: 1d, 5m"
+            min="1"
+            >
+        </div>
+     </div>
+     @elseif ($profiles->expmode_profile=="0" )
      <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: none;">
         <div class="form-group" >
            <label for="validation_profile">Validación:</label>
@@ -232,6 +264,7 @@
             >
         </div>
      </div>
+@endif
      <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>

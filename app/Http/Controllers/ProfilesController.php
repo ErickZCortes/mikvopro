@@ -231,9 +231,9 @@ class ProfilesController extends Controller
                     $profile->limitda_profiles = $request->input('limitda_profiles');
                     $profile->limitho_profiles = $request->input('limitho_profiles');
                     if($request->input('typet_profile') == "Corrido"){
-                        $profile->expireda_profiles = "0";
-                        $profile->expiredho_profiles = "0";
-                        $profile->cuttime_profile = "0";
+                        $profile->expireda_profiles = 1;
+                        $profile->expiredho_profiles = "00:00:00";
+                        $profile->cuttime_profile = "00:00:00";
                     }else if($request->input('typet_profile') == "Pausado"){
                         $profile->expireda_profiles = $request->input('expireda_profiles');
                         $profile->expiredho_profiles = $request->input('expiredho_profiles');
@@ -403,8 +403,6 @@ class ProfilesController extends Controller
                         ->equal('on-login', $onlogin)
                         ->equal('parent-queue', $parent);
                         $out = $client->query($query)->read();
-
-                        dd($out);
                     }else {
                     
                         $query =(new Query('/ip/hotspot/user/profile/set'))
@@ -421,7 +419,6 @@ class ProfilesController extends Controller
                         ->equal('on-login', $onlogin)
                         ->equal('parent-queue', $parent);
                         $out = $client->query($query)->read();  
-                        print_r($out);
                     }
 
                     if($expmode != "0"){
@@ -477,9 +474,9 @@ class ProfilesController extends Controller
                     $profile->limitda_profiles = $request->input('limitda_profiles');
                     $profile->limitho_profiles = $request->input('limitho_profiles');
                     if($request->input('typet_profile') == "Corrido"){
-                        $profile->expireda_profiles = "0";
-                        $profile->expiredho_profiles = "0";
-                        $profile->cuttime_profile = "0";
+                        $profile->expireda_profiles = 1;
+                        $profile->expiredho_profiles = "00:00:00";
+                        $profile->cuttime_profile = "00:00:00";
                     }else if($request->input('typet_profile') == "Pausado"){
                         $profile->expireda_profiles = $request->input('expireda_profiles');
                         $profile->expiredho_profiles = $request->input('expiredho_profiles');
