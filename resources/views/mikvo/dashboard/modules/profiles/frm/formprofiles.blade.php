@@ -74,7 +74,13 @@
         <select class="form-control" required name="addpool_profile" id="addpool_profile">
                 <option value="none" @if ($profiles->addpool_profile=="none" ) selected @endif>Ninguno</option>
                 @foreach($getpool as $pool)
-                <option>{{$pool['name']}}</option>  
+                @if ($profiles->addpool_profile==$pool['name'] )
+                <option selected>{{$pool['name']}}</option>
+                @else
+                <option >{{$pool['name']}}</option>
+
+                 @endif
+  
                 @endforeach 
                 
                 

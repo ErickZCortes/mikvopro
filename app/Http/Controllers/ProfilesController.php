@@ -275,7 +275,7 @@ class ProfilesController extends Controller
                     $getpool = (new Query('/ip/pool/print'));        
                     $allpool = $client->query($getpool)->read();
                     $addpool = Collection::make($allpool);
-
+                    //dd($profiles);
                     return view('mikvo.dashboard.modules.profiles.updateprofile', ['profiles'=>$profiles,'user'=> $user, 'getallqueue' => $queue, 'getpool' => $addpool]);                
                 }
             }
