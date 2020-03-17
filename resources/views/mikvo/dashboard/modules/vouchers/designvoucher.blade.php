@@ -1,4 +1,3 @@
-designvoucher.blade.php
 @extends('mikvo.dashboard.layouts.default')
 @section('header')
     @include('mikvo.dashboard.shared.components.header')
@@ -31,7 +30,7 @@ designvoucher.blade.php
 <div class="card shadow mb-4">
   <div class="card-body">
       <div>
-        <div class="">
+        <form class="">
             <div class="row col-md-12 col-lg-12">
                 <div class="col-md-4 title">Plantilla de vouchers:</div>
                 <div class="col-md-4">
@@ -42,85 +41,56 @@ designvoucher.blade.php
                         <option>Plantilla 3</option>
                         <option>Plantilla 4</option>
                     </select>  
-                    
-                   
-            
                 </div> 
                 <div class="col-md-4">
                     <button type="button" class="btn btn-danger">Eliminar</button>
-
-                </div>
-               
-    
+                </div>    
             </div>
             
             <div class="col-md-12"><hr></div>
             <div class="row col-md-12 text-center">
                   <div class="col-md-3">
-                    <div class="btn-group">
-                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-file-text-o"></i> Por hoja
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">10 por hoja</a>
-                            <a class="dropdown-item" href="#">21 por hoja</a>
-                            <a class="dropdown-item" href="#">50 por hoja</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Automatico</a>
-                        </div>
+                        <div class="col-md-12">
+                            <select class="form-control">
+                                <option value="none">Por hoja</option>
+                                <option value="hojado">18 por hoja</option>
+                                <option value="hojavu">21 por hoja</option>
+                                <option value="hojac">50 por hoja</option>
+                                <option>Automatico</option>
+                            </select>
+                      </div>
+                  </div> 
+                <div class="col-md-3">
+                        <div class="col-md-12">
+                            <select class="form-control">
+                                <option value="">Por Logo</option>
+                                <option value="">10 por hoja</option>
+                                <option value="">21 por hoja</option>
+                                <option value="">50 por hoja</option>
+                                <option value="">Automatico</option>
+                            </select>
                       </div>
                 </div>  
-
                 <div class="col-md-3">
-                    <div class="btn-group">
-                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-qrcode"></i>                        
-                            Por QR
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">5 por hoja</a>
-                            <a class="dropdown-item" href="#">15 por hoja</a>
-                            <a class="dropdown-item" href="#">25 por hoja</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Automatico</a>
-                        </div>
-                      </div>
-                </div>  
-
-                <div class="col-md-3">
-                    <div class="btn-group">
-                        <button class="btn btn-secondary btn-md dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-file-image"></i>
-                            Por logo
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">10 por hoja</a>
-                            <a class="dropdown-item" href="#">20 por hoja</a>
-                            <a class="dropdown-item" href="#">30 por hoja</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Automatico</a>
-                        </div>
+                        <div class="col-md-12">
+                            <select class="form-control">
+                                <option value="">Por codigo QR</option>
+                                <option value="">10 por hoja</option>
+                                <option value="">21 por hoja</option>
+                                <option value="">50 por hoja</option>
+                                <option value="">Automatico</option>
+                            </select>
                       </div>
                 </div>    
-                
                 <div class="col-md-3">
                     <div class="">
                     <a href="{{route('/dashboard/vouchers/pdf', $voucher->id )}}" class="btn btn-dark"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
                     </div>
                 </div>  
             </div>
-        </div>
+        </form>
       </div>
   </div>
 </div>
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <h1 class="h3 mb-2 text-gray-800">Crear plantilla</h1>
-          <div class="row" style="justify-content:center">
-                <div class="col-md-12" style="">
-                    @include('mikvo.dashboard.modules.vouchers.pdf.voucher')
-                </div>
-           </div>
-    </div>
-  </div>
+
 @endsection

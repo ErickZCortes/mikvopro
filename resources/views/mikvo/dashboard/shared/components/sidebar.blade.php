@@ -72,6 +72,7 @@
             <i class="far fa-file-alt"></i>
             <span>Reprint vouchers</span></a>
     </li>
+    
 
     <!-- Nav Item - Pages Collapse Menu -->
     

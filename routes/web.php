@@ -56,6 +56,9 @@ Route::get('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name(
 //-----------------------------------------VOUCHERS-------------------------------------------//
 Route::get('/dashboard/vouchers/reprint','VouchersController@indexreprint')->name('/dashboard/vouchers/reprint');
 Route::get('/dashboard/vouchers/reprintvoucher/{id}','VouchersController@reprintvoucher')->name('/dashboard/vouchers/reprintvoucher');
+//-----------------------------------------TEMPLATE-------------------------------------------//
+Route::get('/dashboard/vouchers/template/{id}', 'VouchersController@indextemplate')->name('/dashboard/vouchers/template');
+Route::put('/dashboard/vouchers/template/create/{id}', 'VouchersController@createmp')->name('/dashboard/vouchers/template/create');
 
 
 Route::get('/prueba', 'MikrotikController@conection')->name('/prueba');

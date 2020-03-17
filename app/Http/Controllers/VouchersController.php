@@ -7,6 +7,7 @@ use App\Voucher;
 use App\User;
 use App\Profile;
 use App\DetailVoucher;
+use App\Template;
 use DB;
 use Barryvdh\DomPDF\Facade as PDF;
 class VouchersController extends Controller
@@ -230,8 +231,10 @@ class VouchersController extends Controller
             $user = User::find($uidSesion);
             $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
             $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
-        
-        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user]);
+            $profile = Profile::find($voucher->idprofile_voucher);
+            
+
+        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile]);
         }
         return view('welcome');
     }
@@ -241,7 +244,7 @@ class VouchersController extends Controller
         $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
         $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$voucher->id)->get();
        
-        $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucher',["voucher"=>$voucher,"detailv"=>$detailv]);
+        $pdf = PDF::loadView('mikvo.dashboard.modules.vouchers.pdf.pdfvoucherimg',["voucher"=>$voucher,"detailv"=>$detailv]);
            /* if($voucher->prefix_voucher == 'tete'){
                 $pdfname =$voucher->prefix_voucher.$voucher->id.".pdf";
             }*/
@@ -274,21 +277,45 @@ class VouchersController extends Controller
     }
 
     //---------------------------------------CREATE TEMPLATE----------------------------------------------//
-    public function createmp(){
+
+    public function indextemplate($id){
         if(session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
+            $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
+            $profile = Profile::find($voucher->idprofile_voucher);
+            return view('mikvo.dashboard.modules.vouchers.pdf.voucher', ["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile]);
+        }
+        return view('welcome');
+
+    }
+    public function createmp(Request $request, $id){
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
+            $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
+            $profile = Profile::find($voucher->idprofile_voucher);
+            
             $template = new Template;
 
             $template->name_template = $request->input('name_template');
-            $template->bgcolor_template = $request->input('bgcolor_template');
-            $template->bgimage_template = $request->input('bgimage_template');
+            if($request->input('bg_voucher') == "bgcolor"){
+                $template->bgimage_template = "N/A";
+                $template->bgcolor_template = $request->input('bgcolor_template');
+            }else if($request->input('bg_voucher') == "bgimage"){
+                $template->bgcolor_template = "N/A";
+                $template->bgimage_template = $request->input('bgimage_template');
+            }
             $template->logo_template = $request->input('logo_template');
             $template->font_template = $request->input('font_template'); 
             
             $template->save();
-            return view('mikvo.dashboard.modules.vouchers.designvoucher',["detailsv"=>$detailsv,"voucherget"=>$voucherget, 'user'=>$user]);
 
+        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile]);
         }
         return view('welcome');
+
     }
 }

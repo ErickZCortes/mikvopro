@@ -137,7 +137,7 @@
             </div>
             <div id="btnform" class="col-sm-10 col-md-4 col-lg-4">
               <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-check-square"></i> Generar</button>
-              <a href="{{ route('/dashboard/vouchers') }}"  class="btn btn-warning" >Cancelar</a>
+              <a href="{{ route('/dashboard') }}"  class="btn btn-warning" >Cancelar</a>
             </div>
           </div>
         </form>
