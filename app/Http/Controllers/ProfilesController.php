@@ -507,13 +507,37 @@ class ProfilesController extends Controller
                 $pass = session()->get('routerConnected')->password_router;
                 $port = session()->get('routerConnected')->port_router; 
                 if($this->connect($ip, $userrouter, $pass, $port)){
+                    $client = $this->connect($ip, $userrouter, $pass, $port);
+                    $profile = Profile::find($id);
 
+                    $pprofile = (new Query('/ip/hotspot/user/profile/print'))
+                    ->where('name', $profile->name_profile);
+                    $getprofile = $client->query($pprofile)->read();
+                    $idp = $getprofile[0]['.id'];
+                    $pname = $getprofile[0]['name'];
+                    
+                    $query = (new Query('/system/scheduler/print'))
+                    ->where('name', $pname);
+                    $getmonexpired = $client->query($query)->read();
+                    $monexpired = $getmonexpired[0];
+                    $monid = $monexpired['.id'];
+
+
+                    $prof =(new Query('/ip/hotspot/user/profile/remove'))
+                    ->equal('.id', $idp);
+                    $removepro = $client->query($prof)->read();
+                    dd($removepro);
+                    $sched =(new Query('/system/scheduler/remove'))
+                    ->equal('.id', $monid);
+                    $removesche = $client->query($sched)->read();
+                    
+                    Profile::destroy($id);
+                    return redirect('/dashboard/profiles');
                 }
             }
-            $profile = Profile::find($id);
+            
 
-            Profile::destroy($id);
-            return redirect('/dashboard/profiles');
+            
         }
         return view('welcome');
     }
