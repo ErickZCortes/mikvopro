@@ -10,22 +10,45 @@
     </style>    
     
   <script type="text/javascript">
-    function deshabilitar(){      
-        $(document).ready(function(){
-	        $('#typet_profile').change(function(){
-                if ($('#typet_profile').val() === "nada") {
-                    $("#expireda_profiles").prop('disabled', false);
-                    $("#expiredho_profiles").prop('disabled', false);
-                } else if($('#typet_profile').val()  === "Corrido"){
-                    $("#expireda_profiles").prop('disabled', true);
-                    $("#expiredho_profiles").prop('disabled', true);
-                }else if($('#typet_profile').val()  === "Pausado"){
-                    $("#expireda_profiles").prop('disabled', false);
-                    $("#expiredho_profiles").prop('disabled', false);
-                }      
-	        });
-        });
-    }
+    function expmodechange(op) {
+            if(op.value=="0" || op.value=="nada"){
+                divI = document.getElementById("validation");
+                divI.style.display = "none";
+                divC = document.getElementById("grace");
+                divC.style.display = "none";
+            }else if(op.value=="rem" || op.value=="ntf" || op.value=="remc" || op.value=="ntfc"){
+                divC = document.getElementById("validation");
+                divC.style.display ="";
+                divI = document.getElementById("grace");
+                divI.style.display = "";
+            }
+        }
+  </script>
+  <script type="text/javascript">
+    function ttimechange(op) {
+            if(op.value=="Corrido"){
+                divI = document.getElementById("limittime");
+                divI.style.display = "";
+                divC = document.getElementById("expiretime");
+                divC.style.display = "none";
+                divD = document.getElementById("cuttime");
+                divD.style.display = "none";
+            }else if(op.value=="Pausado"){
+                divC = document.getElementById("limittime");
+                divC.style.display ="";
+                divI = document.getElementById("expiretime");
+                divI.style.display = "";
+                divD = document.getElementById("cuttime");
+                divD.style.display = "";
+            }else if(op.value=="nada"){
+                divC = document.getElementById("limittime");
+                divC.style.display ="none";
+                divI = document.getElementById("expiretime");
+                divI.style.display = "none";
+                divD = document.getElementById("cuttime");
+                divD.style.display = "none";
+            }
+        }
   </script>
 </head>
     
@@ -49,13 +72,12 @@
         <div class="form-group">
         <label for="addpool_profile">Addres Pool:</label>
         <select class="form-control" required name="addpool_profile" id="addpool_profile">
-                <option value="none">Ninguno</option>
-                <?php $TotalReg = count($getpool);
-                for ($i = 0; $i < $TotalReg; $i++) {
-
-                echo "<option>" . $getpool[$i]['name'] . "</option>";
-                }
-                ?> 
+                <option value="none" @if ($profiles->addpool_profile=="none" ) selected @endif>Ninguno</option>
+                @foreach($getpool as $pool)
+                <option>{{$pool['name']}}</option>  
+                @endforeach 
+                
+                
                 
               </select>
         </div>
@@ -160,9 +182,9 @@
         <div class="form-group">
             <select class="form-control"  required name="dbyte_profile" id="dbyte_profile">
                 <option selected> Elige una opción</option>
-                <option value="K">KB</option>
-                <option value="M">MB</option>
-                <option value="G">GB</option>
+                <option value="K" @if ($profiles->dbyte_profile=="K" ) selected @endif >KB</option>
+                <option value="M" @if ($profiles->dbyte_profile=="M" ) selected @endif >MB</option>
+                <option value="G" @if ($profiles->dbyte_profile=="G" ) selected @endif >GB</option>
               </select>
         </div>
     </div>
@@ -171,18 +193,17 @@
     <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
         <label for="expmode_profile">Modo de expiración</label>
-        <select class="form-control" onchange="RequiredV();" id="expmode_profile" name="expmode_profile" required="1">
-        <option value="">Selecciona un modo de expiración</option>
-        <option value="0">Ninguno</option>
-        <option value="rem">Eliminar</option>
-        <option value="ntf">Avisar</option>
-        <option value="remc">Eliminar & Registrar</option>
-        <option value="ntfc">Avisar & Registrar</option>
+        <select class="form-control" onchange="expmodechange(this)" id="expmode_profile" name="expmode_profile" required="1">
+        <option value="0"    @if ($profiles->expmode_profile=="0" ) selected @endif >Ninguno</option>
+        <option value="rem"  @if ($profiles->expmode_profile=="rem" ) selected @endif >Eliminar</option>
+        <option value="ntf"  @if ($profiles->expmode_profile=="ntf" ) selected @endif >Avisar</option>
+        <option value="remc" @if ($profiles->expmode_profile=="remc" ) selected @endif >Eliminar & Registrar</option>
+        <option value="ntfc" @if ($profiles->expmode_profile=="ntfc" ) selected @endif >Avisar & Registrar</option>
       </select>
         </div>
      </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
+     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: none;">
+        <div class="form-group" >
            <label for="validation_profile">Validación:</label>
            <input 
             id="validation_profile"
@@ -196,8 +217,8 @@
             >
         </div>
      </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
+     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: none;">
+        <div class="form-group" >
            <label for="gracep_profile">Tiempo de espera:</label>
            <input 
             id="gracep_profile"
@@ -214,14 +235,14 @@
      <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
+           <select class="form-control" name="typet_profile" id="typet_profile" onchange="ttimechange(this)">
             <option value ="nada" selected>Seleciona un tipo de tiempo</option>
-            <option value="Corrido">Corrido</option>
-            <option value="Pausado">Pausado</option>
+            <option value="Corrido" @if ($profiles->typet_profile=="Corrido" ) selected @endif >Corrido</option>
+            <option value="Pausado" @if ($profiles->typet_profile=="Pausado" ) selected @endif >Pausado</option>
           </select>
         </div>
      </div>
-     <div class="col-md-6">
+     <div class="col-md-6" id="limittime" style="display: none;">
     <div class="row">
     <div class="col-md-12" style="text-align: center">
     <label for="limitda_profiles">Limite de tiempo:</label>
@@ -255,7 +276,7 @@
         </div>
     </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="expiretime" style="display: none;">
     <div class="row">
     <div class="col-md-12" style="text-align: center">
     <label for="expireda_profiles">Voucher expira en:</label>
@@ -267,7 +288,6 @@
             type="number" 
             class="form-control" 
             name="expireda_profiles"
-            required
             value="{{ $profiles->expireda_profiles}}"
             placeholder="Días"
             min="1"
@@ -289,7 +309,7 @@
         </div>
     </div>
     </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
+    <div class="col-sm-10 col-md-6 col-lg-6" id="cuttime" style="display: none;">
         <div class="form-group">
            <label for="cuttime_profile">Desconectar en:</label>
            <input 
@@ -307,8 +327,8 @@
         <div class="form-group">
         <label class="non-selectable" for="lockuser_profile">Bloqueo de usuario:</label>
         <select class="form-control" id="lockuser_profile" name="lockuser_profile" required="1">
-        <option value="Disable">Desactivado</option>
-        <option value="Enable">Activado</option>
+        <option value="Disable" @if ($profiles->lockuser_profile=="Disable" ) selected @endif >Desactivado</option>
+        <option value="Enable" @if ($profiles->lockuser_profile=="Enable" ) selected @endif >Activado</option>
       </select>
         </div>
     </div>
@@ -317,12 +337,10 @@
         <label class="non-selectable" for="parentq_profiles">Parent Queue:</label>
         <select class="form-control" id="parentq_profiles" name="parentq_profiles">
         <option value="none">Ninguno</option>
-        <?php $TotalReg = count($getallqueue);
-        for ($i = 0; $i < $TotalReg; $i++) {
+        @foreach($getallqueue as $queue)
+        <option>{{$queue['name']}}</option>  
+        @endforeach 
 
-          echo "<option>" . $getallqueue[$i]['name'] . "</option>";
-        }
-        ?>
       </select>
         </div>
     </div>  
@@ -347,12 +365,9 @@
         <label for="addpool_profile">Addres Pool:</label>
         <select class="form-control" required name="addpool_profile" id="addpool_profile">
                 <option value="none">Ninguno</option>
-                <?php $TotalReg = count($getpool);
-                for ($i = 0; $i < $TotalReg; $i++) {
-
-                echo "<option>" . $getpool[$i]['name'] . "</option>";
-                }
-                ?> 
+                @foreach($getpool as $pool)
+                <option value ="{{$pool['name']}}" >{{$pool['name']}}</option>  
+                @endforeach 
                 
               </select>
         </div>
@@ -442,7 +457,6 @@
             type="number" 
             class="form-control" 
             name="vdescarga_profile"
-            required
             placeholder="Ingresa la velocidad de descarga"
             min="1"
             >
@@ -464,8 +478,8 @@
     <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
         <label for="expmode_profile">Modo de expiración</label>
-        <select class="form-control" onchange="RequiredV();" id="expmode_profile" name="expmode_profile" required="1">
-        <option value="">Selecciona un modo de expiración</option>
+        <select class="form-control" onchange="expmodechange(this)" id="expmode_profile" name="expmode_profile" required="1">
+        <option value="nada">Seleccione un modo de expiración</option>
         <option value="0">Ninguno</option>
         <option value="rem">Eliminar</option>
         <option value="ntf">Avisar</option>
@@ -474,7 +488,7 @@
       </select>
         </div>
      </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
+     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: none;">
         <div class="form-group">
            <label for="validation_profile">Validación:</label>
            <input 
@@ -482,13 +496,13 @@
             type="text" 
             class="form-control" 
             name="validation_profile"
-            required
+            
             placeholder="Ejemplo: 1d, 5m"
             min="1"
             >
         </div>
      </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
+     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: none;">
         <div class="form-group">
            <label for="gracep_profile">Tiempo de espera:</label>
            <input 
@@ -496,7 +510,7 @@
             type="text" 
             class="form-control" 
             name="gracep_profile"
-            required
+            
             placeholder="Ejemplo: 1d, 5m"
             min="1"
             >
@@ -505,14 +519,14 @@
      <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
-           <select class="form-control" name="typet_profile" id="typet_profile" onclick="deshabilitar()">
+           <select class="form-control" name="typet_profile" id="typet_profile" onchange="ttimechange(this)">
             <option value ="nada" selected>Seleciona un tipo de tiempo</option>
             <option value="Corrido">Corrido</option>
             <option value="Pausado">Pausado</option>
           </select>
         </div>
      </div>
-     <div class="col-md-6">
+     <div class="col-md-6" id="limittime" style="display: none;">
     <div class="row">
     <div class="col-md-12" style="text-align: center">
     <label for="limitda_profiles">Limite de tiempo:</label>
@@ -524,7 +538,6 @@
             type="number" 
             class="form-control" 
             name="limitda_profiles"
-            required
             placeholder="Días"
             min="1"
             >
@@ -544,7 +557,7 @@
         </div>
     </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="expiretime" style="display: none;">
     <div class="row">
     <div class="col-md-12" style="text-align: center">
     <label for="expireda_profiles">Voucher expira en:</label>
@@ -556,7 +569,7 @@
             type="number" 
             class="form-control" 
             name="expireda_profiles"
-            required
+            
             placeholder="Días"
             min="1"
             >
@@ -576,7 +589,7 @@
         </div>
     </div>
     </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
+    <div class="col-sm-10 col-md-6 col-lg-6" id="cuttime" style="display: none;">
         <div class="form-group">
            <label for="cuttime_profile">Desconectar en:</label>
            <input 
@@ -603,12 +616,9 @@
         <label class="non-selectable" for="parentq_profiles">Parent Queue:</label>
         <select class="form-control" id="parentq_profiles" name="parentq_profiles">
         <option value="none">Ninguno</option>
-        <?php $TotalReg = count($getallqueue);
-        for ($i = 0; $i < $TotalReg; $i++) {
-
-          echo "<option>" . $getallqueue[$i]['name'] . "</option>";
-        }
-        ?>
+        @foreach($getallqueue as $queue)
+        <option>{{$queue['name']}}</option>  
+        @endforeach 
       </select>
         </div>
     </div>  
