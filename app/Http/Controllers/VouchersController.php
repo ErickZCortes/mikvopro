@@ -232,9 +232,8 @@ class VouchersController extends Controller
             $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
             $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
             $profile = Profile::find($voucher->idprofile_voucher);
-            
-
-        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile]);
+            $templates = DB::table('templates_voucher')->select('*')->where('iduser_template',$uidSesion)->get();
+        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile,"templates"=>$templates]);
         }
         return view('welcome');
     }
@@ -299,6 +298,7 @@ class VouchersController extends Controller
             $profile = Profile::find($voucher->idprofile_voucher);
             
             $template = new Template;
+            $template->iduser_template = $user->id;
 
             $template->name_template = $request->input('name_template');
             if($request->input('bg_voucher') == "bgcolor"){
@@ -313,7 +313,9 @@ class VouchersController extends Controller
             
             $template->save();
 
-        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile]);
+            $templates = DB::table('templates_voucher')->select('*')->where('iduser_template',$uidSesion)->get();
+
+        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile, "templates"=>$templates]);
         }
         return view('welcome');
 

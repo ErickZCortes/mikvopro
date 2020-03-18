@@ -35,11 +35,10 @@
                 <div class="col-md-4 title">Plantilla de vouchers:</div>
                 <div class="col-md-4">
                     <select class="form-control" >
-                        <option> Elige una opción</option>
-                        <option>Plantilla 1</option>
-                        <option>Plantilla 2</option>
-                        <option>Plantilla 3</option>
-                        <option>Plantilla 4</option>
+                        <option selected> Elige una opción</option>
+                        @foreach ($templates as $template)
+                        <option>{{$template->name_template}}</option>
+                        @endforeach
                     </select>  
                 </div> 
                 <div class="col-md-4">

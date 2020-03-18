@@ -15,6 +15,10 @@ class CreateTemplatesVoucherTable extends Migration
     {
         Schema::create('templates_voucher', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->bigInteger("iduser_template")->unsigned();
+            $table->foreign("iduser_template")->references("id")->on("users");
+            
             $table->string('name_template')->unique();
             $table->string('bgcolor_template')->default("null");
             $table->string('bgimage_template')->default("null");

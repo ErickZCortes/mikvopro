@@ -41,20 +41,22 @@ table.inside{
                                 [{{$detaili->id}}]
                             </td>
                         </tr>
-                        <tr>       
-                            <td style="width: 100%; font-weight: bold; font-size: 12px; color:grey; text-align: left;">
-                                Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}}
+                        <tr>
+                            <td style=" background:#FDC830; color:#fff;">
+                                Valido: {{$voucher->nprofile_voucher}} datalimit
                             </td>
                             <td rowspan="3">
                                 <img src="{{ base_path() }}/public/uploads/9.jpg" alt="logo" style="height:45px;">
 
                             </td>
                         </tr>
-                        <tr>
-                            <td style=" background:#FDC830; color:#fff;">
-                                Valido: {{$voucher->nprofile_voucher}} datalimit
+                        <tr>       
+                            <td style="width: 100%; font-weight: bold; font-size: 12px; color:grey; text-align: left;">
+                                Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}}
                             </td>
+                            
                         </tr>
+                        
                         <tr>
                             <td colspan="1" style="font-size: 10px;">
                                 Login:http://{{$voucher->dnsname_voucher}} -  - Cs : 085366567572 

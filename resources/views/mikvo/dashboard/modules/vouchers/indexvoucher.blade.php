@@ -53,8 +53,8 @@
                   <button class="btn btn-info btn-sm">
                     <i class="fas fa-file-csv"></i> CSV
                   </button>
-                  <a class="btn btn-info btn-sm"  href="{{route('/dashboard/vouchers/template',$voucherget->id )}}">
-                    <i class="fas fa-file-excel"></i> CREA TU PLANTILLA BROOOO
+                  <a class="btn btn-warning btn-sm" href="{{route('/dashboard/vouchers/template',$voucherget->id )}}">
+                    <i class="fas fa-file-excel"></i> Crear plantilla
                   </a>
                   
                   <a class="btn btn-info btn-sm" href="{{route('/dashboard/vouchers/design',$voucherget->id )}}">
