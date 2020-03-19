@@ -8,21 +8,83 @@ use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use vendor\autoload;
+use \RouterOS\Query;
+use \RouterOS\Client;
+use App\DetailVoucher;
+
 class UserController extends Controller
 {
 
 //-----------------------------------------------------LOGIN---------------------------------------------
+    
+public function connect($ip,$user,$pass,$port){
+    if($pass === null){
+        $client = new Client([
+            'host' => $ip,
+            'user' => $user,
+            'pass' => '',
+            'port' => (int)$port,
+        ]);
+        return $client;
+    }else{
+        $client = new Client([
+            'host' => $ip,
+            'user' => $user,
+            'pass' => $pass,
+            'port' => (int)$port,
+        ]);
+        return $client;
+    }
+}
+public static function formatBytes($size, $precision = 2)
+{
+    if ($size > 0) {
+        $size = (int) $size;
+        $base = log($size) / log(1024);
+        $suffixes = array(' bytes', ' KB', ' MiB', ' GB', ' TB');
+
+        return round(pow(1024, $base - floor($base)), $precision);
+    } else {
+        return $size;
+    }
+}
     public function index(){
-        if(!session()->has('UserSession')){
-            return view('mikvo.login');    
+
+        if (session()->has('routerConnected')) {
+            $ip = session()->get('routerConnected')->ip_router;
+            $userrouter = session()->get('routerConnected')->user_router;
+            $pass = session()->get('routerConnected')->password_router;
+            $port = session()->get('routerConnected')->port_router; 
+            if($this->connect($ip, $userrouter, $pass, $port)){
+                $inforouter = session()->get('routerConnected');
+                $uidSesion = session()->get('UserSession')->id;
+                $user = User::find($uidSesion);
+                $client = $this->connect($ip, $userrouter, $pass, $port);
+                $getactive =(new Query('/ip/hotspot/active/print'));
+                $active = $client->query($getactive)->read();
+                $getusers =(new Query('/ip/hotspot/user/print'));
+                $usersall = $client->query($getusers)->read();
+                $costos = DetailVoucher::sum('price_detailv');
+                
+                $getallresources = (new Query('/system/resource/print'));
+                $resources = $client->query($getallresources)->read();
+                $freememory = $resources[0]['free-memory'];
+                $totalmemory = $resources[0]['total-memory'];
+                $resta = ($totalmemory - $freememory);
+
+                $total = $this->formatBytes($totalmemory);
+                $free = $this->formatBytes($freememory);
+                $rest = $this->formatBytes($resta);
+
+                return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+            }
         }
-        $id = session()->get('UserSession')->id;
-        $user = User::find($id);
-        return view('mikvo.dashboard.layouts.main',['user'=>$user]);
+            return view('mikvo.login');    
     }
     public function login(){
         if($this->isSession()){
-            return redirect(('/dashboard'));
+            return redirect(('/dashboard/routerboard'));
         }
         return view('welcome');
     }
@@ -32,15 +94,17 @@ class UserController extends Controller
         if(isset($usuario)){
             if(Hash::check($password_user,$usuario->password_user)){
                 session()->put('UserSession',$usuario);
-                return redirect('/dashboard');
+                return redirect('/dashboard/routerboard');
             }       
         }
         return redirect('/login')->with('status', 'Email o password incorrecto!');
     }
 
     public function logout(){
-        session()->forget('UserSession');
-        return redirect('/login');
+            session()->forget('UserSession');
+            session()->forget('routerConnected');
+            return redirect('/login');
+        
     }
     
     public function issSession(){

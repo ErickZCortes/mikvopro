@@ -51,7 +51,7 @@ Route::put('/dashboard/vouchers/update/{id}','VouchersController@update')->name(
 Route::put('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->name('/dashboard/vouchers/delete');
 Route::get('/dashboard/vouchers/generate', 'VouchersController@generate')->name('/dashboard/vouchers/generate');
 Route::get('/dashboard/vouchers/design/{id}', 'VouchersController@design')->name('/dashboard/vouchers/design');
-Route::get('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
+Route::put('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
 Route::get('/dashboard/vouchers/reprint','VouchersController@indexreprint')->name('/dashboard/vouchers/reprint');

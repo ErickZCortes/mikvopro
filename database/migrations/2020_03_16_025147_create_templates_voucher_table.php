@@ -21,9 +21,9 @@ class CreateTemplatesVoucherTable extends Migration
             
             $table->string('name_template')->unique();
             $table->string('bgcolor_template')->default("null");
-            $table->string('bgimage_template')->default("null");
             $table->string('logo_template');
             $table->string('font_template');
+            $table->string('color_template')->default("null");
             $table->timestamps();
         });
     }

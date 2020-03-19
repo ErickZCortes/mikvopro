@@ -578,7 +578,7 @@
             class="form-control" 
             name="limitda_profiles"
             placeholder="Días"
-            min="1"
+            min="0"
             >
         </div>
         </div>
@@ -610,7 +610,7 @@
             name="expireda_profiles"
             
             placeholder="Días"
-            min="1"
+            min="0"
             >
         </div>
         </div>

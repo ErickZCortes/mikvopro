@@ -35,13 +35,14 @@
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="dnsname_voucher">DNS name:</label>
-                <input 
-                id="dnsname_voucher"
-                type="text" 
-                class="form-control" 
-                name="dnsname_voucher"
-                placeholder="Ingresa el DNS"
-                 >
+                <select class="form-control" id="dnsname_voucher" name="dnsname_voucher" >
+                  <option selected> Elige una opción</option>
+                  @foreach ($alldns as $dns)
+                  @if ($dns['dns-name'] != "")
+                  <option>{{$dns['dns-name']}}</option>
+                  @endif
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
@@ -61,13 +62,12 @@
             <div class="col-sm-10 col-md-4 col-lg-4">
               <div class="form-group">
                 <label for="server_voucher">Server:</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  id="server_voucher" 
-                  placeholder="Ingresa un servidor" 
-                  name="server_voucher"
-                 >
+                <select class="form-control" id="server_voucher" name="server_voucher" >
+                  <option value="all" selected>all</option>
+                  @foreach ($allservers as $server)
+                  <option>{{$server['name']}}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
             <div class="col-sm-10 col-md-4 col-lg-4">
@@ -88,7 +88,7 @@
                 <select class="form-control" id="nprofile_voucher" name="nprofile_voucher" >
                   <option selected> Elige una opción</option>
                   @foreach ($profiles as $profile)
-                  <option>{{$profile->name_profile}}</option>
+                  <option>{{$profile['name']}}</option>
                   @endforeach
                 </select>
               </div>

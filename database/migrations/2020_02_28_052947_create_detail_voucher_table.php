@@ -24,8 +24,8 @@ class CreateDetailVoucherTable extends Migration
             $table->string("password_detailv",25);
             $table->integer("limittda_detailv");
             $table->time("limitho_detailv");
-            $table->string("limitbin_detailv",25)->default('null');
-            $table->string("limitout_detailv",25)->default('null');
+            $table->integer("price_detailv");
+            
             $table->timestamps();
         });
     }

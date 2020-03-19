@@ -9,6 +9,8 @@ use App\User;
 use vendor\autoload;
 use \RouterOS\Query;
 use \RouterOS\Client;
+use App\DetailVoucher;
+
 
 
 class RouterController extends Controller
@@ -33,13 +35,53 @@ class RouterController extends Controller
         }
     }
 
+    public static function formatBytes($size, $precision = 2)
+    {
+        if ($size > 0) {
+            $size = (int) $size;
+            $base = log($size) / log(1024);
+            $suffixes = array(' bytes', ' KB', ' MiB', ' GB', ' TB');
+
+            return round(pow(1024, $base - floor($base)), $precision);
+        } else {
+            return $size;
+        }
+    }
+    
     public function conectrouter($id)
     {
         if (session()->has('UserSession')){
             $router = Router::find($id);
-        session()->put('routerConnected',$router);
+            session()->put('routerConnected',$router);
             if (session()->has('routerConnected')) {
-                return redirect('/dashboard/routerboard')->with('message','Conectado!');
+                $ip = session()->get('routerConnected')->ip_router;
+                $userrouter = session()->get('routerConnected')->user_router;
+                $pass = session()->get('routerConnected')->password_router;
+                $port = session()->get('routerConnected')->port_router; 
+                if($this->connect($ip, $userrouter, $pass, $port)){
+                    $inforouter = session()->get('routerConnected');
+                    $uidSesion = session()->get('UserSession')->id;
+                    $user = User::find($uidSesion);
+                    $client = $this->connect($ip, $userrouter, $pass, $port);
+                    $getactive =(new Query('/ip/hotspot/active/print'));
+                    $active = $client->query($getactive)->read();
+                    $getusers =(new Query('/ip/hotspot/user/print'));
+                    $usersall = $client->query($getusers)->read();
+                    $costos = DetailVoucher::sum('price_detailv');
+                    
+                    $getallresources = (new Query('/system/resource/print'));
+                    $resources = $client->query($getallresources)->read();
+                    $freememory = $resources[0]['free-memory'];
+                    $totalmemory = $resources[0]['total-memory'];
+                    $resta = ($totalmemory - $freememory);
+
+                    $total = $this->formatBytes($totalmemory);
+                    $free = $this->formatBytes($freememory);
+                    $rest = $this->formatBytes($resta);
+
+                    return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                }
+                
             }else {
                 return redirect('/dashboard/routerboard')->with('message','n!');
             }
@@ -51,7 +93,7 @@ class RouterController extends Controller
     {
         if (session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
-            $routers = Router::where('iduser_router', $uidSesion)->paginate(5);
+            $routers = Router::where('iduser_router', $uidSesion)->paginate(10);
             //dd($routers);
             $user = User::find($uidSesion);
 
@@ -138,5 +180,14 @@ class RouterController extends Controller
         }
         return view('welcome');
 
+    }
+    public function search(Request $request){
+        
+        $fields = ['author_id', 'category_id'];
+        foreach($fields as $field){
+            if(!empty($request->$field)){
+                $query->where($field, '=', $request->$field);
+            }
+        }
     }
 }

@@ -33,15 +33,6 @@
           <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
               <div class="col-sm-12 col-md-4">
-                <div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length"
-                      aria-controls="dataTable" class="custom-select custom-select-md form-control form-control-md">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select> entries</label></div>
-              </div>
-              <div class="col-sm-12 col-md-4">
                 <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
                       class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label></div>
               </div>

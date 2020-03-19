@@ -83,10 +83,6 @@
                 <small>La contraseña debe tener al menos 7 caracteres</small>
               </div>
             </div>
-            <p class="text-small text-muted">Al hacer clic en "Crear una cuenta", aceptas nuestros <a
-                href="#">Términos</a>,
-              <a href="#">Política de privacidad</a>&nbsp;y <a href="#">Política de seguridad</a>
-            </p>
             <br>
             <button class="btn btn-block btn-success btn-md" type="submit">Crear una cuenta</button>
           </form>

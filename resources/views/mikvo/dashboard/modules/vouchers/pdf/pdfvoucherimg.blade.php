@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style>
 @page { 
-  size: 595pt 800pt; 
+  size: 595pt 700pt; 
   margin: 0.3cm 0.3cm;
   }
   @media print
@@ -31,35 +31,35 @@ table.inside{
     <table class="table"> @foreach($detailv->chunk(3) as $detail)
         <tr> @foreach($detail as $detaili)
             <td>
-                <table class="inside">
+                <table class="inside" style="background-color: {{$template->bgcolor_template}};">
                     <tbody>
                         <tr>
                             <td>
-                                <img src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo" style="height:45px;">
+                                <img height="23px" width="48px" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
                             </td>
-                            <td style="text-align: right; font-size: 10px;" rowspan="1">
+                            <td style="text-align: right; font-family:{{$template->font_template}}; font-size: 8px;" rowspan="1">
                                 [{{$detaili->id}}]
                             </td>
                         </tr>
                         <tr>
-                            <td style=" background:#FDC830; color:#fff;">
-                                Valido: {{$voucher->nprofile_voucher}} datalimit
+                            <td style="text-align: center; background:{{$template->color_voucher}}; font-family:{{$template->font_template}}; color:#fff;">
+                            {{$voucher->nprofile_voucher}}
                             </td>
                             <td rowspan="3">
-                                <img src="{{ base_path() }}/public/uploads/9.jpg" alt="logo" style="height:45px;">
+                            <img src="{{ base_path() }}/public/uploads/{{$template->logo_template}}" alt="logo" style="height:50px;">
 
                             </td>
                         </tr>
                         <tr>       
-                            <td style="width: 100%; font-weight: bold; font-size: 12px; color:grey; text-align: left;">
-                                Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}}
+                            <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;">
+                                Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br>${{$profile->sprice_profile}} pesos
                             </td>
                             
                         </tr>
                         
                         <tr>
-                            <td colspan="1" style="font-size: 10px;">
-                                Login:http://{{$voucher->dnsname_voucher}} -  - Cs : 085366567572 
+                            <td colspan="2" style="font-size: 10px; font-family:{{$template->font_template}};">
+                                login: http://{{$voucher->dnsname_voucher}}
                             </td>
                         </tr>
                     </tbody>

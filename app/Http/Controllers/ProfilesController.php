@@ -37,7 +37,7 @@ class ProfilesController extends Controller
         if(session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
             $user = User::find($uidSesion);
-            $profiles = Profile::where('iduser_profile', $uidSesion)->paginate(5);
+            $profiles = Profile::where('iduser_profile', $uidSesion)->paginate(10);
             return view('mikvo.dashboard.modules.profiles.profiles', ["profiles"=>$profiles, "user"=>$user]);               
         }
         return view('welcome');
@@ -137,7 +137,7 @@ class ProfilesController extends Controller
                     $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
                     $randinterval = "00:02:".rand(10,59);
 
-                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikhmon';
+                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
                     $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
                     
                     if ($expmode == "rem") {
@@ -275,7 +275,6 @@ class ProfilesController extends Controller
                     $getpool = (new Query('/ip/pool/print'));        
                     $allpool = $client->query($getpool)->read();
                     $addpool = Collection::make($allpool);
-                    //dd($profiles);
                     return view('mikvo.dashboard.modules.profiles.updateprofile', ['profiles'=>$profiles,'user'=> $user, 'getallqueue' => $queue, 'getpool' => $addpool]);                
                 }
             }
@@ -362,7 +361,7 @@ class ProfilesController extends Controller
                     $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
                     $randinterval = "00:02:".rand(10,59);
 
-                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikhmon';
+                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
     
                     $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
 

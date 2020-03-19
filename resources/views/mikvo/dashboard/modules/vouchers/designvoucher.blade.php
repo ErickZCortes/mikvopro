@@ -30,60 +30,45 @@
 <div class="card shadow mb-4">
   <div class="card-body">
       <div>
-        <form class="">
-            <div class="row col-md-12 col-lg-12">
+        <form method="POST" action="{{route('/dashboard/vouchers/pdf', $voucher->id )}}">
+            @csrf  
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+
+            <div class="row col-md-12 col-lg-12 form-group">
                 <div class="col-md-4 title">Plantilla de vouchers:</div>
                 <div class="col-md-4">
-                    <select class="form-control" >
+                    <select class="form-control" name="template">
                         <option selected> Elige una opción</option>
                         @foreach ($templates as $template)
-                        <option>{{$template->name_template}}</option>
+                        <option value="{{$template->id}}">{{$template->name_template}}</option>
                         @endforeach
                     </select>  
                 </div> 
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-danger">Eliminar</button>
-                </div>    
+                   
             </div>
             
             <div class="col-md-12"><hr></div>
-            <div class="row col-md-12 text-center">
-                  <div class="col-md-3">
-                        <div class="col-md-12">
-                            <select class="form-control">
-                                <option value="none">Por hoja</option>
-                                <option value="hojado">18 por hoja</option>
-                                <option value="hojavu">21 por hoja</option>
-                                <option value="hojac">50 por hoja</option>
-                                <option>Automatico</option>
+            <h1 class="h3 mb-2 text-gray-800">Formato</h1>
+            <div class="row col-md-12 text-center form-group">
+                  <div class="col-md-6">
+                            <select class="form-control" name ="type_template">
+                                <option value="none">Elije una opción</option>
+                                <option value="hoja">Por hoja</option>
+                                <option value="qr">Por QR</option>
+                                <option value="logo">Por logo</option>
                             </select>
-                      </div>
                   </div> 
-                <div class="col-md-3">
-                        <div class="col-md-12">
-                            <select class="form-control">
-                                <option value="">Por Logo</option>
-                                <option value="">10 por hoja</option>
-                                <option value="">21 por hoja</option>
-                                <option value="">50 por hoja</option>
-                                <option value="">Automatico</option>
-                            </select>
-                      </div>
-                </div>  
-                <div class="col-md-3">
-                        <div class="col-md-12">
-                            <select class="form-control">
-                                <option value="">Por codigo QR</option>
-                                <option value="">10 por hoja</option>
-                                <option value="">21 por hoja</option>
-                                <option value="">50 por hoja</option>
-                                <option value="">Automatico</option>
-                            </select>
-                      </div>
-                </div>    
-                <div class="col-md-3">
-                    <div class="">
-                    <a href="{{route('/dashboard/vouchers/pdf', $voucher->id )}}" class="btn btn-dark"><i class="fas fa-file-pdf"></i> Exportar a PDF</a> 
+                <div class="col-md-6 form-group">
+                        <select class="form-control" name="amount_template">
+                            <option value="none">Seleccione la cantidad de vouchers</option>
+                            <option value="papervu">21 por hoja</option>
+                            <option value="papertd">32 por hoja</option>
+                        </select>
+                  </div>
+                <div class="col-md-12">
+                    <div>
+                    <button type="submit" class="btn btn-dark"><i class="fas fa-file-pdf"></i> Exportar a PDF</button> 
                     </div>
                 </div>  
             </div>
