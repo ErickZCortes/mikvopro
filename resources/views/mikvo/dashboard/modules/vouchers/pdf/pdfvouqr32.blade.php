@@ -40,8 +40,7 @@ table.inside{
                     </td>          
                 </tr>
                 <tr>
-                    <td style="font-size: 10px; font-family:{{$template->font_template}}; background:{{$template->color_voucher}}; color: white; text-align: center;">{{$voucher->nprofile_voucher}}</td>
-                </tr>
+                    <td style="font-size: 10px; font-family:{{$template->font_template}}; background:{{$template->color_template}}; color: white; text-align: center;">{{$voucher->nprofile_voucher}}</td>                </tr>
                 <tr>
                     <td style="width: 100%;  font-size: 10px; font-family:{{$template->font_template}}; text-align: center;"> Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br>  ${{$profile->sprice_profile}} pesos</td>
                 </tr>

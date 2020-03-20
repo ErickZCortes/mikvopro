@@ -42,8 +42,7 @@ table.inside{
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; background:{{$template->color_voucher}}; font-family:{{$template->font_template}}; color:#fff;">
-                            {{$voucher->nprofile_voucher}}
+                            <td style="text-align: center; background:{{$template->color_template}}; font-family:{{$template->font_template}}; color:#fff;">                            {{$voucher->nprofile_voucher}}
                             </td>
                             <td rowspan="3">
                             <img src="{{ base_path() }}/public/uploads/{{$template->logo_template}}" alt="logo" style="height:50px;">

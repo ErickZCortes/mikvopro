@@ -59,8 +59,7 @@ table.inside{
                         </table>
                       </td>
                       <tr>
-                      <td style="font-family: {{$template->font_family}}; font-size:12px; background-color:{{$template->color_voucher}};">${{$profile->sprice_profile}} pesos</td>
-                      </tr>
+                        <td style="font-family: {{$template->font_family}}; font-size:12px; background-color:{{$template->color_template}};">${{$profile->sprice_profile}} pesos</td>                      </tr>
                       <tr>
                       <td style="font-family: {{$template->font_family}}; font-size:10px">Red: {{$voucher->dnsname_voucher}}</td>
                       </tr>
