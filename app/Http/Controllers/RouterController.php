@@ -10,7 +10,7 @@ use vendor\autoload;
 use \RouterOS\Query;
 use \RouterOS\Client;
 use App\DetailVoucher;
-
+use DB;
 
 
 class RouterController extends Controller
@@ -189,5 +189,16 @@ class RouterController extends Controller
                 $query->where($field, '=', $request->$field);
             }
         }
+    }
+
+    public function searchrouter(Request $request){
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $search = $request->get('search');
+            $routers = DB::table('routers')->where('user_router', 'like', '%'.$search.'%')->paginate(10);
+            return view('mikvo.dashboard.modules.routerboard.routerboard', ["user"=>$user, "routers"=>$routers]);
+        }
+        return view('welcome');
     }
 }

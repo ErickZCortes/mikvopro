@@ -50,34 +50,35 @@ public static function formatBytes($size, $precision = 2)
     }
 }
     public function index(){
-
-        if (session()->has('routerConnected')) {
-            $ip = session()->get('routerConnected')->ip_router;
-            $userrouter = session()->get('routerConnected')->user_router;
-            $pass = session()->get('routerConnected')->password_router;
-            $port = session()->get('routerConnected')->port_router; 
-            if($this->connect($ip, $userrouter, $pass, $port)){
-                $inforouter = session()->get('routerConnected');
-                $uidSesion = session()->get('UserSession')->id;
-                $user = User::find($uidSesion);
-                $client = $this->connect($ip, $userrouter, $pass, $port);
-                $getactive =(new Query('/ip/hotspot/active/print'));
-                $active = $client->query($getactive)->read();
-                $getusers =(new Query('/ip/hotspot/user/print'));
-                $usersall = $client->query($getusers)->read();
-                $costos = DetailVoucher::sum('price_detailv');
+        if (session()->has('UserSession')) {
+            if (session()->has('routerConnected')) {
+                $ip = session()->get('routerConnected')->ip_router;
+                $userrouter = session()->get('routerConnected')->user_router;
+                $pass = session()->get('routerConnected')->password_router;
+                $port = session()->get('routerConnected')->port_router; 
+                if($this->connect($ip, $userrouter, $pass, $port)){
+                    $inforouter = session()->get('routerConnected');
+                    $uidSesion = session()->get('UserSession')->id;
+                    $user = User::find($uidSesion);
+                    $client = $this->connect($ip, $userrouter, $pass, $port);
+                    $getactive =(new Query('/ip/hotspot/active/print'));
+                    $active = $client->query($getactive)->read();
+                    $getusers =(new Query('/ip/hotspot/user/print'));
+                    $usersall = $client->query($getusers)->read();
+                    $costos = DetailVoucher::sum('price_detailv');
+                    
+                    $getallresources = (new Query('/system/resource/print'));
+                    $resources = $client->query($getallresources)->read();
+                    $freememory = $resources[0]['free-memory'];
+                    $totalmemory = $resources[0]['total-memory'];
+                    $resta = ($totalmemory - $freememory);
                 
-                $getallresources = (new Query('/system/resource/print'));
-                $resources = $client->query($getallresources)->read();
-                $freememory = $resources[0]['free-memory'];
-                $totalmemory = $resources[0]['total-memory'];
-                $resta = ($totalmemory - $freememory);
-
-                $total = $this->formatBytes($totalmemory);
-                $free = $this->formatBytes($freememory);
-                $rest = $this->formatBytes($resta);
-
-                return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                    $total = $this->formatBytes($totalmemory);
+                    $free = $this->formatBytes($freememory);
+                    $rest = $this->formatBytes($resta);
+                
+                    return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                }
             }
         }
             return view('mikvo.login');    
@@ -113,12 +114,38 @@ public static function formatBytes($size, $precision = 2)
 
 //----------------------------------------------------REGISTER--------------------------------------------------
     public function indexregister(){
-        if(!session()->has('UserSession')){
-            return view('mikvo.register');    
-        }
-        $id = session()->get('UserSession')->id;
-        $user = User::find($id);
-        return view('mikvo.dashboard.layouts.main',['user'=>$user]);
+        if (session()->has('UserSession')) {
+            if (session()->has('routerConnected')) {
+                $ip = session()->get('routerConnected')->ip_router;
+                $userrouter = session()->get('routerConnected')->user_router;
+                $pass = session()->get('routerConnected')->password_router;
+                $port = session()->get('routerConnected')->port_router; 
+                if($this->connect($ip, $userrouter, $pass, $port)){
+                    $inforouter = session()->get('routerConnected');
+                    $uidSesion = session()->get('UserSession')->id;
+                    $user = User::find($uidSesion);
+                    $client = $this->connect($ip, $userrouter, $pass, $port);
+                    $getactive =(new Query('/ip/hotspot/active/print'));
+                    $active = $client->query($getactive)->read();
+                    $getusers =(new Query('/ip/hotspot/user/print'));
+                    $usersall = $client->query($getusers)->read();
+                    $costos = DetailVoucher::sum('price_detailv');
+                    
+                    $getallresources = (new Query('/system/resource/print'));
+                    $resources = $client->query($getallresources)->read();
+                    $freememory = $resources[0]['free-memory'];
+                    $totalmemory = $resources[0]['total-memory'];
+                    $resta = ($totalmemory - $freememory);
+                
+                    $total = $this->formatBytes($totalmemory);
+                    $free = $this->formatBytes($freememory);
+                    $rest = $this->formatBytes($resta);
+                
+                    return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                }
+            }
+        } 
+        return redirect('/dashboard/routerboard');
     }
 
     public function register(Request $request){

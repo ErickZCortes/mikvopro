@@ -15,6 +15,7 @@ use \RouterOS\Query;
 use \RouterOS\Client;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Paginate;
 
 class VouchersController extends Controller
 {
@@ -456,6 +457,17 @@ class VouchersController extends Controller
         return view('welcome');
     }
 
+    public function searchvouchers(Request $request){
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $search = $request->get('search');
+            $vouchers = DB::table('vouchers')->where('prefix_voucher', 'like', '%'.$search.'%')->paginate(10);
+            return view('mikvo.dashboard.modules.vouchers.reprintvoucher', ["user"=>$user, "vouchers"=>$vouchers]);
+        }
+        return view('welcome');
+    }
+
     //---------------------------------------CREATE TEMPLATE----------------------------------------------//
 
     public function indextemplate($id){
@@ -497,4 +509,5 @@ class VouchersController extends Controller
         return view('welcome');
 
     }
+    
 }

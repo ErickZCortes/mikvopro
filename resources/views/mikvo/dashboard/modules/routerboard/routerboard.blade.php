@@ -31,11 +31,19 @@
       <div class="card-body">
         <div class="table-responsive table-hover">
           <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+          
             <div class="row">
-              <div class="col-sm-12 col-md-4">
-                <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                      class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label></div>
-              </div>
+              
+                <div class="col-sm-12 col-md-4">
+                <form action="/dashboard/search-router" method="GET">
+                  <div class="input-group">
+                    <input type="search" class="form-control form-control-md" name ="search">
+                      <span class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                      </span>
+                  </div>
+              </form>
+                </div>
               <div class="col-sm-12 col-md-4">
                 <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success mt-4 ml-3">Agregar Router</a>
               </div>

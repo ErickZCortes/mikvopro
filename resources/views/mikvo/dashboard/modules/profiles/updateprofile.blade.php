@@ -24,7 +24,6 @@
     <div class="card shadow mb-4">
    <div class="card-body">
    <h5 id="title">Update Profiles</h5>
-      
     <form method="POST" action="{{ route('/dashboard/profiles/update',$profiles->id) }}" role="form" enctype="multipart/form-data">
  
         <input type="hidden" name="_method" value="PUT">

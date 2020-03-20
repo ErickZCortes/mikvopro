@@ -27,16 +27,21 @@
     <div class="card-body">
       <div class="table-responsive table-hover">
         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <form action="/dashboard/search-profile" method="GET">
           <div class="row">
             <div class="col-sm-12 col-md-4">
-              <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                    class="form-control form-control-md" placeholder="" aria-controls="dataTable"></label></div>
+              <div class="input-group">
+                <input type="search" class="form-control form-control-md" name ="search">
+                  <span class="input-group-prepend">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </span>
+              </div>
             </div>
             <div class="col-sm-12 col-md-4">
               <a href="{{ route('/dashboard/profiles/create') }}" class="btn btn-success mt-4 ml-3">Agregar Perfil</a>
-
             </div>
           </div>
+          </form>
           <div class="row">
             <div class="col-sm-12">
               <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"

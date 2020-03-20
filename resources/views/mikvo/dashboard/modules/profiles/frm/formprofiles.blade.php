@@ -296,7 +296,7 @@
             required
             value="{{ $profiles->limitda_profiles}}"
             placeholder="Días"
-            min="1"
+            min="0"
             >
         </div>
         </div>

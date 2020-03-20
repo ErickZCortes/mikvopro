@@ -47,7 +47,7 @@
             <div class="col mr-2">
               <div class="h5 text-xs text-primary text-capitalize mb-1">Usuarios activos</div>
               <?php 
-                echo "<div class='h4 mb-0 text-gray-800'>".count($active)."</div>";;
+                echo "<div class='h4 mb-0 text-gray-800'>".count($active)."</div>";
               ?>
             </div>
             <div class="col-auto">
@@ -109,15 +109,68 @@
     <div class="col-md-6">
       <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Fichas más vendidas</h6>
             </div>
             <div class="card-body">
               <div class="chart-bar">
-                <canvas id="myChart1"></canvas>
+                <canvas id="barchart"></canvas>
               </div>
             </div>
           </div>
       </div>
+    </div>
+    
+    <div class="col-md-12">
+    <div class="card shadow mb-4">
+      
+      <div class="card-body">
+        <div class="table-responsive table-hover">
+          <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+              <div class="col-sm-12 col-md-4">
+              <form action="/delete-scripts" method="POST" role="form" enctype="multipart/form-data">
+              <input type="hidden" name="_method" value="PUT">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-md" name ="datescript" placeholder="formato : mm/dd/aaaa">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+              </div>
+              </form>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"
+                  aria-describedby="dataTable_info" style="width: 100%;">
+                  <thead>
+                    <tr role="row">
+                      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 90%;">
+                        Fecha de creación/ Hora de conexión/ Usuario/ Precio ficha/ Dirección IP/ Dirección MAC/ Tiempo/ Perfil
+                        </th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                       aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
+                       Acciones
+                       </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($scripts as $script)
+                    <tr role="row" class="odd">
+                      <td class="sorting_1">{{$script['name']}}</td>                
+                     
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+  
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
     <div class="col-md-12">
       <div class="card shadow mb-4">
@@ -132,6 +185,33 @@
         </div>
     </div>
 <script>
+var ctx = document.getElementById('barchart');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green'],
+            datasets: [{
+                label: 'Votes',
+                backgroundColor:['rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)'],
+                borderColor:['rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'],
+                data: [28, 50, 45, 26]
+            }]
+        },
+
+            // Configuration options go here
+            options: {}
+        });
+
+
 var ctx = document.getElementById('donutcpu');
         var donutcpu = new Chart(ctx, {
             // The type of chart we want to create
@@ -156,7 +236,6 @@ var ctx = document.getElementById('donutcpu');
         },
         });
 
-
         var chartColors = {
 	red: 'rgb(255, 99, 132)',
 	orange: 'rgb(255, 159, 64)',
@@ -168,7 +247,11 @@ var ctx = document.getElementById('donutcpu');
 };
 
 function randomScalingFactor() {
-	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+  var bytes = this.value;                          
+  var sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+  if (bytes == 0) return '0 bps';
+  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+  return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
 function onRefresh(chart) {
@@ -185,34 +268,35 @@ var color = Chart.helpers.color;
         var traffic = new Chart(ctx, {
           type: 'line',
           data: {
+            
             datasets: [{
-			label: 'Dataset 1 (linear interpolation)',
+			label: '{{$traffic[0]['name']}}',
 			backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
 			borderColor: chartColors.red,
 			fill: false,
 			lineTension: 0,
 			borderDash: [8, 4],
-			data: []
+			data: [{{$traffic[0]['data']}}]
 		}, {
-			label: 'Dataset 2 (cubic interpolation)',
+			label: '{{$traffic[1]['name']}}',
 			backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
 			borderColor: chartColors.blue,
 			fill: false,
 			cubicInterpolationMode: 'monotone',
-			data: []
+			data: [{{$traffic[1]['data']}}]
 		}]
           },
           options: {
             title: {
 			display: true,
-			text: 'Line chart (hotizontal scroll) sample'
+			text: 'Tráfico'
 		},
             scales: {
               xAxes: [{
                 type: 'realtime',
                 realtime: {
 					duration: 20000,
-					refresh: 1000,
+					refresh: 900,
 					delay: 2000,
 					onRefresh: onRefresh
 				}

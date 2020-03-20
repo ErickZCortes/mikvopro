@@ -25,18 +25,20 @@
 <h1 class="h3 mb-2 text-gray-800">Reprint</h1>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Fichas almacenadas</h6>
-  </div>
   <div class="card-body">
     <div class="table-responsive table-hover">
       <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
         <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                  class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>
-          </div>
-        </div>
+        <div class="col-sm-12 col-md-4">
+                <form action="/dashboard/search-voucher" method="GET">
+                  <div class="input-group">
+                    <input type="search" class="form-control form-control-md" name ="search">
+                      <span class="input-group-prepend">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                      </span>
+                  </div>
+              </form>
+                </div>
         <div class="row">
           <div class="col-sm-12">
             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"

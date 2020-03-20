@@ -9,6 +9,8 @@ use vendor\autoload;
 use \RouterOS\Query;
 use \RouterOS\Client;
 use Illuminate\Support\Collection as Collection;
+use Illuminate\Database\Eloquent\Paginate;
+use DB;
 
 class ProfilesController extends Controller
 {
@@ -534,6 +536,17 @@ class ProfilesController extends Controller
             
 
             
+        }
+        return view('welcome');
+    }
+
+    public function searchprofiles(Request $request){
+        if (session()->has('UserSession')){
+            $uidSesion = session()->get('UserSession')->id;
+            $user = User::find($uidSesion);
+            $search = $request->get('search');
+            $profiles = DB::table('profiles')->where('name_profile', 'like', '%'.$search.'%')->paginate(10);
+            return view('mikvo.dashboard.modules.profiles.profiles', ["user"=>$user, "profiles"=>$profiles]);
         }
         return view('welcome');
     }

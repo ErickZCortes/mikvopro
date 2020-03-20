@@ -35,6 +35,7 @@ Route::put('/dashboard/routerboard/delete/{id}', 'RouterController@destroy')->na
 
 Route::get('/dashboard/routerboard/conect/{id}', 'RouterController@conectrouter')->name('/dashboard/routerboard/conect');
 
+Route::get('/dashboard/search-router', 'RouterController@searchrouter')->name('/dashboard/search-router');
 //-----------------------------------------PROFILES-------------------------------------------//
 Route::get('/dashboard/profiles', 'ProfilesController@index')->name('/dashboard/profiles');
 Route::get('/dashboard/profiles/create', 'ProfilesController@create')->name('/dashboard/profiles/create');
@@ -42,6 +43,7 @@ Route::put('/dashboard/profiles/store','ProfilesController@store')->name('/dashb
 Route::get('/dashboard/profiles/edit/{id}', 'ProfilesController@edit')->name('/dashboard/profiles/edit');
 Route::put('/dashboard/profiles/update/{id}','ProfilesController@update')->name('/dashboard/profiles/update');
 Route::put('/dashboard/profiles/delete/{id}', 'ProfilesController@destroy')->name('/dashboard/profiles/delete');
+Route::get('/dashboard/search-profile', 'ProfilesController@searchprofiles')->name('/dashboard/search-profile');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
 Route::get('/dashboard/vouchers', 'VouchersController@create')->name('/dashboard/vouchers');
@@ -52,6 +54,7 @@ Route::put('/dashboard/vouchers/delete/{id}', 'VouchersController@destroy')->nam
 Route::get('/dashboard/vouchers/generate', 'VouchersController@generate')->name('/dashboard/vouchers/generate');
 Route::get('/dashboard/vouchers/design/{id}', 'VouchersController@design')->name('/dashboard/vouchers/design');
 Route::put('/dashboard/vouchers/pdf/{id}','VouchersController@exportPdf')->name('/dashboard/vouchers/pdf');
+Route::get('/dashboard/search-voucher', 'VouchersController@searchvouchers')->name('/dashboard/search-voucher');
 
 //-----------------------------------------VOUCHERS-------------------------------------------//
 Route::get('/dashboard/vouchers/reprint','VouchersController@indexreprint')->name('/dashboard/vouchers/reprint');
@@ -60,5 +63,7 @@ Route::get('/dashboard/vouchers/reprintvoucher/{id}','VouchersController@reprint
 Route::get('/dashboard/vouchers/template/{id}', 'VouchersController@indextemplate')->name('/dashboard/vouchers/template');
 Route::put('/dashboard/vouchers/template/create/{id}', 'VouchersController@createmp')->name('/dashboard/vouchers/template/create');
 
+
+Route::put('/delete-scripts', 'ViewsController@deletescript')->name('/delete-scripts');
 
 Route::get('/prueba', 'MikrotikController@conection')->name('/prueba');
