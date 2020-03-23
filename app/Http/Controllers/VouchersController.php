@@ -498,7 +498,7 @@ class VouchersController extends Controller
             $template->logo_template = $request->input('logo_template');
             $template->logo_template = $request->file('logo_template')->store('/');
             $template->font_template = $request->input('font_template'); 
-            $template->color_voucher = $request->input('color_etiqueta');
+            $template->color_template = $request->input('color_etiqueta');
          +
             $template->save();
 

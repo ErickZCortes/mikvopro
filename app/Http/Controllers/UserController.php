@@ -79,7 +79,9 @@ public static function formatBytes($size, $precision = 2)
                 
                     return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
                 }
+                
             }
+            return redirect('/dashboard/routerboard');
         }
             return view('mikvo.login');    
     }
@@ -144,8 +146,9 @@ public static function formatBytes($size, $precision = 2)
                     return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
                 }
             }
+            return redirect('/dashboard/routerboard');
         } 
-        return redirect('/dashboard/routerboard');
+        return view('mikvo.register');
     }
 
     public function register(Request $request){

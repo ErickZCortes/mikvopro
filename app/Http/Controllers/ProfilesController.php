@@ -70,9 +70,7 @@ class ProfilesController extends Controller
             }
         }
         return view('welcome');
-        
     }
-
     public function store(Request $request)
     {
         if (session()->has('UserSession')){

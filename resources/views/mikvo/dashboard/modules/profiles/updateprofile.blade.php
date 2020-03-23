@@ -21,8 +21,10 @@
     
     @section('content')
     <h1 class="h3 mb-2 text-gray-800">Profiles</h1>
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 col-md-12">
    <div class="card-body">
+   <div class="row">
+   <div class="col-md-8">
    <h5 id="title">Update Profiles</h5>
     <form method="POST" action="{{ route('/dashboard/profiles/update',$profiles->id) }}" role="form" enctype="multipart/form-data">
  
@@ -31,6 +33,25 @@
 
         @include('mikvo.dashboard.modules.profiles.frm.formprofiles')     
     </form>
+   </div>
+   <div class="col-md-4">
+   <div class="card text-white bg-dark mb-7" style="max-width: 20rem;">
+  <div class="card-header">Especificaciones</div>
+  <div class="card-body">
+    <h5 class="card-title">Opciones de Modo expiración</h5>
+    <p class="card-text"><strong>- Eliminar</strong>: El usuario se eliminará cuando finalice el tiempo de espera.</p>
+    <p class="card-text"><strong>- Avisar</strong>: El usuario no se ha eliminado y recibirá una notificación una vez que haya expirado.</p>
+    <p class="card-text"><strong>- Registrar</strong>: Ealmacena los datos de precios para cada usuario que inicia sesión</p>
+    <hr style="background-color:white">
+    <p class="card-text"><strong>- Tiempo de espera</strong>: Se refiere al tiempo antes de que se elimine al usuario.</p>
+    <hr style="background-color:white">
+    <h5 class="card-title">Formato</h5>
+    <p class="card-text">Tanto para <strong>Validación</strong> como para <strong>Tiempo de espera:</strong></p>
+    <strong>Ejemplo: 20d = 20 días, 3h = 3 horas, 6m = 6 minutos</strong>
+  </div>
+</div>
+   </div>
+   </div>
     </div>
       </div>
    

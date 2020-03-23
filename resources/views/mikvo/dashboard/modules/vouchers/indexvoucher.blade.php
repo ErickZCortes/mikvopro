@@ -30,40 +30,24 @@
         <div class="table-responsive">
           <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
-              <div class="col-sm-12 col-md-4">
-                <div class="dataTables_length" id="dataTable_length">
-                  <label>Show entries
-                    <select name="dataTable_length" aria-controls="dataTable"
-                      class="custom-select custom-select-sm form-control form-control-sm">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select></label>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-4">
-                <div id="dataTable_filter" class="dataTables_filter">
-                  <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-4">
+            <div class="col-md-7"></div>
+              <div class="col-sm-12 col-md-5 " style="align-items: center">
                 <div>
-                  <button class="btn btn-info btn-sm">
+                  <button class="btn btn-info btn-md">
                     <i class="fas fa-file-csv"></i> CSV
                   </button>
-                  <a class="btn btn-warning btn-sm" href="{{route('/dashboard/vouchers/template',$voucherget->id )}}">
+                  <a class="btn btn-warning btn-md" href="{{route('/dashboard/vouchers/template',$voucherget->id )}}">
                     <i class="fas fa-file-excel"></i> Crear plantilla
                   </a>
                   
-                  <a class="btn btn-info btn-sm" href="{{route('/dashboard/vouchers/design',$voucherget->id )}}">
+                  <a class="btn btn-info btn-md" href="{{route('/dashboard/vouchers/design',$voucherget->id )}}">
                     <i class="fas fa-print"></i> Imprimir
                   </a>
                   
                 </div>
               </div>
             </div>
+            <br>
             <div class="row">
               <div class="col-sm-12">
                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid"

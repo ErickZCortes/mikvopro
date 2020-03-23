@@ -21,7 +21,7 @@
     
     @section('content')
     <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
-    <div class="card shadow mb-4 col-md-6">
+    <div class="card shadow mb-4 col-md-12">
    <div class="card-body">
    <h5 id="title">Add Routers</h5>
       

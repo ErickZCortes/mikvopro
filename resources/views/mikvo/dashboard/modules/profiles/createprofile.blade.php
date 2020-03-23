@@ -36,9 +36,21 @@
     </form>
    </div>
    <div class="col-md-4">
-   <div class="card shadow mb-4 col-md-12" style="background-color:black; color:white">
-   dfdknlk Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste porro quidem rem voluptatem ex perferendis mollitia impedit explicabo expedita aspernatur architecto tempore voluptatum quos, reiciendis dignissimos nam odio laudantium quo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae accusantium similique necessitatibus, nam sapiente facilis cum iusto nemo asperiores ullam, officiis ad quas, incidunt aliquam voluptates perspiciatis deleniti! Quia, quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, suscipit unde! Doloremque maxime obcaecati veritatis unde voluptatum, corrupti quod vitae possimus! Repellendus tempore consectetur cumque sed sequi natus facilis excepturi.
-   </div>
+   <div class="card text-white bg-dark mb-7" style="max-width: 20rem;">
+  <div class="card-header">Especificaciones</div>
+  <div class="card-body">
+    <h5 class="card-title">Opciones de Modo expiración</h5>
+    <p class="card-text"><strong>- Eliminar</strong>: El usuario se eliminará cuando finalice el tiempo de espera.</p>
+    <p class="card-text"><strong>- Avisar</strong>: El usuario no se ha eliminado y recibirá una notificación una vez que haya expirado.</p>
+    <p class="card-text"><strong>- Registrar</strong>: Ealmacena los datos de precios para cada usuario que inicia sesión</p>
+    <hr style="background-color:white">
+    <p class="card-text"><strong>- Tiempo de espera</strong>: Se refiere al tiempo antes de que se elimine al usuario.</p>
+    <hr style="background-color:white">
+    <h5 class="card-title">Formato</h5>
+    <p class="card-text">Tanto para <strong>Validación</strong> como para <strong>Tiempo de espera:</strong></p>
+    <strong>Ejemplo: 20d = 20 días, 3h = 3 horas, 6m = 6 minutos</strong>
+  </div>
+</div>
    </div>
     </div>
       </div>

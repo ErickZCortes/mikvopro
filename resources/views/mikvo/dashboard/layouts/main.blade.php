@@ -192,10 +192,10 @@ var ctx = document.getElementById('barchart');
 
             // The data for our dataset
             data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green'],
+            labels: ['1 hora', '1 día', '1 semana', '1 mes'],
             datasets: [{
-                label: 'Votes',
-                backgroundColor:['rgba(255, 99, 132, 0.2)',
+                label: 'Fichas',
+                backgroundColor:['rgba(255, 99, 142, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 206, 86, 0.2)',
                                 'rgba(75, 192, 192, 0.2)'],
@@ -203,7 +203,7 @@ var ctx = document.getElementById('barchart');
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)'],
-                data: [28, 50, 45, 26]
+                data: [100, 50, 45, 26]
             }]
         },
 
