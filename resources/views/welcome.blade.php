@@ -320,11 +320,11 @@
                   <li class="nav-item">
                     <a class="nav-link" href="#">Manual</a>
                   </li>
-                  <li>
-                    <a class="btn btn-outline-info" href="{{route('/login')}}" role="button">Login</a>
-                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{route('/register')}}" role="button">Registro</a>
+                  </li>
+                  <li>
+                    <a class="btn btn-outline-info" href="{{route('/login')}}" role="button">Login</a>
                   </li>
                 </ul>
               </div>

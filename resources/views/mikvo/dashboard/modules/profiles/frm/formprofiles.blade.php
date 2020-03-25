@@ -221,7 +221,8 @@
             required
             value="{{ $profiles->validation_profile}}"
             placeholder="Ejemplo: 1d, 5m"
-            min="1"
+            min="1" 
+            maxlength="3"
             >
         </div>
      </div>
@@ -237,6 +238,7 @@
             value="{{ $profiles->gracep_profile}}"
             placeholder="Ejemplo: 1d, 5m"
             min="1"
+            maxlength="3"
             >
         </div>
      </div>
@@ -537,9 +539,9 @@
             type="text" 
             class="form-control" 
             name="validation_profile"
-            
             placeholder="Ejemplo: 1d, 5m"
-            min="1"
+            min="1" maxlength="3"
+            required
             >
         </div>
      </div>
@@ -551,9 +553,10 @@
             type="text" 
             class="form-control" 
             name="gracep_profile"
-            
             placeholder="Ejemplo: 1d, 5m"
             min="1"
+            maxlength="3"
+            required
             >
         </div>
      </div>
@@ -581,6 +584,7 @@
             name="limitda_profiles"
             placeholder="Días"
             min="0"
+            required
             >
         </div>
         </div>
@@ -593,6 +597,7 @@
             name="limitho_profiles"
             step="1"
             placeholder="Horas, minútos y/o segundos"
+            required
             >
         </div>
         </div>
@@ -610,7 +615,7 @@
             type="number" 
             class="form-control" 
             name="expireda_profiles"
-            
+            required
             placeholder="Días"
             min="0"
             >
@@ -624,6 +629,7 @@
             class="form-control" 
             name="expiredho_profiles"
             step="1"
+            required
             placeholder="Horas, minútos y/o segundos"
             >
         </div>
@@ -639,6 +645,7 @@
             class="form-control" 
             name="cuttime_profile"
             step="1"
+            required
             placeholder="Ingresa la velocidad de subida"
             >
         </div>

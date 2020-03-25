@@ -11,6 +11,7 @@ use \RouterOS\Client;
 use Illuminate\Support\Collection as Collection;
 use Illuminate\Database\Eloquent\Paginate;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfilesController extends Controller
 {
@@ -84,7 +85,7 @@ public function store(Request $request)
             if($this->connect($ip, $userrouter, $pass, $port)){
                 $name = $request->input('name_profile');
                 $uidSesion = session()->get('UserSession')->id;
-                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->and('iduser_profile',$uidSesion)->first();
+                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->first();
                 if($profilebd == null){
                     $profile = new Profile;
                     $client = $this->connect($ip, $userrouter, $pass, $port);
@@ -301,10 +302,11 @@ public function update(Request $request, $id)
             $pass = session()->get('routerConnected')->password_router;
             $port = session()->get('routerConnected')->port_router; 
             if($this->connect($ip, $userrouter, $pass, $port)){
+                $uidSesion = session()->get('UserSession')->id;
                 $profile = Profile::find($id);
                 $name = $request->input('name_profile');
-                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->and('iduser_profile',$uidSesion)->first();
-                if($profilebd == null){
+                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->count();
+                if($profilebd <= 1){
                     $addrpool = $request->input('addpool_profile');
                     $getprice = $request->input('cost_profile');
                     $getsprice = $request->input('sprice_profile');
@@ -461,7 +463,7 @@ public function update(Request $request, $id)
                         ->where('.id', $monid);
                     }
                 
-                    $uidSesion = session()->get('UserSession')->id;
+                   
                     $profile->iduser_profile = $uidSesion;
                     $profile->name_profile = $name;
                     $profile->addpool_profile = $addrpool;                    
@@ -539,7 +541,6 @@ public function update(Request $request, $id)
                     $prof =(new Query('/ip/hotspot/user/profile/remove'))
                     ->equal('.id', $idp);
                     $removepro = $client->query($prof)->read();
-                    dd($removepro);
                     $sched =(new Query('/system/scheduler/remove'))
                     ->equal('.id', $monid);
                     $removesche = $client->query($sched)->read();
