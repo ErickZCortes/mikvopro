@@ -77,27 +77,13 @@ class ViewsController extends Controller
                     $getscripts = (new Query('/system/script/print'));
                     $scripts = $client->query($getscripts)->read(); 
                     
-                    $gettraffic = (new Query('/interface/monitor-traffic'))
+                    $gettrafficether1 = (new Query('/interface/monitor-traffic'))
                                   ->equal('interface', 'ether1')
                                   ->equal('once');
-                    $traffic = $client->query($gettraffic)->read();
-                    
-                    $ftx = $traffic[0]['tx-bits-per-second'];
-                    $frx = $traffic[0]['rx-bits-per-second'];
+                    $trafficether1 = $client->query($gettrafficether1)->read();
+                    //dd($trafficether1[0]);
 
-                    $rows = array(); $rows2 = array();
-
-                    $rows['name'] = 'Tx';
-                    $rows['data'] = $ftx;
-                    $rows2['name'] = 'Rx';
-                    $rows2['data'] = $frx;
-
-                    $result = array();
-                    array_push($result,$rows);
-	                array_push($result,$rows2);
-                    $arraytraffic =json_encode($result);
-                    //dd($result[1]['name']);
-                    return view('mikvo.dashboard.layouts.main',["arraytraffic"=>$arraytraffic,"traffic"=>$result,"scripts"=>$scripts,"freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter,'user'=>$user]);
+                    return view('mikvo.dashboard.layouts.main',["trafficether1"=>$trafficether1[0],"scripts"=>$scripts,"freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter,'user'=>$user]);
                 }   
             }
         }
@@ -122,21 +108,20 @@ class ViewsController extends Controller
                     $ftx = $traffic[0]['tx-bits-per-second'];
                     $frx = $traffic[0]['rx-bits-per-second'];
 
-                    $rows = array(); $rows2 = array();
-
-                    $labels['name'] = 'Tx';
-                    $labels['name'] = 'Rx';
+                    $labels = array(); $data = array();
                     
-                    $data['data'] = $ftx;
-                    $data['data'] = $frx;
+                    $labels =['Tx', 'Rx'];                    
+                    $data = [$ftx,$frx];
+                    
 
-                    $result = array();
+                    //dd($labels);
+                    /*$result = array();
                     array_push($result,$rows);
 	                array_push($result,$rows2);
-                    $arraytraffic =json_encode($result);
+                    $arraytraffic =json_encode($result);*/
 
 
-                    return response()->json(compact('arraytraffic'));
+                    return response()->json(compact('labels', 'data'));
                 }
             }
         }

@@ -93,33 +93,29 @@
     </div>
   <div class="row">
     <div class="col-md-6 ">
-        <div class="card shadow mb-4">
-          <!-- Card Header - Dropdown -->
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Rendimiento de cpu</h6>
-          </div>
-          <!-- Card Body -->
-          <div class="card-body">
-            <div class="chart-pie">
-              <canvas id="donutcpu"></canvas>
-            </div>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Rendimiento de cpu</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-pie">
+            <canvas id="donutcpu"></canvas>
           </div>
         </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Fichas más vendidas</h6>
-            </div>
-            <div class="card-body">
-              <div class="chart-bar">
-                <canvas id="barchart"></canvas>
-              </div>
-            </div>
-          </div>
       </div>
     </div>
-    
+    <div class="col-md-6">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Rendimiento de cpu</h6>
+        </div>
+        <div class="card-body">
+          <div class="chart-pie">
+            <canvas id="traffic"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-12">
     <div class="card shadow mb-4">
       
@@ -172,45 +168,35 @@
       </div>
     </div>
     </div>
-    <div class="col-md-12">
-      <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-            </div>
-              <div class="card-body">
-                <div class="chart-area">
-                  <canvas id="traffic"></canvas>
-                </div>
-              </div>
-        </div>
-    </div>
+    
+    
 <script>
-var ctx = document.getElementById('barchart');
-        var chart = new Chart(ctx, {
+
+var ctx = document.getElementById('donutcpu');
+        var donutcpu = new Chart(ctx, {
             // The type of chart we want to create
-            type: 'bar',
+            type: 'doughnut',
 
             // The data for our dataset
             data: {
-            labels: ['1 hora', '1 día', '1 semana', '1 mes'],
+            labels: [
+					'Memoria disponible en MiB',
+					'Memoria utilizada en MiB'
+					],
             datasets: [{
-                label: 'Fichas',
-                backgroundColor:['rgba(255, 99, 142, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)'],
-                borderColor:['rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
+                
+                backgroundColor:[
+                                'rgb(255, 206, 86, 0.2)',
+                                'rgb(75, 192, 192, 0.2)'],
+                borderColor:[
+                            'rgb(255, 206, 86, 1)',
                             'rgba(75, 192, 192, 1)'],
-                data: [100, 50, 45, 26]
+                data: [{{$freememory}}, {{$restmemeory}}]
             }]
         },
-
-            // Configuration options go here
-            options: {}
         });
-
+</script>
+<script>
 
 var ctx = document.getElementById('donutcpu');
         var donutcpu = new Chart(ctx, {
@@ -236,91 +222,94 @@ var ctx = document.getElementById('donutcpu');
         },
         });
 
-        var chartColors = {
-	red: 'rgb(255, 99, 132)',
-	orange: 'rgb(255, 159, 64)',
-	yellow: 'rgb(255, 205, 86)',
-	green: 'rgb(75, 192, 192)',
-	blue: 'rgb(54, 162, 235)',
-	purple: 'rgb(153, 102, 255)',
-	grey: 'rgb(201, 203, 207)'
-};
 
-function randomScalingFactor() {
-  var bytes = this.value;                          
-  var sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
-  if (bytes == 0) return '0 bps';
-  var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-  return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
-}
-
-function onRefresh(chart) {
-	chart.config.data.datasets.forEach(function(dataset) {
-		dataset.data.push({
-			x: Date.now(),
-			y: randomScalingFactor()
-		});
-	});
-}
-
-var color = Chart.helpers.color;
-        var ctx = document.getElementById('traffic');
-        var traffic = new Chart(ctx, {
-          type: 'line',
-          data: {
-            
-            datasets: [{
-			label: '{{$traffic[0]['name']}}',
-			backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
-			borderColor: chartColors.red,
-			fill: false,
-			lineTension: 0,
-			borderDash: [8, 4],
-			data: [{{$traffic[0]['data']}}]
-		}, {
-			label: '{{$traffic[1]['name']}}',
-			backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
-			borderColor: chartColors.blue,
-			fill: false,
-			cubicInterpolationMode: 'monotone',
-			data: [{{$traffic[1]['data']}}]
-		}]
+   var ctx = document.getElementById("traffic");
+  var traffic = new Chart(ctx, {
+    type: 'line',
+    data: {
+      
+      datasets: [{
+        label: 'Tx',
+        backgroundColor:[
+                               
+                                'rgb(255, 99, 132, 0)'],
+                borderColor:[
+                           
+                            'rgba(255, 99, 132, 1)'],
+                            borderWidth: 1
+        }, {label: 'Rx',
+          backgroundColor:[
+                                'rgb(54, 162, 235, 0)'],
+                                
+                borderColor:[
+                            'rgb(54, 162, 235, 1)'],
+                            
+        
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+        }
+          
+        ],
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
           },
-          options: {
-            title: {
-			display: true,
-			text: 'Tráfico'
-		},
-            scales: {
-              xAxes: [{
-                type: 'realtime',
-                realtime: {
-					duration: 20000,
-					refresh: 900,
-					delay: 2000,
-					onRefresh: onRefresh
-				}
-              }],
-              yAxes: [{
-				scaleLabel: {
-					display: true,
-					labelString: 'value'
-				}
-			}]
-            },
-            tooltips: {
-			mode: 'nearest',
-			intersect: false
-		},
-		hover: {
-			mode: 'nearest',
-			intersect: false
-		}
-          }
-        });
+          labels: {
+                              formatter: function () {      
+                                var bytes = this.value;                          
+                                var sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+                                if (bytes == 0) return '0 bps';
+                                var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+                                return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];                    
+                              },
+                            },
+        }]
+      }
+    }
+  });
+  var updateChart = function() {
+    $.ajax({
+      url: "{{ route('api.chart') }}",
+      type: 'GET',
+      dataType: 'json',
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        traffic.data.labels = [data.labels[0], data.labels[1]];
+        traffic.data.datasets[0].data = data.data[0];
+        traffic.data.datasets[1].data = data.data[1];
+        traffic.options.scales.yAxes.labels = {
+          formatter: function () {      
+                                var bytes = this.value;                          
+                                var sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+                                if (bytes == 0) return '0 bps';
+                                var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+                                return parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];                    
+                              },
+        }
+
+        traffic.update();
+      },
+      error: function(data){
+        console.log(data);
+      }
+    });
+  }
+  
+  updateChart();
+  setInterval(() => {
+    updateChart();
+  }, 1000);
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest/dist/chartjs-plugin-streaming.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     @endsection

@@ -67,3 +67,6 @@ Route::put('/dashboard/vouchers/template/create/{id}', 'VouchersController@creat
 Route::put('/delete-scripts', 'ViewsController@deletescript')->name('/delete-scripts');
 
 Route::get('/prueba', 'MikrotikController@conection')->name('/prueba');
+
+
+Route::get('chart', 'ViewsController@indexapi')->name('api.chart');
