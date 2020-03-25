@@ -33,11 +33,8 @@
             <div class="col-md-7"></div>
               <div class="col-sm-12 col-md-5 " style="align-items: center">
                 <div>
-                  <button class="btn btn-info btn-md">
-                    <i class="fas fa-file-csv"></i> CSV
-                  </button>
                   <a class="btn btn-warning btn-md" href="{{route('/dashboard/vouchers/template',$voucherget->id )}}">
-                    <i class="fas fa-file-excel"></i> Crear plantilla
+                    <i class="far fa-object-ungroup"></i> Crear plantilla
                   </a>
                   
                   <a class="btn btn-info btn-md" href="{{route('/dashboard/vouchers/design',$voucherget->id )}}">

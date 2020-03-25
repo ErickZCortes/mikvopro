@@ -61,8 +61,8 @@
                     title="La contraseña debe tener al menos 8 caracteres">
                 </div>
                 <div class="col-md-6">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('/dashboard/user') }}" class="btn btn-warning">Cancelar</a>
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Guardar</button>
+                <a href="{{ route('/dashboard/user') }}" class="btn btn-warning"> <i class="fas fa-ban"></i> Cancelar</a>
             </div>
             </form>
     </div>

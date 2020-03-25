@@ -23,7 +23,7 @@
     <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
     <div class="card shadow mb-4">
    <div class="card-body">
-   <h5 id="title">Update Routers</h5>
+   <h5 id="title">Actualizar Routers</h5>
       
     <form method="POST" action="{{ route('/dashboard/routerboard/update',$routers->id) }}" role="form" enctype="multipart/form-data">
  

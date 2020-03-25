@@ -16,6 +16,8 @@ use \RouterOS\Client;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Paginate;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class VouchersController extends Controller
 {
@@ -370,6 +372,7 @@ class VouchersController extends Controller
             if($detailsv->delete()){
              Voucher::destroy($id);
             }
+            Alert::success('Vouchers eliminados')->autoClose(3000);
              return redirect('/dashboard/vouchers/reprint');
          }
          return view('welcome');
@@ -492,27 +495,28 @@ class VouchersController extends Controller
             $profile = Profile::find($voucher->idprofile_voucher);
           
             $nametemplate = $request->input('name_template');
-            $detailv = DB::table('templates_voucher')->select('name_template')->where('name_template',$nametemplate)->and('iduser_template',$uidSesion)->first();
-            if($nametemplate = $detailv){
-                return redirect('/dashboard/vouchers/design',$voucher->id)->with('message','Este nombre ya existe !');
-            }else{
+            $templatedb = DB::table('templates_voucher')->select('name_template')->where('name_template',$nametemplate)->where('iduser_template',$uidSesion)->first();
+            if($templatedb == null){
                 $template = new Template;
-            $template->iduser_template = $user->id;
-            $template->name_template = $request->input('name_template');
-            $template->bgcolor_template = $request->input('bgcolor_template');
-            $template->logo_template = $request->input('logo_template');
-            $template->logo_template = $request->file('logo_template')->store('/');
-            $template->font_template = $request->input('font_template'); 
-            $template->color_template = $request->input('color_etiqueta');
-         
-            $template->save();
+                $template->iduser_template = $user->id;
+                $template->name_template = $request->input('name_template');
+                $template->bgcolor_template = $request->input('bgcolor_template');
+                $template->logo_template = $request->input('logo_template');
+                $template->logo_template = $request->file('logo_template')->store('/');
+                $template->font_template = $request->input('font_template'); 
+                $template->color_template = $request->input('color_etiqueta');
+            
+                $template->save();
+               
+                $templates = DB::table('templates_voucher')->select('*')->where('iduser_template',$uidSesion)->get();
 
-            $templates = DB::table('templates_voucher')->select('*')->where('iduser_template',$uidSesion)->get();
-
-        return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile, "templates"=>$templates]);
+            return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile, "templates"=>$templates]);
+            }else{
+                Alert::error('Este template ya existe')->autoClose(2000);
+                return redirect()->route('/dashboard/vouchers/reprintvoucher', ['id' => $voucher->id]);
             }
+            
         }
         return view ('welcome');
     }
-    
 }

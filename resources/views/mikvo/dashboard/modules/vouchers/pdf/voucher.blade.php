@@ -23,10 +23,10 @@
    
 </head>
 <body>
-    <h1 class="h3 mb-2 text-gray-800">Create template</h1>
+    <h1 class="h3 mb-2 text-gray-800">Crear plantilla</h1>
     <div class="card shadow mb-4">
         <div class="card-body">
-          <h5 id="title">New templates</h5>
+          <h5 id="title">Nueva plantilla</h5>
             <form method="POST" action="{{ route('/dashboard/vouchers/template/create',$voucher->id) }}" role="form" enctype="multipart/form-data">
                 @csrf  
                 <input type="hidden" name="_method" value="PUT">
@@ -58,7 +58,7 @@
                     <div class="col-sm-10 col-md-4 col-lg-4">
                         <div class="form-group">
                             <label for="logo_template">Logo:</label>
-                            <input type="file" id="logo_template" name="logo_template" accept="image/*">
+                            <input type="file" id="logo_template" name="logo_template" accept="image/jpeg">
                         </div>
                     </div>
                     

@@ -23,7 +23,7 @@
     <h1 class="h3 mb-2 text-gray-800">Routerboar</h1>
     <div class="card shadow mb-4 col-md-12">
    <div class="card-body">
-   <h5 id="title">Add Routers</h5>
+   <h5 id="title">Agregar Routers</h5>
       
     <form method="POST" action="{{ route('/dashboard/routerboard/store') }}" role="form" enctype="multipart/form-data">
  

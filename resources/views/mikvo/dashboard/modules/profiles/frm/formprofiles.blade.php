@@ -63,6 +63,7 @@
              class="form-control" 
              name="name_profile"
              required
+             maxlength="20"
              value="{{ $profiles->name_profile}}"
              placeholder="Ingresa el nombre de perfil" 
              >
@@ -395,6 +396,7 @@
              class="form-control" 
              name="name_profile"
              required
+             maxlength="20"
              placeholder="Ingresa el nombre de perfil" 
              >
        </div>
@@ -664,5 +666,5 @@
 </div>
 @endif
 <hr>
-<button type="submit" style="margin-right: 5px;" class="btn btn-success btn-xs"><i class="fa fa-download"></i> Guardar</button>
-<a href="{{ route('/dashboard/profiles') }}" class="btn btn-warning">Cancelar</a>
+<button type="submit" style="margin-right: 5px;" class="btn btn-success btn-xs"><i class="fas fa-save"></i> Guardar</button>
+<a href="{{ route('/dashboard/profiles') }}" class="btn btn-warning"> <i class="fas fa-ban"></i> Cancelar</a>

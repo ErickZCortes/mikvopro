@@ -19,7 +19,7 @@ class CreateTemplatesVoucherTable extends Migration
             $table->bigInteger("iduser_template")->unsigned();
             $table->foreign("iduser_template")->references("id")->on("users");
             
-            $table->string('name_template')->unique();
+            $table->string('name_template');
             $table->string('bgcolor_template')->default("null");
             $table->string('logo_template');
             $table->string('font_template');

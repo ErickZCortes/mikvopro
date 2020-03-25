@@ -20,12 +20,12 @@
     @endsection
     
     @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Profiles</h1>
+    <h1 class="h3 mb-2 text-gray-800">Perfiles</h1>
     <div class="card shadow mb-4 col-md-12">
    <div class="card-body">
    <div class="row">
    <div class="col-md-8">
-   <h5 id="title">Update Profiles</h5>
+   <h5 id="title">Actualizar perfiles</h5>
     <form method="POST" action="{{ route('/dashboard/profiles/update',$profiles->id) }}" role="form" enctype="multipart/form-data">
  
         <input type="hidden" name="_method" value="PUT">

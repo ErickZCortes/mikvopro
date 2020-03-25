@@ -39,14 +39,14 @@
                   <div class="input-group">
                     <input type="search" class="form-control form-control-md" name ="search">
                       <span class="input-group-prepend">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
                       </span>
                   </div>
               
                 </div>
               <div class="col-sm-12 col-md-6" style="margin-left: 20px">
               <div class="input-group">
-              <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success">Agregar Router</a>
+              <a href="{{ route('/dashboard/routerboard/create') }}" class="btn btn-success"> <i class="fas fa-plus"></i> Agregar Router</a>
 
               </div>
               </div>
@@ -119,6 +119,7 @@
         </div>
       </div>
     </div>
+@include('sweetalert::alert')
     <script type="text/javascript">
     
       function confirmdelete()

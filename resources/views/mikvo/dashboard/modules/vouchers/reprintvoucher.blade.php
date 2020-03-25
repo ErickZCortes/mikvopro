@@ -22,7 +22,7 @@
     @section('content')
         
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Reprint</h1>
+<h1 class="h3 mb-2 text-gray-800">Reimprimir vouchers</h1>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-body">
@@ -34,7 +34,7 @@
                   <div class="input-group">
                     <input type="search" class="form-control form-control-md" name ="search">
                       <span class="input-group-prepend">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
                       </span>
                   </div>
               </form>
@@ -60,7 +60,7 @@
                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                     aria-label="Salary: activate to sort column ascending" style="width: 115px;">Fecha</th>
                   <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                    aria-label="Actions: activate to sort column ascending" style="width: 115px;">Accones</th>
+                    aria-label="Actions: activate to sort column ascending" style="width: 180px;">Acciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -77,10 +77,10 @@
                           <input type="hidden" name="_method" value="PUT">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                           <a href="{{ route('/dashboard/vouchers/reprintvoucher',$voucher->id) }}" class="btn btn-info btn-sm">
-                            <i class="fa fa-repeat"></i>
+                            <i class="fas fa-print"></i> Imprimir
                           </a>
                           <button class="btn btn-danger btn-sm" name="deletevoucher" type="submit">
-                          <i class="fa fa-trash-o"></i>
+                          <i class="fa fa-trash-o"></i> Eliminar
                           </button>
                         </form>
                       </td>
@@ -113,17 +113,17 @@
     </div>
   </div>
 </div>
+@include('sweetalert::alert')
 <script type="text/javascript">
-   $('button[name="deletevoucher"]').on('click', function(e) {
-  var $form = $(this).closest('form');
-  e.preventDefault();
-  $('#confirm').modal({
-      backdrop: 'static',
-      keyboard: false
-  })
-  .on('click', '#delete', function(e) {
-      $form.trigger('submit');
-    });
-});
-    </script>
+    
+  function confirmdelete()
+  {
+  var x = confirm("¿Estas seguro de eliminar el router?");
+  if (x)
+    return true;
+  else
+    return false;
+  }
+
+</script>
   @endsection

@@ -71,19 +71,24 @@ class ProfilesController extends Controller
         }
         return view('welcome');
     }
-    public function store(Request $request)
-    {
-        if (session()->has('UserSession')){
-            if(session()->has('routerConnected')){
-                $ip = session()->get('routerConnected')->ip_router;
-                $userrouter = session()->get('routerConnected')->user_router;
-                $pass = session()->get('routerConnected')->password_router;
-                $port = session()->get('routerConnected')->port_router;
-                $client = "";
-                if($this->connect($ip, $userrouter, $pass, $port)){
+    
+public function store(Request $request)
+{
+    if (session()->has('UserSession')){
+        if(session()->has('routerConnected')){
+            $ip = session()->get('routerConnected')->ip_router;
+            $userrouter = session()->get('routerConnected')->user_router;
+            $pass = session()->get('routerConnected')->password_router;
+            $port = session()->get('routerConnected')->port_router;
+            $client = "";
+            if($this->connect($ip, $userrouter, $pass, $port)){
+                $name = $request->input('name_profile');
+                $uidSesion = session()->get('UserSession')->id;
+                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->and('iduser_profile',$uidSesion)->first();
+                if($profilebd == null){
                     $profile = new Profile;
                     $client = $this->connect($ip, $userrouter, $pass, $port);
-                    $uidSesion = session()->get('UserSession')->id;
+                    
                     $name = $request->input('name_profile');
                     $addrpool = $request->input('addpool_profile');
                     $getprice = $request->input('cost_profile');
@@ -139,7 +144,7 @@ class ProfilesController extends Controller
 
                     $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
                     $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
-                    
+
                     if ($expmode == "rem") {
                         $onlogin = $onlogin . $lock . "}}";
                         $mode = "remove";
@@ -157,10 +162,10 @@ class ProfilesController extends Controller
                     } else {
                         $onlogin = "";
                       }
-                    
+                  
                     $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
                     if($typetime == "Corrido"){
-                        
+
                         $query =(new Query('/ip/hotspot/user/profile/add'))
                         ->equal('name', $name)
                         ->equal('address-pool', $addrpool)
@@ -176,7 +181,7 @@ class ProfilesController extends Controller
                         ->equal('parent-queue', $parent);
                         $out = $client->query($query)->read();
 
-                        
+
                     }else {
                     
                         $query =(new Query('/ip/hotspot/user/profile/add'))
@@ -239,19 +244,23 @@ class ProfilesController extends Controller
                         $profile->expiredho_profiles = $request->input('expiredho_profiles');
                         $profile->cuttime_profile = $cuttime;
                     }
-                    
+
                     $profile->lockuser_profile = $getlock;
                     $profile->parentq_profiles = $parent; 
-                    
+
                     $profile->save();
 
                     return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
-                    
                 }
+
+            }else{
+                Alert::error('Este perfil ya existe', 'Ingresa otro nombre')->autoClose(3000);
+                return redirect('/dashboard/profiles/create');
             }
         }
-        return view('welcome');
     }
+    return view('welcome');
+}
 
     public function edit($id)
     {
@@ -282,17 +291,20 @@ class ProfilesController extends Controller
         return view('welcome');
     }
 
-    public function update(Request $request, $id)
-    {
-        if(session()->has('UserSession')){
-            if(session()->has('routerConnected')){
-                $ip = session()->get('routerConnected')->ip_router;
-                $userrouter = session()->get('routerConnected')->user_router;
-                $pass = session()->get('routerConnected')->password_router;
-                $port = session()->get('routerConnected')->port_router; 
-                if($this->connect($ip, $userrouter, $pass, $port)){
-                    $profile = Profile::find($id);
-                    $name = $request->input('name_profile');
+    
+public function update(Request $request, $id)
+{
+    if(session()->has('UserSession')){
+        if(session()->has('routerConnected')){
+            $ip = session()->get('routerConnected')->ip_router;
+            $userrouter = session()->get('routerConnected')->user_router;
+            $pass = session()->get('routerConnected')->password_router;
+            $port = session()->get('routerConnected')->port_router; 
+            if($this->connect($ip, $userrouter, $pass, $port)){
+                $profile = Profile::find($id);
+                $name = $request->input('name_profile');
+                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->and('iduser_profile',$uidSesion)->first();
+                if($profilebd == null){
                     $addrpool = $request->input('addpool_profile');
                     $getprice = $request->input('cost_profile');
                     $getsprice = $request->input('sprice_profile');
@@ -328,8 +340,8 @@ class ProfilesController extends Controller
                     $getmonexpired = $client->query($query)->read();
                     $monexpired = $getmonexpired[0];
                     $monid = $monexpired['.id'];
-                	$pmon = $monexpired['name'];
-                	$chkpmon = $monexpired['disabled'];
+                    $pmon = $monexpired['name'];
+                    $chkpmon = $monexpired['disabled'];
 
                     if($getprice ==""){
                         $price = "0";
@@ -362,7 +374,7 @@ class ProfilesController extends Controller
                     $randinterval = "00:02:".rand(10,59);
 
                     $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
-    
+                
                     $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
 
                     if ($expmode == "rem") {
@@ -384,9 +396,9 @@ class ProfilesController extends Controller
                     }
 
                     $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
-                    
+
                     if($typetime == "Corrido"){
-                        
+
                         $query =(new Query('/ip/hotspot/user/profile/set'))
                         ->equal('.id', $idp)
                         ->equal('name', $name)
@@ -443,12 +455,12 @@ class ProfilesController extends Controller
                             ->equal('disabled', 'no')
                             ->equal('comment', $comm);
                         }
-                        
+
                     }else{
                         $query =(new Query('/system/scheduler/remove'))
                         ->where('.id', $monid);
                     }
-                   
+                
                     $uidSesion = session()->get('UserSession')->id;
                     $profile->iduser_profile = $uidSesion;
                     $profile->name_profile = $name;
@@ -481,19 +493,24 @@ class ProfilesController extends Controller
                         $profile->expiredho_profiles = $request->input('expiredho_profiles');
                         $profile->cuttime_profile = $cuttime;
                     }
-                    
+
                     $profile->lockuser_profile = $getlock;
                     $profile->parentq_profiles = $parent; 
-                    
+
                     $profile->save();
 
                     return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
+                }else{
+                    Alert::error('Este perfil ya existe', 'Ingresa un nombre válido')->autoClose(3000);
+                    //return redirect('/dashboard/vouchers/template/create',$voucher->id);
+                    return redirect()->route('/dashboard/profiles/edit', ['id' => $id]);
                 }
-            }            
-        }
-        return view('welcome');
+                
+            }
+        }            
     }
-
+    return view('welcome');
+}
     public function destroy($id)
     {
         if(session()->has('UserSession')){

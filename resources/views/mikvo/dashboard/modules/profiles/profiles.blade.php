@@ -21,7 +21,7 @@
     
     @section('content')
       
-<h1 class="h3 mb-2 text-gray-800">Profiles</h1>
+<h1 class="h3 mb-2 text-gray-800">Perfiles</h1>
 <div class="card shadow mb-4">
       
     <div class="card-body">
@@ -33,13 +33,13 @@
               <div class="input-group">
                 <input type="search" class="form-control form-control-md" name ="search">
                   <span class="input-group-prepend">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                   </span>
               </div>
             </div>
             <div class="col-sm-12 col-md-4" style="margin-left: 20px">
             <div class="input-group">
-            <a href="{{ route('/dashboard/profiles/create') }}" class="btn btn-success">Agregar Perfil</a>
+            <a href="{{ route('/dashboard/profiles/create') }}" class="btn btn-success"> <i class="fas fa-plus"></i> Agregar Perfil</a>
             </div>
             </div>
           </div>
@@ -51,19 +51,19 @@
                 <thead>
                   <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 180px;">Nombre</th>
+                      aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 160px;">Nombre</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Position: activate to sort column ascending" style="width: 180px;">Address Pool</th>
+                      aria-label="Position: activate to sort column ascending" style="width: 130px;">Address Pool</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Office: activate to sort column ascending" style="width: 180px;">Límite de velocidad</th>
+                      aria-label="Office: activate to sort column ascending" style="width: 130px;">Límite de velocidad</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Age: activate to sort column ascending" style="width: 180px;">Precio</th>
+                      aria-label="Age: activate to sort column ascending" style="width: 100px;">Precio</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Tipo tiempo</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 130px;">Tipo tiempo</th>
                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Límite de tiempo</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 100px;">Límite de tiempo</th>
                       <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                      aria-label="Actions: activate to sort column ascending" style="width: 180px;">Acciones</th>
+                      aria-label="Actions: activate to sort column ascending" style="width: 50px;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -79,9 +79,9 @@
                       <form action="{{route('/dashboard/profiles/delete',$profile->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <a href="{{ route('/dashboard/profiles/edit',$profile->id) }}" class="btn btn-info btn-sm"> <i class="far fa-edit"> Editar</i></a>
+                        <a href="{{ route('/dashboard/profiles/edit',$profile->id) }}" class="btn btn-primary btn-sm"> <i class="far fa-edit"></i> Editar</a>
                         <button class="btn btn-danger btn-sm" type="submit">
-                          <i class="fa fa-trash-o"> Eliminar</i>
+                          <i class="fa fa-trash-o"></i> Eliminar
                         </button>
                       </form>
                     </td>

@@ -19,7 +19,7 @@
          </div>
          <div class="col-sm-10 col-md-4 col-lg-4">
          <div class="form-group">
-            <label for="user_router">User:</label>
+            <label for="user_router">Usuario:</label>
             <input 
                id="user_router"
                type="text" 
@@ -34,7 +34,7 @@
          </div>
          <div class="col-sm-10 col-md-4 col-lg-4">
          <div class="form-group">
-            <label for="password_router">Password:</label>
+            <label for="password_router">Contraseña:</label>
             <input 
                id="password_router"
                type="password" 
@@ -82,7 +82,7 @@
          </div>
          <div class="col-sm-10 col-md-4 col-lg-4">
          <div class="form-group">
-            <label for="user_router">User:</label>
+            <label for="user_router">Usuario:</label>
             <input 
                id="user_router"
                type="text" 
@@ -96,7 +96,7 @@
          </div>
          <div class="col-sm-10 col-md-4 col-lg-4">
             <div class="form-group">
-               <label for="password_router">Password:</label>
+               <label for="password_router">Contraseña:</label>
                <input 
                   id="password_router"
                   type="password" 
@@ -123,5 +123,5 @@
          </div>
          </div>
 @endif
-<button type="submit" class="btn btn-primary">Guardar</button>
-<a href="{{ route('/dashboard/routerboard') }}" class="btn btn-warning">Cancelar</a>
+<button type="submit" class="btn btn-primary"> <i class="fas fa-save"></i> Guardar</button>
+<a href="{{ route('/dashboard/routerboard') }}" class="btn btn-warning"> <i class="fas fa-ban"></i> Cancelar</a>

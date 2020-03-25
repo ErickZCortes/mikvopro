@@ -9,6 +9,8 @@ use \RouterOS\Query;
 use \RouterOS\Client;
 use App\DetailVoucher;
 use DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class ViewsController extends Controller
@@ -77,13 +79,13 @@ class ViewsController extends Controller
                     $getscripts = (new Query('/system/script/print'));
                     $scripts = $client->query($getscripts)->read(); 
                     
-                    $gettrafficether1 = (new Query('/interface/monitor-traffic'))
+                   /* $gettrafficether1 = (new Query('/interface/monitor-traffic'))
                                   ->equal('interface', 'ether1')
                                   ->equal('once');
                     $trafficether1 = $client->query($gettrafficether1)->read();
-                    //dd($trafficether1[0]);
+                    //dd($trafficether1[0]);*/
 
-                    return view('mikvo.dashboard.layouts.main',["trafficether1"=>$trafficether1[0],"scripts"=>$scripts,"freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter,'user'=>$user]);
+                    return view('mikvo.dashboard.layouts.main',["scripts"=>$scripts,"freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter,'user'=>$user]);
                 }   
             }
         }

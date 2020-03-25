@@ -28,7 +28,7 @@
     <link rel="stylesheet"type="text/css" href="{{URL::asset('css/app.css')}}">
 </header>
 @if ( !empty ( $user->id) )
-<h1 class="h3 mb-2 text-gray-800">Perfil del usuario</h1>
+<h1 class="h3 mb-2 text-gray-800">Editar perfil</h1>
             <div class="card shadow mb-4">
                 <div class="card-body">
                 <form method="POST" action="{{ route('/dashboard/user/update',$user->id) }}" role="form" enctype="multipart/form-data">
@@ -56,7 +56,7 @@
                                     type="text" 
                                     class="form-control text-capitalize" 
                                     name="user_name"
-                                    minlength="5" maxlength="30"
+                                    minlength="5" maxlength="15"
                                     value="{{ $user->user_name }}"
                                     required
                                     >
@@ -81,6 +81,7 @@
                                     type="email" 
                                     class="form-control" 
                                     name="email_user"
+                                    maxlength="40"
                                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                     value="{{ $user->email_user }}"
                                     required

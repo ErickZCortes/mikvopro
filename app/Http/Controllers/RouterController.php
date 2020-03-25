@@ -10,6 +10,7 @@ use vendor\autoload;
 use \RouterOS\Query;
 use \RouterOS\Client;
 use App\DetailVoucher;
+use RealRashid\SweetAlert\Facades\Alert;
 use DB;
 
 
@@ -80,8 +81,12 @@ class RouterController extends Controller
                     $free = $this->formatBytes($freememory);
                     $rest = $this->formatBytes($resta);
 
-                    return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                    $getscripts = (new Query('/system/script/print'));
+                    $scripts = $client->query($getscripts)->read();
+                    Alert::toast('Conectado', 'success')->position('top-end')->autoClose(3000);
+                    return view('mikvo.dashboard.layouts.main',["scripts"=>$scripts,"freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
                 }else{
+                    Alert::toast('Fallo la conexión', 'error')->position('top-end')->autoClose(3000);
                     return redirect('/dashboard/routerboard/');
                 }
             }    
@@ -140,8 +145,9 @@ class RouterController extends Controller
             }
                 
             $router->save();
+            Alert::success('¡Guardado con éxito!')->autoClose(3000);
+            return redirect('/dashboard/routerboard');
             
-            return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
         }
         return view('welcome');     
     }
@@ -163,11 +169,18 @@ class RouterController extends Controller
             $router = Router::find($id);
             $router->ip_router = $request->input('ip_router');
             $router->user_router = $request->input('user_router');
-            $router->password_router = $request->input('password_router');
+            $pass = $request->input('password_router');
+
+            if ($pass == null ) {
+                $pass = "";
+            }
+            $router->password_router = $pass;
+
             $router->port_router = $request->input('port_router');
             $router->save();
     
-            return redirect('/dashboard/routerboard')->with('message','Guardado Satisfactoriamente !');
+            Alert::success('Guardado satisfactoriamente')->autoClose(3000);
+            return redirect('/dashboard/routerboard');
         }
         return view('welcome');
     }
@@ -177,7 +190,9 @@ class RouterController extends Controller
         if (session()->has('UserSession')){
 
             Router::destroy($id);
+            Alert::success('Registro eliminado')->autoClose(3000);
             return redirect('/dashboard/routerboard');
+            
         }
         return view('welcome');
 

@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
             $table->bigInteger("iduser_profile")->unsigned()->nullable();
             $table->foreign("iduser_profile")->references("id")->on("users");
             
-            $table->string("name_profile",30)->nullable()->unique();
+            $table->string("name_profile",30)->nullable();
             $table->string("addpool_profile");            
             $table->string("cost_profile");
             $table->string("sprice_profile");
