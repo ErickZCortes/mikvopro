@@ -323,6 +323,9 @@
                   <li>
                     <a class="btn btn-outline-info" href="{{route('/login')}}" role="button">Login</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{route('/register')}}" role="button">Registro</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -336,12 +339,9 @@
                 <div class="col-12 col-md-6 col-lg-5 text-center text-md-left">
                   <h1 class="display-3">Rapido, Seguro, Confiable</h1>
                   <h2 class="lead">Servicio de internet por fichas al alcance de tus manos</h2>
-                  <form>
-                  <a class="btn btn-primary-outline"  href="{{route('/prueba')}}">COMENZAR</a>
-                </form>
                 </div>
                 <div class="col-md-6">
-                  <img alt="Image" src="{{URL::asset('/uploads/fastweb.png')}}" class="shadow img-fluid">
+                  <img alt="Image" src="{{URL::asset('/uploads/fastweb.png')}}" class=" img-fluid">
                 </div>
               </div>
             </div>
@@ -354,8 +354,8 @@
                     <div>
                       <img src="{{URL::asset('/uploads/fastweb.png')}}" alt="img" width="170px" height="150px">
                     </div>
-                    <h3>Fully Responsive</h3>
-                    <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                    <h3>Fácil de usar</h3>
+                    <p class="lead mb-0">Mikvo cuenta con una interfaz amigable para el usuario</p>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -363,8 +363,8 @@
                     <div>
                       <img src="{{URL::asset('/uploads/network.png')}}" alt="img" width="170px" height="150px">
                     </div>
-                    <h3>Bootstrap 4 Ready</h3>
-                    <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
+                    <h3>Diseño y calidad</h3>
+                    <p class="lead mb-0">Podrás agregar un toque de creatividad</p>
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -372,8 +372,8 @@
                     <div>
                       <img src="{{URL::asset('/uploads/transfer.png')}}" alt="img" width="170px" height="150px">
                     </div>
-                    <h3>Easy to Use</h3>
-                    <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                    <h3>Almacenamiento</h3>
+                    <p class="lead mb-0">Puedes agregar los routers que desees a nuestra aplicación</p>
                   </div>
                 </div>
               </div>
@@ -389,9 +389,9 @@
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                   <div class="col-12 col-sm-8">
                     <i class="fas fa-terminal" style="font-size: 3rem"></i>
-                    <h3 class="h1">An exciting new way</h3>
+                    <h3 class="h1">Desarrollado en Laravel</h3>
                     <span class="lead">
-                      Offer a brief description of this aspect of your product without too much detail
+                      Al ser uno de los framework más actuales y de calidad, Mikvo cuenta con la seguridad para todos sus procesos.
                     </span>
                   </div>
                 </div>
@@ -401,9 +401,9 @@
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                   <div class="col-12 col-sm-8">
                     <i class="fas fa-broadcast-tower" style="font-size: 3rem"></i>
-                    <h3 class="h1">An exciting new way</h3>
+                    <h3 class="h1">Cobertura</h3>
                     <span class="lead">
-                      Offer a brief description of this aspect of your product without too much detail
+                      Con Mikvo puedes editar tus perfiles para asignarle cual será la cobertura de tus fichas
                     </span>
                   </div>
                 </div>
@@ -413,9 +413,9 @@
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
                   <div class="col-12 col-sm-8">
                     <i class="fas fa-desktop" style="font-size: 3rem"></i>
-                    <h3 class="h1">An exciting new way</h3>
+                    <h3 class="h1">Flexible y ágil</h3>
                     <span class="lead">
-                      Offer a brief description of this aspect of your product without too much detail
+                      Adaptado para que puedas crear perfiles y fichas de internet con los parámetros que tu elijas.
                     </span>
                   </div>
                 </div>
@@ -429,9 +429,9 @@
                 <div class="col-12 col-md-9 col-lg-8">
                   <span><p style="vertical-align: inherit;">
                   <h2 class="display-4"><p style="vertical-align: inherit;">
-                    <p style="vertical-align: inherit;">Flujo de trabajo muy simplificado</p></p></h2>
+                    <p style="vertical-align: inherit;">Mikvo, una aplicación de alta calidad a tu alcance</p></p></h2>
                   <span class="lead"><p style="vertical-align: inherit;">
-                    <p style="vertical-align: inherit;">Una oportunidad para presentar los principales beneficios de su producto y preparar el escenario para lo que está por venir</p></p></span>
+                    <p style="vertical-align: inherit;">Disfruta de una aplicación flexible, adaptable a tus necesidades.</p></p></span>
                 </div>
               </div>
             </div>
@@ -444,15 +444,15 @@
               <div class="row">
                 <div class="col-sm-12 col-md-6">
                   <h6>Mikvo</h6>
-                  <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                  <p class="text-justify">Es una aplicación para la creación de fichas de internet con Mikrotik, desarrollada en Laravel, Adaptable a las necesiades de nuestros clientes y en constante desarrollo para brindar los mejores servicios.</p>
                 </div>
                 <div class="col-xs-6 col-md-3"></div>
                 <div class="col-xs-6 col-md-3">
                   <h6>Acceso rápido</h6>
                   <ul class="footer-links">
-                    <li><a href="http://scanfcode.com/about/">Inicio</a></li>
+                    <li><a href="{{ url('/home') }}">Inicio</a></li>
                     <li><a href="http://scanfcode.com/contact/">Manual</a></li>
-                    <li><a href="http://scanfcode.com/sitemap/">Login</a></li>
+                    <li><a href="{{route('/login')}}">Login</a></li>
                   </ul>
                 </div>
               </div>
