@@ -10,7 +10,10 @@
                name="ip_router"
                required
                value="{{ $routers->ip_router }}"
-               placeholder="Ingresa la IP"
+               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+               minlength="7"
+               maxlength="15"
+               placeholder="Ingresa una dirección IP"
                >
          </div>
          </div>
@@ -23,8 +26,9 @@
                class="form-control" 
                name="user_router"
                required
+               maxlength="15"
                value="{{ $routers->user_router }}"
-               placeholder="Ingresa el usuario"
+               placeholder="Ingresa un usuario"
                >
          </div>
          </div>
@@ -33,9 +37,10 @@
             <label for="password_router">Password:</label>
             <input 
                id="password_router"
-               type="text" 
+               type="password" 
                class="form-control" 
                name="password_router"
+               maxlength="20"
                value="{{ $routers->password_router }}"
                placeholder="Ingresa la contraseña"
                >
@@ -50,6 +55,7 @@
                class="form-control" 
                name="port_router"
                required
+               minlength="2" maxlength="4"
                value="{{ $routers->port_router }}"
                placeholder="Ingresa un puerto"
                >
@@ -67,6 +73,9 @@
                class="form-control" 
                name="ip_router"
                required
+               pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+               minlength="7"
+               maxlength="15"
                placeholder="Ingresa la IP"
                >
          </div>
@@ -80,6 +89,7 @@
                class="form-control" 
                name="user_router"
                required
+               maxlength="15"
                placeholder="Ingresa el usuario"
                >
          </div>
@@ -89,9 +99,10 @@
                <label for="password_router">Password:</label>
                <input 
                   id="password_router"
-                  type="text" 
+                  type="password" 
                   class="form-control" 
                   name="password_router"
+                  maxlength="20"
                   placeholder="Ingresa la contraseña"
                   >
             </div>
@@ -104,6 +115,7 @@
                type="text" 
                class="form-control" 
                name="port_router"
+               minlength="2" maxlength="4"
                required
                placeholder="Ingresa un puerto"
                >

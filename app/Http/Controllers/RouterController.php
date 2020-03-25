@@ -24,6 +24,7 @@ class RouterController extends Controller
                 'port' => (int)$port,
             ]);
             return $client;
+            
         }else{
             $client = new Client([
                 'host' => $ip,
@@ -57,7 +58,7 @@ class RouterController extends Controller
                 $ip = session()->get('routerConnected')->ip_router;
                 $userrouter = session()->get('routerConnected')->user_router;
                 $pass = session()->get('routerConnected')->password_router;
-                $port = session()->get('routerConnected')->port_router; 
+                $port = session()->get('routerConnected')->port_router;
                 if($this->connect($ip, $userrouter, $pass, $port)){
                     $inforouter = session()->get('routerConnected');
                     $uidSesion = session()->get('UserSession')->id;
@@ -80,11 +81,10 @@ class RouterController extends Controller
                     $rest = $this->formatBytes($resta);
 
                     return view('mikvo.dashboard.layouts.main',["freememory"=>$free, "restmemeory"=>$rest,'costos'=>$costos,'usersall'=>$usersall, 'active'=>$active,'router'=>$inforouter, 'user' => $user ] );
+                }else{
+                    return redirect('/dashboard/routerboard/');
                 }
-                
-            }else {
-                return redirect('/dashboard/routerboard')->with('message','n!');
-            }
+            }    
         }
         return view('welcome');
     }
@@ -119,12 +119,13 @@ class RouterController extends Controller
             $user = $request->input('user_router');
             $pass = $request->input('password_router');
             $port = $request->input('port_router');
-
             if($this->connect($ip, $user, $pass, $port)){
+               
                 $client = $this->connect($ip, $user, $pass, $port);
+                //dd($client);
+
                 $query =(new Query('/system/routerboard/print'));
                 $out = $client->query($query)->read();
-                
                 $router->iduser_router = $uidSesion;
                 $router->ip_router = $ip;
                 $router->user_router = $user;

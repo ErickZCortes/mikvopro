@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <a href="{{ route('/dashboard/user/edit', $user->id) }}" class="btn btn-success mt-4 ml-3">Editar usuario</a>
+                                            <a href="{{ route('/dashboard/user/edit', $user->id) }}" class="btn btn-success mt-4 ml-3"> <i class="fas fa-user-edit"></i> Editar usuario</a>
                                         </div>
                                     </form>            
                     </div>

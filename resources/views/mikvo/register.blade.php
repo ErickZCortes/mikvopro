@@ -29,7 +29,8 @@
                   type="text" 
                   id="fullname_user" 
                   required
-                  placeholder="Ingresa tu Nombre completo"
+                  placeholder="Ingresa tu nombre completo"
+                  minlength="8" maxlength="40"
                   name="fullname_user"
                    />
               </div>
@@ -40,7 +41,8 @@
                   type="text" 
                   id="user_name" 
                   required
-                  placeholder="Ingresa tu Usuario"
+                  placeholder="Ingresa tu usuario"
+                  minlength="5" maxlength="30"
                   name="user_name"
                   />
               </div>
@@ -54,6 +56,9 @@
                 id="telephone_user" 
                 required
                 placeholder="(555)-555-5555"
+                pattern=".{10,}"
+                maxlength="10"
+                title="El número telefónico debe tener al menos 10 caracteres"
                 name="telephone_user"
                  />
               </div>
@@ -64,6 +69,7 @@
                 type="email" 
                 id="email_user" 
                 required 
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 placeholder="Ingresa tu Correo electrónico"
                 name="email_user"
                 />
@@ -78,9 +84,13 @@
                 id="password_user" 
                 required
                 placeholder="Ingresa tu Contraseña"
-                name="password_user"                
+                name="password_user"     
+                pattern=".{8,}"
+                maxlength="15"
+                placeholder="Ingresa una contraseña"
+                title="La contraseña debe tener al menos 8 caracteres"           
                  />
-                <small>La contraseña debe tener al menos 7 caracteres</small>
+                <small>La contraseña debe tener al menos 8 caracteres</small>
               </div>
             </div>
             <br>
@@ -93,6 +103,7 @@
       </div>
     </div>
 </div>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

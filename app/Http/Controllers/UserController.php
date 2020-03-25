@@ -12,6 +12,7 @@ use vendor\autoload;
 use \RouterOS\Query;
 use \RouterOS\Client;
 use App\DetailVoucher;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -87,6 +88,7 @@ public static function formatBytes($size, $precision = 2)
     }
     public function login(){
         if($this->isSession()){
+            Alert::info('Info Title', 'Info Message');
             return redirect(('/dashboard/routerboard'));
         }
         return view('welcome');
@@ -97,15 +99,19 @@ public static function formatBytes($size, $precision = 2)
         if(isset($usuario)){
             if(Hash::check($password_user,$usuario->password_user)){
                 session()->put('UserSession',$usuario);
+                Alert::toast('Bienvenido', 'success')->position('top-end')->autoClose(2000);
+                //Alert::success('Success Title', 'Success Message')->autoClose(2000);
                 return redirect('/dashboard/routerboard');
             }       
         }
-        return redirect('/login')->with('status', 'Email o password incorrecto!');
+        Alert::error('Error', 'revise su información')->autoClose(1000);
+        return redirect('/login');
     }
 
     public function logout(){
             session()->forget('UserSession');
             session()->forget('routerConnected');
+            Alert::info('Sesión terminada','')->autoClose(1000);
             return redirect('/login');
         
     }
@@ -162,7 +168,7 @@ public static function formatBytes($size, $precision = 2)
             $user->password_user = Hash::make($request->input('password_user'));
             
             $user->save();
-
+            Alert::success('Usuario registrado', 'Inicie sesión')->autoClose(1000);
         return redirect('/login');
         }
         $id = session()->get('UserSession')->id;

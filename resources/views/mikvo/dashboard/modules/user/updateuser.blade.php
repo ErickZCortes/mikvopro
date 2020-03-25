@@ -44,6 +44,7 @@
                                     type="text" 
                                     class="form-control text-capitalize" 
                                     name="fullname_user"
+                                    minlength="8" maxlength="40"
                                     value="{{ $user->fullname_user }}"
                                     required
                                     >
@@ -55,6 +56,7 @@
                                     type="text" 
                                     class="form-control text-capitalize" 
                                     name="user_name"
+                                    minlength="5" maxlength="30"
                                     value="{{ $user->user_name }}"
                                     required
                                     >
@@ -66,6 +68,8 @@
                                     type="tel" 
                                     class="form-control" 
                                     name="telephone_user"
+                                    pattern=".{10,}"
+                                    maxlength="10"
                                     value="{{ $user->telephone_user }}"
                                     required
                                     >
@@ -77,6 +81,7 @@
                                     type="email" 
                                     class="form-control" 
                                     name="email_user"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                     value="{{ $user->email_user }}"
                                     required
                                     >

@@ -39,7 +39,7 @@
         header.masthead {
             position: relative;
             background-color: #50B0AE;
-            background: url("https://ak5.picdn.net/shutterstock/videos/3530885/thumb/1.jpg") no-repeat center center;
+            background: linear-gradient(to right, #bdc3c7, #2c3e50);
             background-size: cover;
             padding-top: 8rem;
             padding-bottom: 8rem;
@@ -122,7 +122,7 @@
         .call-to-action {
             position: relative;
             background-color: #343a40;
-            background: url("https://ak5.picdn.net/shutterstock/videos/3530885/thumb/1.jpg") no-repeat center center;
+            background: linear-gradient(to right, #314755, #26a0da);
             background-size: cover;
             padding-top: 7rem;
             padding-bottom: 7rem;
@@ -137,6 +137,169 @@
             left: 0;
             opacity: 0.3;
         }
+        .site-footer
+        {
+          background-color:#26272b;
+          padding:20px 0 20px;
+          font-size:15px;
+          line-height:24px;
+          color:#737373;
+        }
+        .site-footer hr
+        {
+          border-top-color:#bbb;
+          opacity:0.5
+        }
+        .site-footer hr.small
+        {
+          margin:20px 0
+        }
+        .site-footer h6
+        {
+          color:#fff;
+          font-size:16px;
+          text-transform:uppercase;
+          margin-top:5px;
+          letter-spacing:2px
+        }
+        .site-footer a
+        {
+          color:#737373;
+        }
+        .site-footer a:hover
+        {
+          color:#3366cc;
+          text-decoration:none;
+        }
+        .footer-links
+        {
+          padding-left:0;
+          list-style:none
+        }
+        .footer-links li
+        {
+          display:block
+        }
+        .footer-links a
+        {
+          color:#737373
+        }
+        .footer-links a:active,.footer-links a:focus,.footer-links a:hover
+        {
+          color:#3366cc;
+          text-decoration:none;
+        }
+        .footer-links.inline li
+        {
+          display:inline-block
+        }
+        .site-footer .social-icons
+        {
+          text-align:right
+        }
+        .site-footer .social-icons a
+        {
+          width:40px;
+          height:40px;
+          line-height:40px;
+          margin-left:6px;
+          margin-right:0;
+          border-radius:100%;
+          background-color:#33353d
+        }
+        .copyright-text
+        {
+          margin:0
+        }
+        @media (max-width:991px)
+        {
+          .site-footer [class^=col-]
+          {
+            margin-bottom:30px
+          }
+        }
+        @media (max-width:767px)
+        {
+          .site-footer
+          {
+            padding-bottom:0
+          }
+          .site-footer .copyright-text,.site-footer .social-icons
+          {
+            text-align:center
+          }
+        }
+        .social-icons
+        {
+          padding-left:0;
+          margin-bottom:0;
+          list-style:none
+        }
+        .social-icons li
+        {
+          display:inline-block;
+          margin-bottom:4px
+        }
+        .social-icons li.title
+        {
+          margin-right:15px;
+          text-transform:uppercase;
+          color:#96a2b2;
+          font-weight:700;
+          font-size:13px
+        }
+        .social-icons a{
+          background-color:#eceeef;
+          color:#818a91;
+          font-size:16px;
+          display:inline-block;
+          line-height:44px;
+          width:44px;
+          height:44px;
+          text-align:center;
+          margin-right:8px;
+          border-radius:100%;
+          -webkit-transition:all .2s linear;
+          -o-transition:all .2s linear;
+          transition:all .2s linear
+        }
+        .social-icons a:active,.social-icons a:focus,.social-icons a:hover
+        {
+          color:#fff;
+          background-color:#29aafe
+        }
+        .social-icons.size-sm a
+        {
+          line-height:34px;
+          height:34px;
+          width:34px;
+          font-size:14px
+        }
+        .social-icons a.facebook:hover
+        {
+          background-color:#3b5998
+        }
+        .social-icons a.twitter:hover
+        {
+          background-color:#00aced
+        }
+        .social-icons a.linkedin:hover
+        {
+          background-color:#007bb6
+        }
+        .social-icons a.dribbble:hover
+        {
+          background-color:#ea4c89
+        }
+        @media (max-width:767px)
+        {
+          .social-icons li.title
+          {
+            display:block;
+            margin-right:0;
+            font-weight:600
+          }
+        } 
         </style>
     </head>
     <body>
@@ -155,16 +318,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Nosotros</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Servicios</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Precios</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
+                    <a class="nav-link" href="#">Manual</a>
                   </li>
                   <li>
                     <a class="btn btn-outline-info" href="{{route('/login')}}" role="button">Login</a>
@@ -179,30 +333,26 @@
             <div class="overlay"></div>
             <div class="container">
               <div class="row">
-                <div class="col-xl-9 mx-auto">
-                  <h1 class="mb-5">Servicio de internet por fichas al alcance de tus manos</h1>
-                </div>
-                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <div class="col-12 col-md-6 col-lg-5 text-center text-md-left">
+                  <h1 class="display-3">Rapido, Seguro, Confiable</h1>
+                  <h2 class="lead">Servicio de internet por fichas al alcance de tus manos</h2>
                   <form>
-                    <div class="form-row">
-                      <div class="col-12">
-                        <a class="btn btn-primary-outline"  href="{{route('/prueba')}}">COMENZAR</a>
-                      </div>
-                    </div>
-                  </form>
+                  <a class="btn btn-primary-outline"  href="{{route('/prueba')}}">COMENZAR</a>
+                </form>
+                </div>
+                <div class="col-md-6">
+                  <img alt="Image" src="{{URL::asset('/uploads/fastweb.png')}}" class="shadow img-fluid">
                 </div>
               </div>
             </div>
           </header>
-          
-          <!-- Icons Grid -->
-          <section class="features-icons bg-light text-center">
+          <section class="bg-light text-center" style="padding: 4rem;">
             <div class="container">
               <div class="row">
                 <div class="col-lg-4">
                   <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                      <i class="icon-screen-desktop m-auto text-primary"></i>
+                    <div>
+                      <img src="{{URL::asset('/uploads/fastweb.png')}}" alt="img" width="170px" height="150px">
                     </div>
                     <h3>Fully Responsive</h3>
                     <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
@@ -210,8 +360,8 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                      <i class="icon-layers m-auto text-primary"></i>
+                    <div>
+                      <img src="{{URL::asset('/uploads/network.png')}}" alt="img" width="170px" height="150px">
                     </div>
                     <h3>Bootstrap 4 Ready</h3>
                     <p class="lead mb-0">Featuring the latest build of the new Bootstrap 4 framework!</p>
@@ -219,8 +369,8 @@
                 </div>
                 <div class="col-lg-4">
                   <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                    <div class="features-icons-icon d-flex">
-                      <i class="icon-check m-auto text-primary"></i>
+                    <div>
+                      <img src="{{URL::asset('/uploads/transfer.png')}}" alt="img" width="170px" height="150px">
                     </div>
                     <h3>Easy to Use</h3>
                     <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
@@ -229,88 +379,103 @@
               </div>
             </div>
           </section>
-          
+          <hr>
           <!-- Image Showcases -->
           <section class="showcase">
             <div class="container-fluid p-0">
               <div class="row no-gutters">
           
-                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{URL::asset('/uploads/code.jpg')}}');"></div>
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                  <h2>Fully Responsive Design</h2>
-                  <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                  <div class="col-12 col-sm-8">
+                    <i class="fas fa-terminal" style="font-size: 3rem"></i>
+                    <h3 class="h1">An exciting new way</h3>
+                    <span class="lead">
+                      Offer a brief description of this aspect of your product without too much detail
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="row no-gutters">
-                <div class="col-lg-6 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
-                <div class="col-lg-6 my-auto showcase-text">
-                  <h2>Updated For Bootstrap 4</h2>
-                  <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('{{URL::asset('/uploads/antenna.jpg')}}');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                  <div class="col-12 col-sm-8">
+                    <i class="fas fa-broadcast-tower" style="font-size: 3rem"></i>
+                    <h3 class="h1">An exciting new way</h3>
+                    <span class="lead">
+                      Offer a brief description of this aspect of your product without too much detail
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="row no-gutters">
-                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg');"></div>
+                <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{{URL::asset('/uploads/typing.jpg')}}');"></div>
                 <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                  <h2>Easy to Use &amp; Customize</h2>
-                  <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                  <div class="col-12 col-sm-8">
+                    <i class="fas fa-desktop" style="font-size: 3rem"></i>
+                    <h3 class="h1">An exciting new way</h3>
+                    <span class="lead">
+                      Offer a brief description of this aspect of your product without too much detail
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
           
-          <!-- Testimonials -->
-          <section class="testimonials text-center bg-light">
+          <section class="bg-dark text-white" style="padding: 55px;">
             <div class="container">
-              <h2 class="mb-5">What people are saying...</h2>
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
-                    <h5>Margaret E.</h5>
-                    <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
-                    <h5>Fred S.</h5>
-                    <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                    <img class="img-fluid rounded-circle mb-3" src="https://i.ytimg.com/vi/rMd2Upb-jE8/maxresdefault.jpg" alt="">
-                    <h5>Sarah W.</h5>
-                    <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
-                  </div>
+              <div class="row justify-content-center text-center section-intro">
+                <div class="col-12 col-md-9 col-lg-8">
+                  <span><p style="vertical-align: inherit;">
+                  <h2 class="display-4"><p style="vertical-align: inherit;">
+                    <p style="vertical-align: inherit;">Flujo de trabajo muy simplificado</p></p></h2>
+                  <span class="lead"><p style="vertical-align: inherit;">
+                    <p style="vertical-align: inherit;">Una oportunidad para presentar los principales beneficios de su producto y preparar el escenario para lo que está por venir</p></p></span>
                 </div>
               </div>
             </div>
           </section>
           
           <!-- Call to Action -->
-          <section class="call-to-action text-white text-center">
-            <div class="overlay"></div>
+          
+          <footer class="site-footer">
             <div class="container">
               <div class="row">
-                <div class="col-xl-9 mx-auto">
-                  <h2 class="mb-4">Ready to get started? Sign up now!</h2>
+                <div class="col-sm-12 col-md-6">
+                  <h6>Mikvo</h6>
+                  <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
                 </div>
-                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                  <form>
-                    <div class="form-row">
-                      <div class="col-12 col-md-9 mb-2 mb-md-0">
-                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
-                      </div>
-                      <div class="col-12 col-md-3">
-                        <button type="submit" class="btn btn-block btn-lg btn-primary" [routerLink]="['/login']">Sign up!</button>
-                      </div>
-                    </div>
-                  </form>
+                <div class="col-xs-6 col-md-3"></div>
+                <div class="col-xs-6 col-md-3">
+                  <h6>Acceso rápido</h6>
+                  <ul class="footer-links">
+                    <li><a href="http://scanfcode.com/about/">Inicio</a></li>
+                    <li><a href="http://scanfcode.com/contact/">Manual</a></li>
+                    <li><a href="http://scanfcode.com/sitemap/">Login</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                  <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Entosoft.
+                  </p>
+                </div>
+      
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                  <ul class="social-icons">
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+                  </ul>
                 </div>
               </div>
             </div>
-          </section>
+      </footer>
            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

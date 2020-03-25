@@ -490,8 +490,13 @@ class VouchersController extends Controller
             $voucher = DB::table('vouchers')->select('*')->where('id',$id)->first();
             $detailv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
             $profile = Profile::find($voucher->idprofile_voucher);
-            
-            $template = new Template;
+          
+            $nametemplate = $request->input('name_template');
+            $detailv = DB::table('templates_voucher')->select('name_template')->where('name_template',$nametemplate)->and('iduser_template',$uidSesion)->first();
+            if($nametemplate = $detailv){
+                return redirect('/dashboard/vouchers/design',$voucher->id)->with('message','Este nombre ya existe !');
+            }else{
+                $template = new Template;
             $template->iduser_template = $user->id;
             $template->name_template = $request->input('name_template');
             $template->bgcolor_template = $request->input('bgcolor_template');
@@ -499,15 +504,15 @@ class VouchersController extends Controller
             $template->logo_template = $request->file('logo_template')->store('/');
             $template->font_template = $request->input('font_template'); 
             $template->color_template = $request->input('color_etiqueta');
-         +
+         
             $template->save();
 
             $templates = DB::table('templates_voucher')->select('*')->where('iduser_template',$uidSesion)->get();
 
         return view('mikvo.dashboard.modules.vouchers.designvoucher',["voucher"=>$voucher,"detailv"=>$detailv, "user"=>$user, "profile"=>$profile, "templates"=>$templates]);
+            }
         }
-        return view('welcome');
-
+        return view ('welcome');
     }
     
 }

@@ -35,7 +35,11 @@
                     <input
                     type="password" 
                     class="form-control"
-                    name="password_user">
+                    name="password_user"
+                    pattern=".{8,}"
+                    maxlength="15"
+                    title="La contraseña debe tener al menos 8 caracteres">
+                    
                 </div>
 
                 <div class="form-group col-md-6">
@@ -44,12 +48,17 @@
                     type="password" 
                     class="form-control"
                     name="password_new"
-                    >
+                    pattern=".{8,}"
+                    maxlength="15"
+                    title="La contraseña debe tener al menos 8 caracteres">
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="password_repeat">Confirma tu nuevo password:</label>
-                    <input type="password" name="password_repeat" class="form-control">
+                    <input type="password" name="password_repeat" class="form-control"
+                    pattern=".{8,}"
+                    maxlength="15"
+                    title="La contraseña debe tener al menos 8 caracteres">
                 </div>
                 <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Guardar</button>

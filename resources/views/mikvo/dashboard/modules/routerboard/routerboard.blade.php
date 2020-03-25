@@ -88,9 +88,10 @@
                         <form action="{{route('/dashboard/routerboard/delete',$router->id)}}" method="POST" role="form" onsubmit="return confirmdelete()">
                           <input type="hidden" name="_method" value="PUT">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                          <a href="{{ route('/dashboard/routerboard/edit',$router->id) }}" class="btn btn-info btn-sm">Editar</a>
+                          <a href="{{ route('/dashboard/routerboard/edit',$router->id) }}" class="btn btn-success btn-sm">
+                            <i class="fa fa-edit"></i> Editar</a>
                           <button class="btn btn-danger btn-sm" type="submit">
-                          <i class="fa fa-trash-o"></i>
+                          <i class="fa fa-trash-o"></i> Eliminar
                           </button>
                           <a  href="{{ route('/dashboard/routerboard/conect', $router->id) }}" class="btn btn-primary btn-sm">
                             <i class="fas fa-plug"></i> Conectar
