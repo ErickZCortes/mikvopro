@@ -98,7 +98,7 @@ class RouterController extends Controller
     {
         if (session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
-            $routers = Router::where('iduser_router', $uidSesion)->paginate(10);
+            $routers = Router::where('iduser_router', $uidSesion)->orderBy('id', 'DESC')->paginate(10);
             //dd($routers);
             $user = User::find($uidSesion);
 

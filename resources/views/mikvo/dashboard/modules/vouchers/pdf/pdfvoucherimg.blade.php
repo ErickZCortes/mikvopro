@@ -35,27 +35,25 @@ table.inside{
                     <tbody>
                         <tr>
                             <td>
-                                <img height="23px" width="48px" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
+                                <img height="25px" width="35px" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
                             </td>
                             <td style="text-align: right; font-family:{{$template->font_template}}; font-size: 8px;" rowspan="1">
                                 [{{$detaili->id}}]
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; background:{{$template->color_template}}; font-family:{{$template->font_template}}; color:#fff;">                            {{$voucher->nprofile_voucher}}
+                            <td style="text-align: center; background:{{$template->color_template}}; font-family:{{$template->font_template}}; color:#fff;">{{$voucher->nprofile_voucher}}
                             </td>
                             <td rowspan="3">
                             <img src="{{ base_path() }}/public/uploads/{{$template->logo_template}}" alt="logo" style="height:50px;">
-
                             </td>
                         </tr>
                         <tr>       
                             <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;">
-                                Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br>${{$profile->sprice_profile}} pesos
+                                ${{$profile->sprice_profile}} pesos <br>
+                               <b> Usuario:</b> {{$detaili->user_detailv}}<br><b>Contraseña:</b> {{$detaili->password_detailv}} <br>
                             </td>
-                            
                         </tr>
-                        
                         <tr>
                             <td colspan="2" style="font-size: 10px; font-family:{{$template->font_template}};">
                                 login: http://{{$voucher->dnsname_voucher}}

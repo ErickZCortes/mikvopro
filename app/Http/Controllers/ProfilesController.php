@@ -40,7 +40,7 @@ class ProfilesController extends Controller
         if(session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
             $user = User::find($uidSesion);
-            $profiles = Profile::where('iduser_profile', $uidSesion)->paginate(10);
+            $profiles = Profile::where('iduser_profile', $uidSesion)->orderBy('id', 'DESC')->paginate(10);
             return view('mikvo.dashboard.modules.profiles.profiles', ["profiles"=>$profiles, "user"=>$user]);               
         }
         return view('welcome');
@@ -68,201 +68,198 @@ class ProfilesController extends Controller
 
                     return view('mikvo.dashboard.modules.profiles.createprofile', ['user'=> $user, 'getallqueue' => $queue, 'getpool' => $addpool]);                
                 }
+            }else{
+            Alert::toast('Debe conectarse a un router', 'error')->position('top-end')->autoClose(3000);
+            return redirect('/dashboard/routerboard/'); 
             }
         }
         return view('welcome');
     }
     
-public function store(Request $request)
-{
-    if (session()->has('UserSession')){
-        if(session()->has('routerConnected')){
-            $ip = session()->get('routerConnected')->ip_router;
-            $userrouter = session()->get('routerConnected')->user_router;
-            $pass = session()->get('routerConnected')->password_router;
-            $port = session()->get('routerConnected')->port_router;
-            $client = "";
-            if($this->connect($ip, $userrouter, $pass, $port)){
-                $name = $request->input('name_profile');
-                $uidSesion = session()->get('UserSession')->id;
-                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->first();
-                if($profilebd == null){
-                    $profile = new Profile;
-                    $client = $this->connect($ip, $userrouter, $pass, $port);
-                    
+    public function store(Request $request)
+    {
+        if (session()->has('UserSession')){
+            if(session()->has('routerConnected')){
+                $ip = session()->get('routerConnected')->ip_router;
+                $userrouter = session()->get('routerConnected')->user_router;
+                $pass = session()->get('routerConnected')->password_router;
+                $port = session()->get('routerConnected')->port_router;
+                $client = "";
+                if($this->connect($ip, $userrouter, $pass, $port)){
                     $name = $request->input('name_profile');
-                    $addrpool = $request->input('addpool_profile');
-                    $getprice = $request->input('cost_profile');
-                    $getsprice = $request->input('sprice_profile');
-                    $sharedusers = $request->input('sharedu_profile');
-                    $ratelimit = $request->input('vsubida_profile').$request->input('sbyte_profile').'/'.$request->input('vdescarga_profile').$request->input('dbyte_profile');
-                    $expmode = $request->input('expmode_profile');
-                    $validity = $request->input('validation_profile');
-                    $graceperiod = $request->input('gracep_profile');
-                    $typetime = $request->input('typet_profile');
-                    $limitdays = $request->input('limitda_profiles');
-                    $limithours = $request->input('limitho_profiles');
-                    $expireday =$request->input('expireda_profiles');
-                    $expirehours = $request->input('expiredho_profiles');
-                    $cuttime = $request->input('cuttime_profile');
-                    $getlock = $request->input('lockuser_profile');
-                    $parent = $request->input('parentq_profiles');
-                    $price = "";
-                    $sprice = "";
-                    $limittime = "";
-                    $expiretime = "";
-                    $look = "";
-                    $mode = "";
-
-                    if($getprice ==""){
-                        $price = "0";
-                    }else{
-                        $price = $getprice;
-                    }
-                    if ($getsprice == "") {
-                        $sprice = "0";
-                    } else {
-                        $sprice = $getsprice;
-                    }
-                    if($limitdays == null){
-                        $limittime = $limithours;
-                    }else{
-                        $limittime = $limitdays.'d'.$limithours;
-                    }
-                    if($expireday == null){
-                        $expiretime = $expirehours;
-                    }else{
-                        $expiretime = $expireday.'d'.$expirehours;
-                    }
-                    if($getlock == "Enable"){
-                        $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
-                    }else{
-                        $lock = "";
-                    }
-
-                    $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
-                    $randinterval = "00:02:".rand(10,59);
-
-                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
-                    $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
-
-                    if ($expmode == "rem") {
-                        $onlogin = $onlogin . $lock . "}}";
-                        $mode = "remove";
-                    } elseif ($expmode == "ntf") {
-                        $onlogin = $onlogin . $lock . "}}";
-                        $mode = "set limit-uptime=1s";
-                    } elseif ($expmode == "remc") {
-                        $onlogin = $onlogin . $record . $lock . "}}";
-                        $mode = "remove";
-                    } elseif ($expmode == "ntfc") {
-                        $onlogin = $onlogin . $record . $lock . "}}";
-                        $mode = "set limit-uptime=1s";
-                    } elseif ($expmode == "0" && $price != "") {
-                        $onlogin = ':put (",,' . $price . ',,,noexp,' . $getlock . ',")' . $lock;
-                    } else {
-                        $onlogin = "";
-                      }
-                  
-                    $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
-                    if($typetime == "Corrido"){
-
-                        $query =(new Query('/ip/hotspot/user/profile/add'))
-                        ->equal('name', $name)
-                        ->equal('address-pool', $addrpool)
-                        ->equal('session-timeout', $limittime)
-                        ->equal('idle-timeout', $limittime)
-                        ->equal('keepalive-timeout', '00:00:00')
-                        ->equal('rate-limit', $ratelimit)
-                        ->equal('shared-users', $sharedusers)
-                        ->equal('mac-cookie-timeout', $limittime)
-                        ->equal('status-autorefresh','00:01:00')
-                        ->equal('transparent-proxy','yes')
-                        ->equal('on-login', $onlogin)
-                        ->equal('parent-queue', $parent);
-                        $out = $client->query($query)->read();
-
-
-                    }else {
-                    
-                        $query =(new Query('/ip/hotspot/user/profile/add'))
-                        ->equal('name', $name)
-                        ->equal('address-pool', $addrpool)
-                        ->equal('session-timeout', $limittime)
-                        ->equal('keepalive-timeout', $cuttime)
-                        ->equal('rate-limit', $ratelimit)
-                        ->equal('shared-users', $sharedusers)
-                        ->equal('mac-cookie-timeout', $expiretime)
-                        ->equal('status-autorefresh','00:02:00')
-                        ->equal('transparent-proxy','yes')
-                        ->equal('on-login', $onlogin)
-                        ->equal('parent-queue', $parent);
-                        $out = $client->query($query)->read();  
-                    }
-
-                    if($expmode != "0"){
-                        $comm = "Monitor Profile ".$name;
-                            $query =(new Query('/system/scheduler/add'))
-                            ->equal('name', $name)
-                            ->equal('start-time', $randstarttime)
-                            ->equal('interval',$randinterval)
-                            ->equal('on-event',$bgservice)
-                            ->equal('disabled', 'no')
-                            ->equal('comment', $comm);
-                            $out = $client->query($query)->read();
-                            //print_r($out);
-                    }
-
                     $uidSesion = session()->get('UserSession')->id;
-                    $profile->iduser_profile = $uidSesion;
-                    $profile->name_profile = $name;
-                    $profile->addpool_profile = $addrpool;                    
-                    $profile->cost_profile = $getprice;
-                    $profile->sprice_profile = $getsprice;
-                    $profile->sharedu_profile = $sharedusers;
-                    $profile->vsubida_profile = $request->input('vsubida_profile');
-                    $profile->sbyte_profile = $request->input('sbyte_profile');
-                    $profile->vdescarga_profile = $request->input('vdescarga_profile');
-                    $profile->dbyte_profile = $request->input('dbyte_profile');
-                    $profile->expmode_profile = $expmode;
-                    if($expmode == "0"){
-                        $profile->validation_profile = "0";
-                        $profile->gracep_profile = "0";
-                    }else if($expmode != "0"){
-                        $profile->validation_profile = $validity;
-                        $profile->gracep_profile = $graceperiod;
+                    $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->first();
+                    if($profilebd == null){
+                        $profile = new Profile;
+                        $client = $this->connect($ip, $userrouter, $pass, $port);
+                        
+                        $name = $request->input('name_profile');
+                        $addrpool = $request->input('addpool_profile');
+                        $getprice = $request->input('cost_profile');
+                        $getsprice = $request->input('sprice_profile');
+                        $sharedusers = 1;
+                        $ratelimit = $request->input('vsubida_profile').$request->input('sbyte_profile').'/'.$request->input('vdescarga_profile').$request->input('dbyte_profile');
+                        $expmode = $request->input('expmode_profile');
+                        $validity = '1m';
+                        $graceperiod = '1m';
+                        $typetime = $request->input('typet_profile');
+                        $limitdays = $request->input('limitda_profiles');
+                        $limithours = $request->input('limitho_profiles');
+                        $expireday =$request->input('expireda_profiles');
+                        $expirehours = $request->input('expiredho_profiles');
+                        $cuttime = $request->input('cuttime_profile');
+                        $getlock = "Enable";
+                        $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
+                        $parent = 'none';
+                        $price = "";
+                        $sprice = "";
+                        $limittime = "";
+                        $expiretime = "";
+                        $mode = "";
+    
+                        if($getprice ==""){
+                            $price = "0";
+                        }else{
+                            $price = $getprice;
+                        }
+                        if ($getsprice == "") {
+                            $sprice = "0";
+                        } else {
+                            $sprice = $getsprice;
+                        }
+                        if($limitdays == null){
+                            $limittime = $limithours;
+                        }else{
+                            $limittime = $limitdays.'d'.$limithours;
+                        }
+                        if($expireday == null){
+                            $expiretime = $expirehours;
+                        }else{
+                            $expiretime = $expireday.'d'.$expirehours;
+                        }
+    
+                        $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
+                        $randinterval = "00:02:".rand(10,59);
+    
+                        $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
+                        $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
+    
+                        if ($expmode == "rem") {
+                            $onlogin = $onlogin . $lock . "}}";
+                            $mode = "remove";
+                        } elseif ($expmode == "ntf") {
+                            $onlogin = $onlogin . $lock . "}}";
+                            $mode = "set limit-uptime=1s";
+                        } elseif ($expmode == "remc") {
+                            $onlogin = $onlogin . $record . $lock . "}}";
+                            $mode = "remove";
+                        } elseif ($expmode == "ntfc") {
+                            $onlogin = $onlogin . $record . $lock . "}}";
+                            $mode = "set limit-uptime=1s";
+                        } elseif ($expmode == "0" && $price != "") {
+                            $onlogin = ':put (",,' . $price . ',,,noexp,' . $getlock . ',")' . $lock;
+                        } else {
+                            $onlogin = "";
+                          }
+                      
+                        $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
+                        if($typetime == "Corrido"){
+    
+                            $query =(new Query('/ip/hotspot/user/profile/add'))
+                            ->equal('name', $name)
+                            ->equal('address-pool', $addrpool)
+                            ->equal('session-timeout', $limittime)
+                            ->equal('idle-timeout', $limittime)
+                            ->equal('keepalive-timeout', '00:00:00')
+                            ->equal('rate-limit', $ratelimit)
+                            ->equal('shared-users', $sharedusers)
+                            ->equal('mac-cookie-timeout', $limittime)
+                            ->equal('status-autorefresh','00:01:00')
+                            ->equal('transparent-proxy','yes')
+                            ->equal('on-login', $onlogin)
+                            ->equal('parent-queue', $parent);
+                            $out = $client->query($query)->read();
+    
+    
+                        }else {
+                        
+                            $query =(new Query('/ip/hotspot/user/profile/add'))
+                            ->equal('name', $name)
+                            ->equal('address-pool', $addrpool)
+                            ->equal('session-timeout', $limittime)
+                            ->equal('keepalive-timeout', $cuttime)
+                            ->equal('rate-limit', $ratelimit)
+                            ->equal('shared-users', $sharedusers)
+                            ->equal('mac-cookie-timeout', $expiretime)
+                            ->equal('status-autorefresh','00:02:00')
+                            ->equal('transparent-proxy','yes')
+                            ->equal('on-login', $onlogin)
+                            ->equal('parent-queue', $parent);
+                            $out = $client->query($query)->read();  
+                        }
+    
+                        if($expmode != "0"){
+                            $comm = "Monitor Profile ".$name;
+                                $query =(new Query('/system/scheduler/add'))
+                                ->equal('name', $name)
+                                ->equal('start-time', $randstarttime)
+                                ->equal('interval',$randinterval)
+                                ->equal('on-event',$bgservice)
+                                ->equal('disabled', 'no')
+                                ->equal('comment', $comm);
+                                $out = $client->query($query)->read();
+                                //print_r($out);
+                        }
+    
+                        $uidSesion = session()->get('UserSession')->id;
+                        $profile->iduser_profile = $uidSesion;
+                        $profile->name_profile = $name;
+                        $profile->addpool_profile = $addrpool;                    
+                        $profile->cost_profile = $getprice;
+                        $profile->sprice_profile = $getsprice;
+                        $profile->sharedu_profile = $sharedusers;
+                        $profile->vsubida_profile = $request->input('vsubida_profile');
+                        $profile->sbyte_profile = $request->input('sbyte_profile');
+                        $profile->vdescarga_profile = $request->input('vdescarga_profile');
+                        $profile->dbyte_profile = $request->input('dbyte_profile');
+                        $profile->expmode_profile = $expmode;
+                        if($expmode == "0"){
+                            $profile->validation_profile = "0";
+                            $profile->gracep_profile = "0";
+                        }else if($expmode != "0"){
+                            $profile->validation_profile = $validity;
+                            $profile->gracep_profile = $graceperiod;
+                        }
+    
+                        $profile->typet_profile = $typetime;
+                        $profile->limitda_profiles = $request->input('limitda_profiles');
+                        $profile->limitho_profiles = $request->input('limitho_profiles');
+                        if($request->input('typet_profile') == "Corrido"){
+                            $profile->expireda_profiles = 1;
+                            $profile->expiredho_profiles = "00:00:00";
+                            $profile->cuttime_profile = "00:00:00";
+                        }else if($request->input('typet_profile') == "Pausado"){
+                            $profile->expireda_profiles = $request->input('expireda_profiles');
+                            $profile->expiredho_profiles = $request->input('expiredho_profiles');
+                            $profile->cuttime_profile = $cuttime;
+                        }
+    
+                        $profile->lockuser_profile = $getlock;
+                        $profile->parentq_profiles = $parent; 
+    
+                        $profile->save();
+    
+                        return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
                     }
-
-                    $profile->typet_profile = $typetime;
-                    $profile->limitda_profiles = $request->input('limitda_profiles');
-                    $profile->limitho_profiles = $request->input('limitho_profiles');
-                    if($request->input('typet_profile') == "Corrido"){
-                        $profile->expireda_profiles = 1;
-                        $profile->expiredho_profiles = "00:00:00";
-                        $profile->cuttime_profile = "00:00:00";
-                    }else if($request->input('typet_profile') == "Pausado"){
-                        $profile->expireda_profiles = $request->input('expireda_profiles');
-                        $profile->expiredho_profiles = $request->input('expiredho_profiles');
-                        $profile->cuttime_profile = $cuttime;
-                    }
-
-                    $profile->lockuser_profile = $getlock;
-                    $profile->parentq_profiles = $parent; 
-
-                    $profile->save();
-
-                    return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
+    
+                }else{
+                    Alert::error('Este perfil ya existe', 'Ingresa otro nombre')->autoClose(3000);
+                    return redirect('/dashboard/profiles/create');
                 }
-
-            }else{
-                Alert::error('Este perfil ya existe', 'Ingresa otro nombre')->autoClose(3000);
-                return redirect('/dashboard/profiles/create');
             }
         }
+        return view('welcome');
     }
-    return view('welcome');
-}
-
     public function edit($id)
     {
         if(session()->has('UserSession')){
@@ -293,226 +290,220 @@ public function store(Request $request)
     }
 
     
-public function update(Request $request, $id)
-{
-    if(session()->has('UserSession')){
-        if(session()->has('routerConnected')){
-            $ip = session()->get('routerConnected')->ip_router;
-            $userrouter = session()->get('routerConnected')->user_router;
-            $pass = session()->get('routerConnected')->password_router;
-            $port = session()->get('routerConnected')->port_router; 
-            if($this->connect($ip, $userrouter, $pass, $port)){
-                $uidSesion = session()->get('UserSession')->id;
-                $profile = Profile::find($id);
-                $name = $request->input('name_profile');
-                $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->count();
-                if($profilebd <= 1){
-                    $addrpool = $request->input('addpool_profile');
-                    $getprice = $request->input('cost_profile');
-                    $getsprice = $request->input('sprice_profile');
-                    $sharedusers = $request->input('sharedu_profile');
-                    $ratelimit = $request->input('vsubida_profile').$request->input('sbyte_profile').'/'.$request->input('vdescarga_profile').$request->input('dbyte_profile');
-                    $expmode = $request->input('expmode_profile');
-                    $validity = $request->input('validation_profile');
-                    $graceperiod = $request->input('gracep_profile');
-                    $typetime = $request->input('typet_profile');
-                    $limitdays = $request->input('limitda_profiles');
-                    $limithours = $request->input('limitho_profiles');
-                    $expireday =$request->input('expireda_profiles');
-                    $expirehours = $request->input('expiredho_profiles');
-                    $cuttime = $request->input('cuttime_profile');
-                    $getlock = $request->input('lockuser_profile');
-                    $parent = $request->input('parentq_profiles');
-                    $price = "";
-                    $sprice = "";
-                    $limittime = "";
-                    $expiretime = "";
-                    $look = "";
-                    $mode = "";
-                    $idp = "";
-                    $client = $this->connect($ip, $userrouter, $pass, $port);
-                    $pprofile = (new Query('/ip/hotspot/user/profile/print'))
-                    ->where('name', $name);
-                    $getprofile = $client->query($pprofile)->read();
-                    $idp = $getprofile[0]['.id'];
-                    $pname = $getprofile[0]['name'];
-                    //dd($getprofile);
-                    $query = (new Query('/system/scheduler/print'))
-                    ->where('name', $pname);
-                    $getmonexpired = $client->query($query)->read();
-                    $monexpired = $getmonexpired[0];
-                    $monid = $monexpired['.id'];
-                    $pmon = $monexpired['name'];
-                    $chkpmon = $monexpired['disabled'];
-
-                    if($getprice ==""){
-                        $price = "0";
-                    }else{
-                        $price = $getprice;
-                    }
-                    if ($getsprice == "") {
-                        $sprice = "0";
-                    } else {
-                        $sprice = $getsprice;
-                    }
-                    if($limitdays == null){
-                        $limittime = $limithours;
-                    }else{
-                        $limittime = $limitdays.'d'.$limithours;
-                    }
-                    if($expireday == null){
-                        $expiretime = $expirehours;
-                    }else{
-                        $expiretime = $expireday.'d'.$expirehours;
-                    }
-
-                    if ($getlock == 'Enable') {
-                      $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
-                    } else {
-                      $lock = "";
-                    }
-
-                    $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
-                    $randinterval = "00:02:".rand(10,59);
-
-                    $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
-                
-                    $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
-
-                    if ($expmode == "rem") {
-                        $onlogin = $onlogin . $lock . "}}";
-                        $mode = "remove";
-                      } elseif ($expmode == "ntf") {
-                        $onlogin = $onlogin . $lock . "}}";
-                        $mode = "set limit-uptime=1s";
-                      } elseif ($expmode == "remc") {
-                        $onlogin = $onlogin . $record . $lock . "}}";
-                        $mode = "remove";
-                      } elseif ($expmode == "ntfc") {
-                        $onlogin = $onlogin . $record . $lock . "}}";
-                        $mode = "set limit-uptime=1s";
-                      } elseif ($expmode == "0" && $price != "") {
-                        $onlogin = ':put (",,' . $price . ',,,noexp,' . $getlock . ',")' . $lock;
-                      } else {
-                        $onlogin = "";
-                    }
-
-                    $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
-
-                    if($typetime == "Corrido"){
-
-                        $query =(new Query('/ip/hotspot/user/profile/set'))
-                        ->equal('.id', $idp)
-                        ->equal('name', $name)
-                        ->equal('address-pool', $addrpool)
-                        ->equal('session-timeout', $limittime)
-                        ->equal('idle-timeout', $limittime)
-                        ->equal('keepalive-timeout', '00:00:00')
-                        ->equal('rate-limit', $ratelimit)
-                        ->equal('shared-users', $sharedusers)
-                        ->equal('mac-cookie-timeout', $limittime)
-                        ->equal('status-autorefresh','00:01:00')
-                        ->equal('transparent-proxy','yes')
-                        ->equal('on-login', $onlogin)
-                        ->equal('parent-queue', $parent);
-                        $out = $client->query($query)->read();
-                    }else {
-                    
-                        $query =(new Query('/ip/hotspot/user/profile/set'))
-                        ->equal('.id', $idp)
-                        ->equal('name', $name)
-                        ->equal('address-pool', $addrpool)
-                        ->equal('session-timeout', $limittime)
-                        ->equal('keepalive-timeout', $cuttime)
-                        ->equal('rate-limit', $ratelimit)
-                        ->equal('shared-users', $sharedusers)
-                        ->equal('mac-cookie-timeout', $expiretime)
-                        ->equal('status-autorefresh','00:02:00')
-                        ->equal('transparent-proxy','yes')
-                        ->equal('on-login', $onlogin)
-                        ->equal('parent-queue', $parent);
-                        $out = $client->query($query)->read();  
-                    }
-
-                    if($expmode != "0"){
-                        if (empty($monid)){
-                            $comm = "Monitor Profile ".$name;
-                            $query =(new Query('/system/scheduler/add'))
-                            ->equal('name', $name)
-                            ->equal('start-time', $randstarttime)
-                            ->equal('interval',$randinterval)
-                            ->equal('on-event',$bgservice)
-                            ->equal('disabled', 'no')
-                            ->equal('comment', $comm);
-                            $out = $client->query($query)->read();
-                            //print_r($out);
+    public function update(Request $request, $id)
+    {
+        if(session()->has('UserSession')){
+            if(session()->has('routerConnected')){
+                $ip = session()->get('routerConnected')->ip_router;
+                $userrouter = session()->get('routerConnected')->user_router;
+                $pass = session()->get('routerConnected')->password_router;
+                $port = session()->get('routerConnected')->port_router; 
+                if($this->connect($ip, $userrouter, $pass, $port)){
+                    $uidSesion = session()->get('UserSession')->id;
+                    $profile = Profile::find($id);
+                    $name = $request->input('name_profile');
+                    $profilebd = DB::table('profiles')->select('name_profile')->where('name_profile',$name)->where('iduser_profile',$uidSesion)->count();
+                    if($profilebd <= 1){
+                        $addrpool = $request->input('addpool_profile');
+                        $getprice = $request->input('cost_profile');
+                        $getsprice = $request->input('sprice_profile');
+                        $sharedusers = 1;
+                        $ratelimit = $request->input('vsubida_profile').$request->input('sbyte_profile').'/'.$request->input('vdescarga_profile').$request->input('dbyte_profile');
+                        $expmode = $request->input('expmode_profile');
+                        $validity = '1m';
+                        $graceperiod = '1m';
+                        $typetime = $request->input('typet_profile');
+                        $limitdays = $request->input('limitda_profiles');
+                        $limithours = $request->input('limitho_profiles');
+                        $expireday =$request->input('expireda_profiles');
+                        $expirehours = $request->input('expiredho_profiles');
+                        $cuttime = $request->input('cuttime_profile');
+                        $getlock = "Enable";
+                        $lock = '; [:local mac $"mac-address"; /ip hotspot user set mac-address=$mac [find where name=$user]]';
+                        $parent = 'none';
+                        $price = "";
+                        $sprice = "";
+                        $limittime = "";
+                        $expiretime = "";
+                        $mode = "";
+                        $idp = "";
+                        $client = $this->connect($ip, $userrouter, $pass, $port);
+                        $pprofile = (new Query('/ip/hotspot/user/profile/print'))
+                        ->where('name', $name);
+                        $getprofile = $client->query($pprofile)->read();
+                        $idp = $getprofile[0]['.id'];
+                        $pname = $getprofile[0]['name'];
+                        //dd($getprofile);
+                        $query = (new Query('/system/scheduler/print'))
+                        ->where('name', $pname);
+                        $getmonexpired = $client->query($query)->read();
+                        $monexpired = $getmonexpired[0];
+                        $monid = $monexpired['.id'];
+                        $pmon = $monexpired['name'];
+                        $chkpmon = $monexpired['disabled'];
+    
+                        if($getprice ==""){
+                            $price = "0";
                         }else{
-                            $comm = "Monitor Profile ".$name;
-                            $query =(new Query('/system/scheduler/set'))
-                            ->equal(".id", $monid)
-                            ->equal('name', $name)
-                            ->equal('start-time', $randstarttime)
-                            ->equal('interval',$randinterval)
-                            ->equal('on-event',$bgservice)
-                            ->equal('disabled', 'no')
-                            ->equal('comment', $comm);
+                            $price = $getprice;
                         }
-
+                        if ($getsprice == "") {
+                            $sprice = "0";
+                        } else {
+                            $sprice = $getsprice;
+                        }
+                        if($limitdays == null){
+                            $limittime = $limithours;
+                        }else{
+                            $limittime = $limitdays.'d'.$limithours;
+                        }
+                        if($expireday == null){
+                            $expiretime = $expirehours;
+                        }else{
+                            $expiretime = $expireday.'d'.$expirehours;
+                        }
+    
+                        $randstarttime = "0".rand(1,5).":".rand(10,59).":".rand(10,59);
+                        $randinterval = "00:02:".rand(10,59);
+    
+                        $record = '; :local mac $"mac-address"; :local time [/system clock get time ]; /system script add name="$date-|-$time-|-$user-|-'.$price.'-|-$address-|-$mac-|-' . $validity . '-|-'.$name.'-|-$comment" owner="$month$year" source=$date comment=mikvo';
+                    
+                        $onlogin = ':put (",'.$expmode.',' . $price . ',' . $validity . ','.$sprice.',,' . $getlock . ',"); {:local date [ /system clock get date ];:local year [ :pick $date 7 11 ];:local month [ :pick $date 0 3 ];:local comment [ /ip hotspot user get [/ip hotspot user find where name="$user"] comment]; :local ucode [:pic $comment 0 2]; :if ($ucode = "vc" or $ucode = "up" or $comment = "") do={ /sys sch add name="$user" disable=no start-date=$date interval="' . $validity . '"; :delay 2s; :local exp [ /sys sch get [ /sys sch find where name="$user" ] next-run]; :local getxp [len $exp]; :if ($getxp = 15) do={ :local d [:pic $exp 0 6]; :local t [:pic $exp 7 16]; :local s ("/"); :local exp ("$d$s$year $t"); /ip hotspot user set comment=$exp [find where name="$user"];}; :if ($getxp = 8) do={ /ip hotspot user set comment="$date $exp" [find where name="$user"];}; :if ($getxp > 15) do={ /ip hotspot user set comment=$exp [find where name="$user"];}; /sys sch remove [find where name="$user"]';
+    
+                        if ($expmode == "rem") {
+                            $onlogin = $onlogin . $lock . "}}";
+                            $mode = "remove";
+                          } elseif ($expmode == "ntf") {
+                            $onlogin = $onlogin . $lock . "}}";
+                            $mode = "set limit-uptime=1s";
+                          } elseif ($expmode == "remc") {
+                            $onlogin = $onlogin . $record . $lock . "}}";
+                            $mode = "remove";
+                          } elseif ($expmode == "ntfc") {
+                            $onlogin = $onlogin . $record . $lock . "}}";
+                            $mode = "set limit-uptime=1s";
+                          } elseif ($expmode == "0" && $price != "") {
+                            $onlogin = ':put (",,' . $price . ',,,noexp,' . $getlock . ',")' . $lock;
+                          } else {
+                            $onlogin = "";
+                        }
+    
+                        $bgservice = ':local dateint do={:local montharray ( "jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec" );:local days [ :pick $d 4 6 ];:local month [ :pick $d 0 3 ];:local year [ :pick $d 7 11 ];:local monthint ([ :find $montharray $month]);:local month ($monthint + 1);:if ( [len $month] = 1) do={:local zero ("0");:return [:tonum ("$year$zero$month$days")];} else={:return [:tonum ("$year$month$days")];}}; :local timeint do={ :local hours [ :pick $t 0 2 ]; :local minutes [ :pick $t 3 5 ]; :return ($hours * 60 + $minutes) ; }; :local date [ /system clock get date ]; :local time [ /system clock get time ]; :local today [$dateint d=$date] ; :local curtime [$timeint t=$time] ; :foreach i in [ /ip hotspot user find where profile="'.$name.'" ] do={ :local comment [ /ip hotspot user get $i comment]; :local name [ /ip hotspot user get $i name]; :local gettime [:pic $comment 12 20]; :if ([:pic $comment 3] = "/" and [:pic $comment 6] = "/") do={:local expd [$dateint d=$comment] ; :local expt [$timeint t=$gettime] ; :if (($expd < $today and $expt < $curtime) or ($expd < $today and $expt > $curtime) or ($expd = $today and $expt < $curtime)) do={ [ /ip hotspot user '.$mode.' $i ]; [ /ip hotspot active remove [find where user=$name] ];}}}';
+    
+                        if($typetime == "Corrido"){
+    
+                            $query =(new Query('/ip/hotspot/user/profile/set'))
+                            ->equal('.id', $idp)
+                            ->equal('name', $name)
+                            ->equal('address-pool', $addrpool)
+                            ->equal('session-timeout', $limittime)
+                            ->equal('idle-timeout', $limittime)
+                            ->equal('keepalive-timeout', '00:00:00')
+                            ->equal('rate-limit', $ratelimit)
+                            ->equal('shared-users', $sharedusers)
+                            ->equal('mac-cookie-timeout', $limittime)
+                            ->equal('status-autorefresh','00:01:00')
+                            ->equal('transparent-proxy','yes')
+                            ->equal('on-login', $onlogin)
+                            ->equal('parent-queue', $parent);
+                            $out = $client->query($query)->read();
+                        }else {
+                        
+                            $query =(new Query('/ip/hotspot/user/profile/set'))
+                            ->equal('.id', $idp)
+                            ->equal('name', $name)
+                            ->equal('address-pool', $addrpool)
+                            ->equal('session-timeout', $limittime)
+                            ->equal('keepalive-timeout', $cuttime)
+                            ->equal('rate-limit', $ratelimit)
+                            ->equal('shared-users', $sharedusers)
+                            ->equal('mac-cookie-timeout', $expiretime)
+                            ->equal('status-autorefresh','00:02:00')
+                            ->equal('transparent-proxy','yes')
+                            ->equal('on-login', $onlogin)
+                            ->equal('parent-queue', $parent);
+                            $out = $client->query($query)->read();  
+                        }
+    
+                        if($expmode != "0"){
+                            if (empty($monid)){
+                                $comm = "Monitor Profile ".$name;
+                                $query =(new Query('/system/scheduler/add'))
+                                ->equal('name', $name)
+                                ->equal('start-time', $randstarttime)
+                                ->equal('interval',$randinterval)
+                                ->equal('on-event',$bgservice)
+                                ->equal('disabled', 'no')
+                                ->equal('comment', $comm);
+                                $out = $client->query($query)->read();
+                                //print_r($out);
+                            }else{
+                                $comm = "Monitor Profile ".$name;
+                                $query =(new Query('/system/scheduler/set'))
+                                ->equal(".id", $monid)
+                                ->equal('name', $name)
+                                ->equal('start-time', $randstarttime)
+                                ->equal('interval',$randinterval)
+                                ->equal('on-event',$bgservice)
+                                ->equal('disabled', 'no')
+                                ->equal('comment', $comm);
+                            }
+    
+                        }else{
+                            $query =(new Query('/system/scheduler/remove'))
+                            ->where('.id', $monid);
+                        }
+                    
+                       
+                        $profile->iduser_profile = $uidSesion;
+                        $profile->name_profile = $name;
+                        $profile->addpool_profile = $addrpool;                    
+                        $profile->cost_profile = $getprice;
+                        $profile->sprice_profile = $getsprice;
+                        $profile->sharedu_profile = $sharedusers;
+                        $profile->vsubida_profile = $request->input('vsubida_profile');
+                        $profile->sbyte_profile = $request->input('sbyte_profile');
+                        $profile->vdescarga_profile = $request->input('vdescarga_profile');
+                        $profile->dbyte_profile = $request->input('dbyte_profile');
+                        $profile->expmode_profile = $expmode;
+                        if($expmode == "0"){
+                            $profile->validation_profile = "0";
+                            $profile->gracep_profile = "0";
+                        }else if($expmode != "0"){
+                            $profile->validation_profile = $validity;
+                            $profile->gracep_profile = $graceperiod;
+                        }
+    
+                        $profile->typet_profile = $typetime;
+                        $profile->limitda_profiles = $request->input('limitda_profiles');
+                        $profile->limitho_profiles = $request->input('limitho_profiles');
+                        if($request->input('typet_profile') == "Corrido"){
+                            $profile->expireda_profiles = 1;
+                            $profile->expiredho_profiles = "00:00:00";
+                            $profile->cuttime_profile = "00:00:00";
+                        }else if($request->input('typet_profile') == "Pausado"){
+                            $profile->expireda_profiles = $request->input('expireda_profiles');
+                            $profile->expiredho_profiles = $request->input('expiredho_profiles');
+                            $profile->cuttime_profile = $cuttime;
+                        }
+    
+                        $profile->lockuser_profile = $getlock;
+                        $profile->parentq_profiles = $parent; 
+    
+                        $profile->save();
+    
+                        return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
                     }else{
-                        $query =(new Query('/system/scheduler/remove'))
-                        ->where('.id', $monid);
+                        Alert::error('Este perfil ya existe', 'Ingresa un nombre válido')->autoClose(3000);
+                        //return redirect('/dashboard/vouchers/template/create',$voucher->id);
+                        return redirect()->route('/dashboard/profiles/edit', ['id' => $id]);
                     }
-                
-                   
-                    $profile->iduser_profile = $uidSesion;
-                    $profile->name_profile = $name;
-                    $profile->addpool_profile = $addrpool;                    
-                    $profile->cost_profile = $getprice;
-                    $profile->sprice_profile = $getsprice;
-                    $profile->sharedu_profile = $sharedusers;
-                    $profile->vsubida_profile = $request->input('vsubida_profile');
-                    $profile->sbyte_profile = $request->input('sbyte_profile');
-                    $profile->vdescarga_profile = $request->input('vdescarga_profile');
-                    $profile->dbyte_profile = $request->input('dbyte_profile');
-                    $profile->expmode_profile = $expmode;
-                    if($expmode == "0"){
-                        $profile->validation_profile = "0";
-                        $profile->gracep_profile = "0";
-                    }else if($expmode != "0"){
-                        $profile->validation_profile = $validity;
-                        $profile->gracep_profile = $graceperiod;
-                    }
-
-                    $profile->typet_profile = $typetime;
-                    $profile->limitda_profiles = $request->input('limitda_profiles');
-                    $profile->limitho_profiles = $request->input('limitho_profiles');
-                    if($request->input('typet_profile') == "Corrido"){
-                        $profile->expireda_profiles = 1;
-                        $profile->expiredho_profiles = "00:00:00";
-                        $profile->cuttime_profile = "00:00:00";
-                    }else if($request->input('typet_profile') == "Pausado"){
-                        $profile->expireda_profiles = $request->input('expireda_profiles');
-                        $profile->expiredho_profiles = $request->input('expiredho_profiles');
-                        $profile->cuttime_profile = $cuttime;
-                    }
-
-                    $profile->lockuser_profile = $getlock;
-                    $profile->parentq_profiles = $parent; 
-
-                    $profile->save();
-
-                    return redirect('/dashboard/profiles')->with('message','Actualizado Satisfactoriamente!');
-                }else{
-                    Alert::error('Este perfil ya existe', 'Ingresa un nombre válido')->autoClose(3000);
-                    //return redirect('/dashboard/vouchers/template/create',$voucher->id);
-                    return redirect()->route('/dashboard/profiles/edit', ['id' => $id]);
+                    
                 }
-                
-            }
-        }            
+            }            
+        }
+        return view('welcome');
     }
-    return view('welcome');
-}
     public function destroy($id)
     {
         if(session()->has('UserSession')){

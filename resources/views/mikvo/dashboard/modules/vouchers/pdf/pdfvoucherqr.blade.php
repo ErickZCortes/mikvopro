@@ -44,7 +44,7 @@
                             <tbody>
                       <tr>
                             <td style="width:60px">
-                                <img width="60" height="20" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
+                                <img width="40" height="25" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
                             </td>	
                             <td>
                       <!--NUM-->
@@ -53,7 +53,7 @@
                       </div>	
                       <!--HARGA-->
                       <div style="text-align:center;font-size:14px;padding-left:17px; padding-top:17px;">
-                      <small style="font-size:12px; font-family:{{$template->font_template}};margin-left:-60px;">{{$voucher->nprofile_voucher}}</small>
+                      <small style="font-size:12px; font-family:{{$template->font_template}};margin-left:-60px;"><b>{{$voucher->nprofile_voucher}}</b></small>
                       </div>	
                       <!--HARGA-->	  
                         </td>		
@@ -71,19 +71,19 @@
                       <!--USER-->
                       <div style="clear:both;color:#111;margin-top:2.5px;margin-bottom:2.5px;">
 
-                        <div style="text-align:center;font-family:{{$template->font_template}};font-size:10px;">Usuario:</div>
-                        <div style="border:1px solid black; background-color: white; text-align:center;font-family:{{$template->font_template}};font-size:10px;">{{$detaili->user_detailv}}</div>
-                    
-                        <div style="text-align:center;font-family:{{$template->font_template}};font-size:10px;">Contraseña:</div>
-                        <div style="border:1px solid black; background-color: white; text-align:center;font-family:{{$template->font_template}};font-size:10px;">{{$detaili->password_detailv}}</div>
+                        <div style="text-align:center;font-family:{{$template->font_template}};font-size:10px;"><b>Usuario:</b></div>
+                        <div style="border:1px solid black; background-color: white; text-align:center;font-family:{{$template->font_template}};font-size:12px;">{{$detaili->user_detailv}}</div>
+                        <div style="text-align:center; background:{{$template->color_template}};font-size:12px; font-family:{{$template->font_template}};">
+                          ${{$profile->sprice_profile}} pesos
+                          
+                        </div>
+                        <div style="text-align:center;font-family:{{$template->font_template}};font-size:10px;"><b>Contraseña:</b></div>
+                        <div style="border:1px solid black; background-color: white; text-align:center;font-family:{{$template->font_template}};font-size:12px;">{{$detaili->password_detailv}}</div>
                       
                       </div>
                       <!--USER--> 
                       <!--URL-->
-                      <div style="text-align:center; font-size:10px; font-family:{{$template->font_template}};">
-                        ${{$profile->sprice_profile}} pesos
-                        
-                      </div>
+                      
                       <!--URL-->	  
                         </td>	
                         <td style="width:100px;text-align:center;">
@@ -98,7 +98,7 @@
               <tr>
                 <td style="background:{{$template->color_template}};padding:0px;" valign="top" colspan="2">                
                       <!--URL-->
-                      <div style="text-align:center;color:#fff;font-size:9px;font-family:{{$template->font_template}};margin:0px;padding:2.5px;">
+                      <div style="text-align:center;color:#000;font-size:9px;font-family:{{$template->font_template}};margin:0px;padding:2.5px;">
                         Login: https://{{$voucher->dnsname_voucher}} 
                       </div>
                       <!--URL-->	 

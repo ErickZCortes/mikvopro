@@ -318,9 +318,6 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Manual</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link" href="{{route('/register')}}" role="button">Registro</a>
                   </li>
                   <li>
@@ -451,7 +448,6 @@
                   <h6>Acceso rápido</h6>
                   <ul class="footer-links">
                     <li><a href="{{ url('/home') }}">Inicio</a></li>
-                    <li><a href="http://scanfcode.com/contact/">Manual</a></li>
                     <li><a href="{{route('/login')}}">Login</a></li>
                   </ul>
                 </div>

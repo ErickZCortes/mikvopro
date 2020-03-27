@@ -10,21 +10,6 @@
     </style>    
     
   <script type="text/javascript">
-    function expmodechange(op) {
-            if(op.value=="0" || op.value=="nada"){
-                divI = document.getElementById("validation");
-                divI.style.display = "none";
-                divC = document.getElementById("grace");
-                divC.style.display = "none";
-            }else if(op.value=="rem" || op.value=="ntf" || op.value=="remc" || op.value=="ntfc"){
-                divC = document.getElementById("validation");
-                divC.style.display ="";
-                divI = document.getElementById("grace");
-                divI.style.display = "";
-            }
-        }
-  </script>
-  <script type="text/javascript">
     function ttimechange(op) {
             if(op.value=="Corrido"){
                 divI = document.getElementById("limittime");
@@ -119,21 +104,6 @@
               >
         </div>
      </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-           <label for="sharedu_profile">Usuarios compartidos:</label>
-           <input 
-              id="sharedu_profile"
-              type="number" 
-              class="form-control" 
-              name="sharedu_profile"
-              required ="1"
-              value="{{ $profiles->sharedu_profile}}"
-              placeholder="Debe ser 1" 
-              min="1"
-              >
-        </div>
-     </div>
     <div class="col-md-6">
     <div class="row">
     <div class="col-md-12" style="text-align:center"> 
@@ -200,7 +170,7 @@
     <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
         <label for="expmode_profile">Modo de expiración</label>
-        <select class="form-control" onchange="expmodechange(this)" id="expmode_profile" name="expmode_profile" required="1">
+        <select class="form-control" id="expmode_profile" name="expmode_profile" required="1">
         <option value="0"    @if ($profiles->expmode_profile=="0" ) selected @endif >Ninguno</option>
         <option value="rem"  @if ($profiles->expmode_profile=="rem" ) selected @endif >Eliminar</option>
         <option value="ntf"  @if ($profiles->expmode_profile=="ntf" ) selected @endif >Avisar</option>
@@ -209,71 +179,6 @@
       </select>
         </div>
      </div>
-     @if ($profiles->expmode_profile=="rem" || $profiles->expmode_profile=="ntf" || $profiles->expmode_profile=="remc" || $profiles->expmode_profile=="ntfc" ) 
-     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: ;">
-        <div class="form-group" >
-           <label for="validation_profile">Validación:</label>
-           <input 
-            id="validation_profile"
-            type="text" 
-            class="form-control" 
-            name="validation_profile"
-            required
-            value="{{ $profiles->validation_profile}}"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1" 
-            maxlength="3"
-            >
-        </div>
-     </div>
-     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: ;">
-        <div class="form-group" >
-           <label for="gracep_profile">Tiempo de espera:</label>
-           <input 
-            id="gracep_profile"
-            type="text" 
-            class="form-control" 
-            name="gracep_profile"
-            required
-            value="{{ $profiles->gracep_profile}}"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1"
-            maxlength="3"
-            >
-        </div>
-     </div>
-     @elseif ($profiles->expmode_profile=="0" )
-     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: none;">
-        <div class="form-group" >
-           <label for="validation_profile">Validación:</label>
-           <input 
-            id="validation_profile"
-            type="text" 
-            class="form-control" 
-            name="validation_profile"
-            required
-            value="{{ $profiles->validation_profile}}"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1"
-            >
-        </div>
-     </div>
-     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: none;">
-        <div class="form-group" >
-           <label for="gracep_profile">Tiempo de espera:</label>
-           <input 
-            id="gracep_profile"
-            type="text" 
-            class="form-control" 
-            name="gracep_profile"
-            required
-            value="{{ $profiles->gracep_profile}}"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1"
-            >
-        </div>
-     </div>
-@endif
      <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
            <label for="typet_profile">Tipo de tiempo:</label>
@@ -365,27 +270,6 @@
             >
         </div>
      </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-        <label class="non-selectable" for="lockuser_profile">Bloqueo de usuario:</label>
-        <select class="form-control" id="lockuser_profile" name="lockuser_profile" required="1">
-        <option value="Disable" @if ($profiles->lockuser_profile=="Disable" ) selected @endif >Desactivado</option>
-        <option value="Enable" @if ($profiles->lockuser_profile=="Enable" ) selected @endif >Activado</option>
-      </select>
-        </div>
-    </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-        <label class="non-selectable" for="parentq_profiles">Parent Queue:</label>
-        <select class="form-control" id="parentq_profiles" name="parentq_profiles">
-        <option value="none">Ninguno</option>
-        @foreach($getallqueue as $queue)
-        <option>{{$queue['name']}}</option>  
-        @endforeach 
-
-      </select>
-        </div>
-    </div>  
 </div>
 @else
 <div class="row">
@@ -439,21 +323,6 @@
               name="sprice_profile"
               required
               placeholder="Ingresa el costo" 
-              min="1"
-              >
-        </div>
-     </div>
-     <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-           <label for="sharedu_profile">Usuarios compartidos:</label>
-           <input 
-              id="sharedu_profile"
-              type="number" 
-              class="form-control" 
-              name="sharedu_profile"
-              required ="1"
-              value ="1"
-              placeholder="Debe ser 1" 
               min="1"
               >
         </div>
@@ -521,7 +390,7 @@
     <div class="col-sm-10 col-md-6 col-lg-6">
         <div class="form-group">
         <label for="expmode_profile">Modo de expiración</label>
-        <select class="form-control" onchange="expmodechange(this)" id="expmode_profile" name="expmode_profile" required="1">
+        <select class="form-control" id="expmode_profile" name="expmode_profile" required="1">
         <option value="nada">Seleccione un modo de expiración</option>
         <option value="0">Ninguno</option>
         <option value="rem">Eliminar</option>
@@ -529,35 +398,6 @@
         <option value="remc">Eliminar & Registrar</option>
         <option value="ntfc">Avisar & Registrar</option>
       </select>
-        </div>
-     </div>
-     <div class="col-sm-10 col-md-6 col-lg-6" id="validation" style="display: none;">
-        <div class="form-group">
-           <label for="validation_profile">Validación:</label>
-           <input 
-            id="validation_profile"
-            type="text" 
-            class="form-control" 
-            name="validation_profile"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1" maxlength="3"
-            required
-            >
-        </div>
-     </div>
-     <div class="col-sm-10 col-md-6 col-lg-6" id="grace" style="display: none;">
-        <div class="form-group">
-           <label for="gracep_profile">Tiempo de espera:</label>
-           <input 
-            id="gracep_profile"
-            type="text" 
-            class="form-control" 
-            name="gracep_profile"
-            placeholder="Ejemplo: 1d, 5m"
-            min="1"
-            maxlength="3"
-            required
-            >
         </div>
      </div>
      <div class="col-sm-10 col-md-6 col-lg-6">
@@ -584,7 +424,6 @@
             name="limitda_profiles"
             placeholder="Días"
             min="0"
-            required
             >
         </div>
         </div>
@@ -597,7 +436,6 @@
             name="limitho_profiles"
             step="1"
             placeholder="Horas, minútos y/o segundos"
-            required
             >
         </div>
         </div>
@@ -615,7 +453,6 @@
             type="number" 
             class="form-control" 
             name="expireda_profiles"
-            required
             placeholder="Días"
             min="0"
             >
@@ -629,7 +466,6 @@
             class="form-control" 
             name="expiredho_profiles"
             step="1"
-            required
             placeholder="Horas, minútos y/o segundos"
             >
         </div>
@@ -645,31 +481,10 @@
             class="form-control" 
             name="cuttime_profile"
             step="1"
-            required
             placeholder="Ingresa la velocidad de subida"
             >
         </div>
      </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-        <label class="non-selectable" for="lockuser_profile">Bloqueo de usuario:</label>
-        <select class="form-control" id="lockuser_profile" name="lockuser_profile" required="1">
-        <option value="Disable">Desactivado</option>
-        <option value="Enable">Activado</option>
-      </select>
-        </div>
-    </div>
-    <div class="col-sm-10 col-md-6 col-lg-6">
-        <div class="form-group">
-        <label class="non-selectable" for="parentq_profiles">Parent Queue:</label>
-        <select class="form-control" id="parentq_profiles" name="parentq_profiles">
-        <option value="none">Ninguno</option>
-        @foreach($getallqueue as $queue)
-        <option>{{$queue['name']}}</option>  
-        @endforeach 
-      </select>
-        </div>
-    </div>  
 </div>
 @endif
 <hr>

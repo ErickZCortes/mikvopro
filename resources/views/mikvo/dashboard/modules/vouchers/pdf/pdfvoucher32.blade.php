@@ -35,13 +35,13 @@ table.inside{
                 <tbody>
                     <tr>
                     <td rowspan="4">
-                        <img width="50px;" height="20px;" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
+                        <img width="30px;" height="20px;" src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo">
                     </td>          
                 </tr>
                 <tr>
                     <td style="font-size: 10px; background-color: {{$template->color_template}}; font-family:{{$template->font_template}}; text-align: center;">{{$voucher->nprofile_voucher}}</td>                </tr>
                 <tr>
-                    <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;"> Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br>${{$profile->sprice_profile}} pesos</td>
+                    <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;"><b>Usuario:</b>{{$detaili->user_detailv}}<br>${{$profile->sprice_profile}} pesos<br><b>Contraseña:</b> {{$detaili->password_detailv}}</td>
                 </tr>
                 <tr>
                 <td style="font-size: 9px; font-family:{{$template->font_template}};">Login: {{$voucher->dnsname_voucher}}</td>

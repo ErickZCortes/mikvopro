@@ -451,7 +451,7 @@ class VouchersController extends Controller
         if(session()->has('UserSession')){
             $uidSesion = session()->get('UserSession')->id;
             $user = User::find($uidSesion);
-            $voucherget = DB::table('vouchers')->select('*')->where('id',$id)->first();
+            $voucherget = DB::table('vouchers')->select('*')->where('id',$id)->orderBy('id', 'DESC')->first();
             //dd($voucherget);
             $detailsv = DB::table('detail_voucher')->select('*')->where('idvoucher_detailv',$id)->get();
 

@@ -34,15 +34,16 @@ table.inside{
             <table class="inside" style="background-color: {{$template->bgcolor_template}};">
                 <tbody>
               
-                    <tr> <td style="text-align: center; font-family:{{$template->font_template}}; font-size: 12px;">2RED</td> 
+                    <tr> <td></td> 
                     <td rowspan="4">
                         <img  width="50" height="50" src="data:image/png;base64,  {!! base64_encode(QrCode::format('png')->size(100)->generate('http://'.$voucher->dnsname_voucher.'/login?username='.$detaili->user_detailv.'&password='.$detaili->password_detailv.'')) !!} ">
                     </td>          
                 </tr>
                 <tr>
-                    <td style="font-size: 10px; font-family:{{$template->font_template}}; background:{{$template->color_template}}; color: white; text-align: center;">{{$voucher->nprofile_voucher}}</td>                </tr>
-                <tr>
-                    <td style="width: 100%;  font-size: 10px; font-family:{{$template->font_template}}; text-align: center;"> Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br>  ${{$profile->sprice_profile}} pesos</td>
+                    <td style="font-size: 10px; font-family:{{$template->font_template}}; background:{{$template->color_template}}; color: black; text-align: center;">{{$voucher->nprofile_voucher}}</td>                </tr>
+                <tr><td style="text-align: center; font-size: 10px;"> ${{$profile->sprice_profile}} pesos</td></tr>
+                    <tr>
+                    <td style="width: 100%;  font-size: 10px; font-family:{{$template->font_template}}; text-align: center;"><b>Usuario:</b> {{$detaili->user_detailv}}<br><b>Contraseña:</b>{{$detaili->password_detailv}}</td>
                 </tr>
                 <tr>
                     <td style="font-size: 8px; font-family:{{$template->font_template}};"> Login: http://{{$voucher->dnsname_voucher}}<br>[{{$detaili->id}}]</td>

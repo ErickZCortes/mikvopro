@@ -127,10 +127,7 @@
               <form action="/delete-scripts" method="POST" role="form" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-md" name ="datescript" placeholder="formato : mm/dd/aaaa">
-                      <button type="submit" class="btn btn-danger">Eliminar</button>
-                </div>
+                
               </div>
               </form>
             </div>
@@ -142,12 +139,8 @@
                     <tr role="row">
                       <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                         aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 90%;">
-                        Fecha de creación/ Hora de conexión/ Usuario/ Precio ficha/ Dirección IP/ Dirección MAC/ Tiempo/ Perfil
+                        Fecha de creación | Hora de conexión | Usuario | Precio ficha | Dirección IP | Dirección MAC | Tiempo | Perfil
                         </th>
-                      <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                       aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 10%;">
-                       Acciones
-                       </th>
                     </tr>
                   </thead>
                   <tbody>

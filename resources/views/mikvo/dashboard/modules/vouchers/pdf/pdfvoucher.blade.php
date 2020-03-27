@@ -40,6 +40,7 @@ table.inside{
                   <img src="{{ base_path() }}/public/uploads/descarga.jpg" alt="logo" style="height:30px; text-align:center;">
                 </td>
               </td>
+              
             </tr>
             <tr>
               <td>
@@ -49,12 +50,13 @@ table.inside{
                       <td>
                         <table style="width:100%;">
                           <tr>
-                            <td style="text-align: center; font-family: {{$template->font_family}};">Usuario</td>
-                            <td style="text-align: center; font-family: {{$template->font_family}};">Contraseña</td>
+                            <td style="text-align: center; font-family: {{$template->font_family}};"><b>Usuario</b></td>
+                            <td style="text-align: center; font-family: {{$template->font_family}};"><b>Contraseña</b></td>
                           </tr>
                           <tr>
                             <td style="border: 1px solid black; background-color: white; text-align: center; font-family: {{$template->font_family}};">{{$detaili->user_detailv}}</td>
                             <td style="border: 1px solid black; background-color: white; text-align: center; font-family: {{$template->font_family}};">{{$detaili->password_detailv}}</td>
+                            <td>[{{$detaili->id}}]</td>
                           </tr>
                         </table>
                       </td>

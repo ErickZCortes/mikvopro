@@ -35,14 +35,21 @@ table.inside{
                 <tbody>
               
                     <tr>
-                    <td rowspan="4">
-                        <img style=" margin:0px 0 0 3px;" width="50" height="28" src="{{ base_path() }}/public/uploads/{{$template->logo_template}}" alt="logo">
-                    </td>          
+                      <td rowspan="5">
+                          <img style=" margin:0px 0 0 3px;" width="50" height="28" src="{{ base_path() }}/public/uploads/{{$template->logo_template}}" alt="logo">
+                      </td>          
+                    </tr>
+                    <tr>
+                      <td style="font-size: 10px; font-family:{{$template->font_template}}; background-color: {{$template->color_template}}; color: #000; text-align: center;">{{$voucher->nprofile_voucher}}
+                    </td>   
+                    </tr>
+                <tr>
+                <td style="font-size: 10px; font-family: {{$template->font_template}}; text-align:center;">
+                    ${{$profile->sprice_profile}} pesos
+                  </td>
                 </tr>
                 <tr>
-                  <td style="font-size: 10px; font-family:{{$template->font_template}}; background-color: {{$template->color_template}}; color: white; text-align: center;">{{$voucher->nprofile_voucher}}</td>                </tr>
-                <tr>
-                <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;"> Usuario: {{$detaili->user_detailv}}<br>Contraseña: {{$detaili->password_detailv}} <br> ${{$profile->sprice_profile}} pesos</td>
+                <td style="width: 100%; font-family:{{$template->font_template}}; font-size: 10px; text-align: center;"> <b>Usuario:</b> {{$detaili->user_detailv}}<br><b>Contraseña:</b> {{$detaili->password_detailv}} </td>
                 </tr>
                 <tr>
                     <td style="font-size: 9px; font-family:{{$template->font_template}}; ">Login: http://{{$voucher->dnsname_voucher}}</td>
